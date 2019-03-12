@@ -18,31 +18,31 @@ import Contact from './Contact.jsx'
 
 class Root extends React.Component{
 
-    render(){
+	render(){
 
-        return(
+		return(
 
-            <Provider store={_store}>
+			<Provider store={_store}>
 
-                <Router history={_history}>
+				<Router history={_history}>
 
-                    <div>
-                        <Switch>
+					<div>
+						<Switch>
 
-                            <Route exact path="/" component={Home} ></Route>
-                            <Route path="/Contact" component={Contact} ></Route>
+							<Route exact path="/" component={Home} ></Route>
+							<Route path="/Contact" component={Contact} ></Route>
                         
-                        </Switch>
-                    </div>
+						</Switch>
+					</div>
 
-                </Router>
+				</Router>
 
-            </Provider>
+			</Provider>
 
-        )
+		)
 
-    }
+	}
 
 }
 
-ReactDOM.render(<Root /> , document.getElementById('root'))
+ReactDOM.render(<Root /> , document.getElementById(`root`))

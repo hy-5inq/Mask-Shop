@@ -6,21 +6,21 @@
 import * as Actions from './Action.js'
 
 const reducerInitialState = {
-    TEXT_STATE : "Change Me!"
+	TEXT_STATE : `Change Me!`,
 }
 
 const Reducer = (state = reducerInitialState , action) => {
 
-    switch(action.type){
+	switch(action.type){
         
-        case Actions.A_USER_CLICKED_BUTTON : 
-            return Object.assign({},state,{
-                TEXT_STATE : action.value
-            })
+	case Actions.A_USER_CLICKED_BUTTON : 
+		return Object.assign({},state,{
+			TEXT_STATE : action.value,
+		})
 
-        default :
-            return state
-    }
+	default :
+		return state
+	}
 
 }
 

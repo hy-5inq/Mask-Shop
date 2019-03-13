@@ -34,7 +34,7 @@ module.exports = {
     // 2 또는 "error" = 위반시 오류 (검증이 중단됨 = 빌드 실패)
     "rules": {
         // Possible Errors
-        "no-console": 1,
+        "no-console": [1, { allow: ["warn", "error"] }],
         "no-empty": 1,
 
         // Best Practices

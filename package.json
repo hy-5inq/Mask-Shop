@@ -6,7 +6,10 @@
   "scripts": {
     "dev": "webpack-dev-server --hot",
     "production": "webpack -p",
-    "bundle": "webpack"
+    "bundle": "webpack",
+    "clean": "rm -rf build public/bundle.js",
+    "build": "./node_modules/.bin/webpack --progress",
+    "start": "./node_modules/.bin/webpack --progress && node ./server/main.js"
   },
   "repository": {
     "type": "git",
@@ -55,7 +58,7 @@
     "style-loader": "^0.23.1",
     "url-loader": "^1.1.2",
     "webpack": "^4.29.6",
-    "webpack-cli": "^3.2.3",
+    "webpack-cli": "^3.3.0",
     "webpack-dev-server": "^3.2.1"
   },
   "optionalDependencies": {

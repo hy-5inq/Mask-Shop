@@ -2,10 +2,13 @@ const webpack = require(`webpack`);
 const path = require(`path`);
 
 module.exports = {
-	entry : path.join(__dirname,`/Components/src/Root.jsx`),
+	entry : {
+		"bundle": path.join(__dirname,`/Components/src/Root.jsx`),
+		"i18n-contents": path.join(__dirname,`/Components/lib/i18n-contents.js`),
+	},
 	output : {
 
-		filename : `bundle.js`,
+		filename : `[name].js`,
 		path : path.join(__dirname,`/public`),
     
 	},

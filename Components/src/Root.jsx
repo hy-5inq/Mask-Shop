@@ -14,7 +14,7 @@ import _store from '../redux/_store.js'
 import _history from '../history/_history.js'
 
 import Home from './Home.jsx'
-import Contact from './Contact.jsx'
+import Product from './Product.jsx'
 
 class Root extends React.Component{
 
@@ -30,7 +30,7 @@ class Root extends React.Component{
 						<Switch>
 
 							<Route exact path="/" component={Home} ></Route>
-							<Route path="/Contact" component={Contact} ></Route>
+							<Route path="/Product" component={Product} ></Route>
                         
 						</Switch>
 					</div>

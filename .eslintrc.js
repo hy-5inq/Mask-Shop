@@ -51,7 +51,6 @@ module.exports = {
         }],
 
         // Stylistic Issues
-        "comma-dangle": [1, "always-multiline"],
         "eol-last": 1,
         "func-style": [1, `declaration`, { "allowArrowFunctions": true }],
         "indent": [1, "tab"],
@@ -85,7 +84,8 @@ module.exports = {
     // allow global variables
     "globals": {
         "Atomics": "readonly",
-        "SharedArrayBuffer": "readonly"
+		"SharedArrayBuffer": "readonly",
+		"i18next": true,
 	},
 
 	"plugins": [

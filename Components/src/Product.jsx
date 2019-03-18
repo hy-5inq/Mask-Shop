@@ -5,7 +5,8 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import _history from '../history/_history.js'
 
-import '../stylesheets/Contact.css'
+import '../stylesheets/Product.css'
+import i18next from 'i18next';
 
 class Contact extends React.Component{
 
@@ -14,22 +15,10 @@ class Contact extends React.Component{
 	}
 
 	render(){
-
-		const { myState , myDispatch } = this.props
-
 		return(
-			<div>
-				<div><h1>Contact</h1></div>
-				<div>
-					<span>현재 스토어의 상태 : {myState.TEXT_STATE}</span>
-				</div>
-				<div>
-					<input id="MY_INPUT" placeholder="텍스트 입력" type="text"/>
-					<button onClick={myDispatch.changeText}>텍스트 상태 바꾸기</button>
-				</div>
-				<div>
-					<button onClick={this.handleRouteToHome}>Home으로 이동</button>
-				</div>
+			<div class='product'>
+				<header class='toolbar'>${i18next.t(`APP_NAME`)}</header>
+				<main></main>
 			</div>
 		)
 	}

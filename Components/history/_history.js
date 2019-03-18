@@ -5,6 +5,6 @@
 
 import { createBrowserHistory } from 'history'
 
-let _history = createBrowserHistory()
+const _history = createBrowserHistory()
 
 export default _history

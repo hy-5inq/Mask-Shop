@@ -10,10 +10,10 @@ import Reducer from './Reducer'
 import logger from 'redux-logger'
 import thunk from 'redux-thunk'
 
-let originReducer = combineReducers({
-    myReducer : Reducer
+const originReducer = combineReducers({
+	myReducer : Reducer,
 })
 
-let _store = createStore(originReducer , applyMiddleware(logger , thunk))
+const _store = createStore(originReducer , applyMiddleware(logger , thunk))
 
 export default _store

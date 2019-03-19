@@ -1,6 +1,7 @@
 import locale_ko from '../_locales/ko.js'
+import i18n from 'i18next'
 
-i18next.init({
+i18n.init({
 	lng: `ko`,
 	debug: true,
 	resources: {
@@ -13,7 +14,7 @@ i18next.init({
 	if (content) {
 		content.forEach(node => {
 			const key = node.getAttribute(`i18n-content`)
-			node.innerHTML = i18next.t(key)
+			node.innerHTML = i18n.t(key)
 		})
 	}
 })

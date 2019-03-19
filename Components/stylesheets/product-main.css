@@ -1,0 +1,7 @@
+.product-main {
+	position: relative;
+	height: 3000px;
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-template-rows: auto auto;
+}

@@ -6,9 +6,10 @@ import { withRouter } from 'react-router-dom'
 import _history from '../history/_history.js'
 
 import '../stylesheets/Product.css'
-import i18next from 'i18next';
+import MenuBar from './menu-bar.jsx'
+import ProductMain from './product-main.jsx'
 
-class Contact extends React.Component{
+class Product extends React.Component{
 
 	handleRouteToHome(){
 		_history.push(`/`)
@@ -16,13 +17,12 @@ class Contact extends React.Component{
 
 	render(){
 		return(
-			<div class='product'>
-				<header class='toolbar'>${i18next.t(`APP_NAME`)}</header>
-				<main></main>
+			<div className='product'>
+				<MenuBar></MenuBar>
+				<ProductMain></ProductMain>
 			</div>
 		)
 	}
-
 }
 
 const mapStateToProps = state => ({
@@ -46,6 +46,6 @@ const mapDispatchToProps = dispatch => ({
 })
 
 // eslint-disable-next-line no-class-assign
-Contact = withRouter(connect(mapStateToProps,mapDispatchToProps)(Contact))
+Product = withRouter(connect(mapStateToProps,mapDispatchToProps)(Product))
 
-export default Contact
+export default Product

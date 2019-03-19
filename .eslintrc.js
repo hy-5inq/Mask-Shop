@@ -79,7 +79,10 @@ module.exports = {
         "prefer-numeric-literals": 1,
         "prefer-rest-params": 1,
         "prefer-spread": 1,
-        "prefer-template": 1
+		"prefer-template": 1,
+		
+		//React
+		"react/jsx-uses-vars": ["error"],
     },    
     // allow global variables
     "globals": {

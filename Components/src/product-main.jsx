@@ -46,11 +46,52 @@ export default class ProductMain extends React.Component{
 					</div>
 					<div className='list'>
 						<div className='inner'>
-							
+							<span className='item'>
+								<img className='photo' src='/images/rabbit.gif' alt='현재 사진 X'></img>
+								<p className='item-name'>상품명</p>
+								<p className='item-tag'>#상품 키워드</p>
+								<p className='item-price'>18,800원</p>
+							</span>	
+
+							<span className='item'>
+								<img className='photo' src='/images/rabbit.gif' alt='현재 사진 X'></img>
+								<p className='item-name'>상품명</p>
+								<p className='item-tag'>#상품 키워드 #농도 몇 이상 #황사마스크용 #아이용 #기타내용</p>
+								<p className='item-price'>18,800원</p>
+							</span>		
+
+							<span className='item'>
+								<img className='photo' src='/images/rabbit.gif' alt='현재 사진 X'></img>
+								<p className='item-name'>상품명</p>
+								<p className='item-tag'>#상품 키워드</p>
+								<p className='item-price'>18,800원</p>
+							</span>		
+
+							<span className='item'>
+								<img className='photo' src='/images/rabbit.gif' alt='현재 사진 X'></img>
+								<p className='item-name'>상품명</p>
+								<p className='item-tag'>#상품 키워드</p>
+								<p className='item-price'>18,800원</p>
+							</span>		
+
+							<span className='item'>
+								<img className='photo' src='/images/rabbit.gif' alt='현재 사진 X'></img>
+								<p className='item-name'>상품명</p>
+								<p className='item-tag'>#상품 키워드</p>
+								<p className='item-price'>18,800원</p>
+							</span>								
 						</div>
 					</div>
 					<div className='page-move'>
-						<div className='inner'></div>
+						<div className='inner'>
+							<div className='page-move-box'>
+								<FA className='start' name='angle-double-left'></FA>
+								<FA className='before' name='angle-left'></FA>
+								<span className='current'>1</span>
+								<FA className='after' name='angle-right'></FA>
+								<FA className='end' name='angle-double-right'></FA>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>

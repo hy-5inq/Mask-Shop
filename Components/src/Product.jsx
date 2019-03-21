@@ -5,35 +5,24 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import _history from '../history/_history.js'
 
-import '../stylesheets/Contact.css'
+import '../stylesheets/Product.css'
+import MenuBar from './menu-bar.jsx'
+import ProductMain from './product-main.jsx'
 
-class Contact extends React.Component{
+class Product extends React.Component{
 
 	handleRouteToHome(){
 		_history.push(`/`)
 	}
 
 	render(){
-
-		const { myState , myDispatch } = this.props
-
 		return(
-			<div>
-				<div><h1>Contact</h1></div>
-				<div>
-					<span>현재 스토어의 상태 : {myState.TEXT_STATE}</span>
-				</div>
-				<div>
-					<input id="MY_INPUT" placeholder="텍스트 입력" type="text"/>
-					<button onClick={myDispatch.changeText}>텍스트 상태 바꾸기</button>
-				</div>
-				<div>
-					<button onClick={this.handleRouteToHome}>Home으로 이동</button>
-				</div>
+			<div className='product'>
+				<MenuBar></MenuBar>
+				<ProductMain></ProductMain>
 			</div>
 		)
 	}
-
 }
 
 const mapStateToProps = state => ({
@@ -57,6 +46,6 @@ const mapDispatchToProps = dispatch => ({
 })
 
 // eslint-disable-next-line no-class-assign
-Contact = withRouter(connect(mapStateToProps,mapDispatchToProps)(Contact))
+Product = withRouter(connect(mapStateToProps,mapDispatchToProps)(Product))
 
-export default Contact
+export default Product

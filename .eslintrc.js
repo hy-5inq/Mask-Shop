@@ -64,7 +64,8 @@ module.exports = {
         }],
         "no-unneeded-ternary": 1,
         "quotes": [1, "backtick"],
-		"semi": 0,
+        "semi": 0,
+        "no-class-assign" : 0,
 		// "max-lines-per-function": [2, 30],
 
         // ECMAScript 6

@@ -148,49 +148,49 @@ class Home extends React.Component{
 
 }
 
-const ProductCard = (props) => {
+const ProductCard = props => {
 
-	let result = props.map((el,idx,arr)=>{
-		return (
-			<div className="Home-Recommend-Container__Item">
+	const result = props.map( el => (
+	
+		<div className="Home-Recommend-Container__Item">
 
-				<div className="Container__Item-ImageBox">
-					<img src={el.src} alt="추천 아이템 이미지"/>
-				</div>
-
-				<div className="Container__Item-ProductTextBox">
-					<span className="ProductTextBox__Text">
-						{el.product}
-					</span>
-				</div>
-
-				<hr className="Container__Item-Divider"/>
-
-				<div className="Container__Item-DescriptionTextBox">
-					<span className="DescriptionTextBox__Text">
-						{el.description}
-					</span>
-				</div>
-
-				<div className="Container__Item-Hover">
-					
-				</div>
+			<div className="Container__Item-ImageBox">
+				<img src={el.src} alt="추천 아이템 이미지"/>
 			</div>
-		)
-	})
+
+			<div className="Container__Item-ProductTextBox">
+				<span className="ProductTextBox__Text">
+					{el.product}
+				</span>
+			</div>
+
+			<hr className="Container__Item-Divider"/>
+
+			<div className="Container__Item-DescriptionTextBox">
+				<span className="DescriptionTextBox__Text">
+					{el.description}
+				</span>
+			</div>
+
+			<div className="Container__Item-Hover">
+				
+			</div>
+		</div>
+	)
+	)
 
 	return result
 }
 
 
 
-const mapStateToProps = ( state ) => {
+const mapStateToProps = state => (
 	
-	return{
+	{
 		homeState : state.homeReducer
 	}
 
-}
+)
 
 Home = withRouter(connect(mapStateToProps,null)(Home))
 

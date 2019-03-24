@@ -138,6 +138,9 @@ class Home extends React.Component{
 					<h4>RECOMMENDED ITEMS</h4>
 				</div>
 
+				<div>
+					
+				</div>
 			</div>
 
 		)

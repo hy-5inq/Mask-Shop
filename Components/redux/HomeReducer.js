@@ -35,6 +35,94 @@ const homeReducerInitialState = {
             thumbnail: `./images/Homegallery/smog_640.jpg`
         }
         
+    ],
+
+    recommendedItems : [
+        {
+            src : `./images/rabbit.gif`,
+            product : `마스크 MK-101`,
+            description : `숨막히지 않는 방진율 98% 프리미엄 아이템`
+        },
+        {
+            src : `./images/rabbit.gif`,
+            product : `마스크 MK-101`,
+            description : `숨막히지 않는 방진율 98% 프리미엄 아이템`
+        },
+        {
+            src : `./images/rabbit.gif`,
+            product : `마스크 MK-101`,
+            description : `숨막히지 않는 방진율 98% 프리미엄 아이템`
+        },
+        {
+            src : `./images/rabbit.gif`,
+            product : `마스크 MK-101`,
+            description : `숨막히지 않는 방진율 98% 프리미엄 아이템`
+        },
+        {
+            src : `./images/rabbit.gif`,
+            product : `마스크 MK-101`,
+            description : `숨막히지 않는 방진율 98% 프리미엄 아이템`
+        },
+        {
+            src : `./images/rabbit.gif`,
+            product : `마스크 MK-101`,
+            description : `숨막히지 않는 방진율 98% 프리미엄 아이템`
+        },
+        {
+            src : `./images/rabbit.gif`,
+            product : `마스크 MK-101`,
+            description : `숨막히지 않는 방진율 98% 프리미엄 아이템`
+        },
+        {
+            src : `./images/rabbit.gif`,
+            product : `마스크 MK-101`,
+            description : `숨막히지 않는 방진율 98% 프리미엄 아이템`
+        },
+        {
+            src : `./images/rabbit.gif`,
+            product : `마스크 MK-101`,
+            description : `숨막히지 않는 방진율 98% 프리미엄 아이템`
+        },
+        {
+            src : `./images/rabbit.gif`,
+            product : `마스크 MK-101`,
+            description : `숨막히지 않는 방진율 98% 프리미엄 아이템`
+        },
+        {
+            src : `./images/rabbit.gif`,
+            product : `마스크 MK-101`,
+            description : `숨막히지 않는 방진율 98% 프리미엄 아이템`
+        },
+        {
+            src : `./images/rabbit.gif`,
+            product : `마스크 MK-101`,
+            description : `숨막히지 않는 방진율 98% 프리미엄 아이템`
+        },
+        {
+            src : `./images/rabbit.gif`,
+            product : `마스크 MK-101`,
+            description : `숨막히지 않는 방진율 98% 프리미엄 아이템`
+        },
+        {
+            src : `./images/rabbit.gif`,
+            product : `마스크 MK-101`,
+            description : `숨막히지 않는 방진율 98% 프리미엄 아이템`
+        },
+        {
+            src : `./images/rabbit.gif`,
+            product : `마스크 MK-101`,
+            description : `숨막히지 않는 방진율 98% 프리미엄 아이템`
+        },
+        {
+            src : `./images/rabbit.gif`,
+            product : `마스크 MK-101`,
+            description : `숨막히지 않는 방진율 98% 프리미엄 아이템`
+        },
+        {
+            src : `./images/rabbit.gif`,
+            product : `마스크 MK-101`,
+            description : `숨막히지 않는 방진율 98% 프리미엄 아이템`
+        },
     ]
 
 }

@@ -137,9 +137,9 @@ class Home extends React.Component{
 					<h4>마스크샵 추천 아이템</h4>
 					<h4>RECOMMENDED ITEMS</h4>
 				</div>
-
-				<div>
-					
+				
+				<div className="Home-Recommend-Items-Container">
+					{ProductCard(homeState.recommendedItems)}
 				</div>
 			</div>
 
@@ -147,6 +147,42 @@ class Home extends React.Component{
 	}
 
 }
+
+const ProductCard = (props) => {
+
+	let result = props.map((el,idx,arr)=>{
+		return (
+			<div className="Home-Recommend-Container__Item">
+
+				<div className="Container__Item-ImageBox">
+					<img src={el.src} alt="추천 아이템 이미지"/>
+				</div>
+
+				<div className="Container__Item-ProductTextBox">
+					<span className="ProductTextBox__Text">
+						{el.product}
+					</span>
+				</div>
+
+				<hr className="Container__Item-Divider"/>
+
+				<div className="Container__Item-DescriptionTextBox">
+					<span className="DescriptionTextBox__Text">
+						{el.description}
+					</span>
+				</div>
+
+				<div className="Container__Item-Hover">
+					
+				</div>
+			</div>
+		)
+	})
+
+	return result
+}
+
+
 
 const mapStateToProps = ( state ) => {
 	

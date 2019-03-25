@@ -195,7 +195,8 @@
     position: relative; }
   .image-gallery-slide img {
     width: 100%;
-    height : auto; }
+    height : 55vh;
+   }
   .image-gallery-slide .image-gallery-description {
     background: rgba(0, 0, 0, 0.4);
     bottom: 70px;

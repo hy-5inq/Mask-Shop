@@ -30,7 +30,7 @@ class Home extends React.Component{
 					<ImageGallery 
 						items={homeState.imageGalleryItems}
 						showBullets={true}
-						showFullscreenButton={true}
+						showFullscreenButton={false}
 						showThumbnails={false}
 						thumbnailPosition="bottom"
 						showNav={true}

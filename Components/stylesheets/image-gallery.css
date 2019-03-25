@@ -195,7 +195,7 @@
     position: relative; }
   .image-gallery-slide img {
     width: 100%;
-    height : 600px; }
+    height : auto; }
   .image-gallery-slide .image-gallery-description {
     background: rgba(0, 0, 0, 0.4);
     bottom: 70px;

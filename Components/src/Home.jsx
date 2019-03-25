@@ -26,16 +26,18 @@ class Home extends React.Component{
 
 			<div>
 				<MenuBar />
-				<ImageGallery 
-					items={homeState.imageGalleryItems}
-					showBullets={true}
-					showFullscreenButton={true}
-					showThumbnails={false}
-					thumbnailPosition="bottom"
-					showNav={true}
-					slideInterval={3000}
-					autoPlay={true}
-				/>
+				<div className="ImageGallery-Container">
+					<ImageGallery 
+						items={homeState.imageGalleryItems}
+						showBullets={true}
+						showFullscreenButton={true}
+						showThumbnails={false}
+						thumbnailPosition="bottom"
+						showNav={true}
+						slideInterval={3000}
+						autoPlay={true}
+					/>
+				</div>
 				<div className="Home-Hot-Menus">
 
 					<div className="Home-Hot-Menus__Item">

@@ -64,11 +64,11 @@ div.ContentBox__Item-Text > p {
 .Home-Ads-Section{
  
     display: grid;
-    width : 100vw;
+    width : 100%;
     max-width: 1260px;
-    grid-template-columns: 620px 620px;
+    grid-template-columns: 1fr 1fr;
     grid-column-gap: 20px;
-    height : 600px;
+    height : auto;
     margin : 0 auto 15px auto;
 
 }
@@ -82,7 +82,6 @@ div.ContentBox__Item-Text > p {
 .Section__Item:nth-child(2){
 
     display: grid;
-    grid-template-rows: 290px 290px;
     grid-row-gap: 20px;
 
 }
@@ -100,14 +99,20 @@ div.ContentBox__Item-Text > p {
 
 }
 
+.Section__Item__Item__Item{
+    border : 1px solid #e8e8e8;
+    text-align: center;
+}
+
 div.Section__Item__Item > img {
     
     height : 100%;
 
 }
 
+
 div.Section__Item__Item__Item > img{
-    width : 100%;
+    /* width : 100%; */
     height : 100%;
 }
 
@@ -162,7 +167,15 @@ div.Home-Recommend-Header h4{
     height : 90px;
 }
 
+
+
 @media screen and (max-width: 720px) {
+
+    .Home-Ads-Section{
+        grid-template-columns: 1fr;
+        height : auto;
+        grid-row-gap: 15px;
+    }
 
     .Home-Hot-Menus{
         grid-template-columns: 1fr 1fr;

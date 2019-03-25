@@ -11,7 +11,6 @@ import { Provider } from 'react-redux'
 import { Router , Route , Switch } from 'react-router-dom'
 import '../lib/i18n-contents.js'
 
-
 import _store from '../redux/_store.js'
 import _history from '../history/_history.js'
 

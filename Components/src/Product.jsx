@@ -1,6 +1,5 @@
 import React from 'react'
 
-import * as Actions from '../redux/Action.js'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import _history from '../history/_history.js'
@@ -25,27 +24,7 @@ class Product extends React.Component{
 	}
 }
 
-const mapStateToProps = state => ({
-	myState : state.myReducer,
-})
-
-const mapDispatchToProps = dispatch => ({
-
-	myDispatch : {
-
-		changeText(){
-
-			const myInput = document.getElementById(`MY_INPUT`)
-			dispatch(Actions.AC_USER_CLICKED_BUTTON(myInput.value))
-			myInput.value = ``
-
-		},
-
-	},
-
-})
-
 // eslint-disable-next-line no-class-assign
-Product = withRouter(connect(mapStateToProps,mapDispatchToProps)(Product))
+Product = withRouter(connect(null, null)(Product))
 
 export default Product

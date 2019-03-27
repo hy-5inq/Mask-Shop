@@ -16,6 +16,7 @@ import _history from '../history/_history.js'
 
 import Home from './Home.jsx'
 import Product from './Product.jsx'
+import ProductDetail from './Product-detail.jsx'
 
 
 class Root extends React.Component{	
@@ -31,7 +32,8 @@ class Root extends React.Component{
 
 							<Route exact path="/" component={Home} ></Route>
 							<Route path="/Product" component={Product} ></Route>
-                        
+							<Route path="/Product-detail" component={ProductDetail} ></Route>
+
 						</Switch>
 					</div>
 

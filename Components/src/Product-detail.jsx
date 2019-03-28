@@ -6,15 +6,13 @@ import MenuBar from './menu-bar.jsx'
 
 import '../stylesheets/Product-Detail.css'
 import FA from 'react-fontawesome'
-import { FaAngleLeft , FaAngleRight , FaSearch , FaAngleDoubleLeft , FaAngleDoubleRight } from 'react-icons/fa'
+import { FaAngleLeft , FaAngleRight , FaSearch } from 'react-icons/fa'
 import { IconContext } from 'react-icons'
 
 
 class ProductDetail extends React.Component{
 
 	render() {
-
-		const { productDetailState } = this.props
 
 		return (
 			<div className={`Wrapper`}>
@@ -296,8 +294,8 @@ class ProductDetail extends React.Component{
 
 							<div className={`Search-By`}>
 								<input type="checkbox"/><span className={`Photo-Only`}>
-								{`포토리뷰만 보기`}
-							</span>
+									{`포토리뷰만 보기`}
+								</span>
 							</div>
 							<div className={`Search-By`}>
 								<select name="" id="">
@@ -451,13 +449,13 @@ const renderAnchor = (
 	</div>
 )
 
-const mapStateToProps = state => {
+const mapStateToProps = state => (
 
-	return {
+	{
 		productDetailState : state.productDetailState
 	}
 
-}
+)
 
 ProductDetail = withRouter(connect(mapStateToProps, null)(ProductDetail))
 

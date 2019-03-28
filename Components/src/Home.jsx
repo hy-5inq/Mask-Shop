@@ -189,7 +189,7 @@ const ProductCard = props => {
 const mapStateToProps = state => (
 	
 	{
-		homeState : state.homeReducer
+		homeState : state.homeState
 	}
 
 )

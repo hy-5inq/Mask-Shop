@@ -5,10 +5,17 @@ import { withRouter } from 'react-router-dom'
 import MenuBar from './menu-bar.jsx'
 
 import '../stylesheets/Product-Detail.css'
+import FA from 'react-fontawesome'
+import { FaAngleLeft , FaAngleRight , FaSearch , FaAngleDoubleLeft , FaAngleDoubleRight } from 'react-icons/fa'
+import { IconContext } from 'react-icons'
+
 
 class ProductDetail extends React.Component{
 
 	render() {
+
+		const { productDetailState } = this.props
+
 		return (
 			<div className={`Wrapper`}>
 				<MenuBar/>
@@ -217,34 +224,7 @@ class ProductDetail extends React.Component{
 
 				<hr className={`Normal-Band --Light-Dark`}/>
 
-				<div className={`Flex-Anchor-Container`}>
-					<div className={`Anchor-Container__Item`}>
-						<a href={`#prdDetail`} className={`Anchor-Container__Item-Text`}>
-							{`상세 정보`}
-						</a>
-					</div>
-					<div className={`Anchor-Container__Item`}>
-						<a href={`#relatedItem`} className={`Anchor-Container__Item-Text`}>
-							{`관련 아이템`}
-						</a>
-					</div>
-					<div className={`Anchor-Container__Item`}>
-						<a href={`#reply`} className={`Anchor-Container__Item-Text`}>
-							{`댓글 보기`}
-						</a>
-						<span className={`Anchor-Container__Item-Number`}>
-							{0}
-						</span>
-					</div>
-					<div className={`Anchor-Container__Item`}>
-						<a href={`#question`} className={`Anchor-Container__Item-Text`}>
-							{`질문 보기`}
-						</a>
-						<span className={`Anchor-Container__Item-Number`}>
-							{0}
-						</span>
-					</div>
-				</div>
+				{renderAnchor}
 
 				<div className={`Dummy-Product-Detail`}>
 					<span>
@@ -254,37 +234,231 @@ class ProductDetail extends React.Component{
 
 				<hr className={`Normal-Band --Light-Dark`}/>
 
-				<div className={`Flex-Anchor-Container`}>
-					<div className={`Anchor-Container__Item`}>
-						<a href={`#prdDetail`} className={`Anchor-Container__Item-Text`}>
-							{`상세 정보`}
-						</a>
+				{renderAnchor}
+
+				<div id={`relatedItem`}>
+					<h3 className={`relatedItem__Header`}>
+						{`관련 아이템`}
+					</h3>
+
+
+					<div className={`relatedItem__Slider`} style={{width : `100%`}}>
+
+						<IconContext.Provider value={{className : `Icon-Color`}}>
+							<a className={`Slider-Prev`} >
+								<FaAngleLeft />
+							</a>
+						</IconContext.Provider>
+
+						<IconContext.Provider value={{className : `Icon-Color`}}>
+							<a className={`Slider-Next`} >
+								<FaAngleRight />
+							</a>
+						</IconContext.Provider>
+
+
 					</div>
-					<div className={`Anchor-Container__Item`}>
-						<a href={`#relatedItem`} className={`Anchor-Container__Item-Text`}>
-							{`관련 아이템`}
-						</a>
+
+				</div>
+
+				<hr className={`Normal-Band --Light-Dark`}/>
+
+				<div id={`reply`}>
+					<h3 className={`reply__Header`}>
+						{`댓글 & 리뷰`}
+					</h3>
+
+					<div className={`Grid-Search-Query-Container`}>
+
+						<div className={`Query-Container__Item Grid-Order-By`}>
+							<div className={`Order-By`}>
+								<span className={`Order-By__Text --Selected`}>
+									{`최신순`}
+								</span>
+							</div>
+
+							<div className={`Order-By`}>
+								<span className={`Order-By__Text`}>
+									{`평점순`}
+								</span>
+							</div>
+
+							<div className={`Order-By`}>
+								<span className={`Order-By__Text`}>
+									{`조회수순`}
+								</span>
+							</div>
+						</div>
+
+						<div className={`Query-Container__Item`}></div>
+
+						<div className={`Query-Container__Item Grid-Search-By`}>
+
+							<div className={`Search-By`}>
+								<input type="checkbox"/><span className={`Photo-Only`}>
+								{`포토리뷰만 보기`}
+							</span>
+							</div>
+							<div className={`Search-By`}>
+								<select name="" id="">
+									<option value="내용">내용</option>
+									<option value="아이디">아이디</option>
+								</select>
+							</div>
+							<div className={`Search-By`}>
+								<div className={`IconSearch`}>
+									<input type="text" placeholder={`검색어 입력 ...`}/>
+									<IconContext.Provider value={{color : `#555` , width : `20%`}}>
+										<FaSearch />
+									</IconContext.Provider>
+								</div>
+							</div>
+
+						</div>
 					</div>
-					<div className={`Anchor-Container__Item`}>
-						<a href={`#reply`} className={`Anchor-Container__Item-Text`}>
-							{`댓글 보기`}
-						</a>
-						<span className={`Anchor-Container__Item-Number`}>
-							{0}
-						</span>
+
+					<div className={`Flex-Buttons`}>
+						<div className={`Flex-Button Write-Button`}>
+							<span className={`Flex-Button__Text`}>후기 작성</span>
+						</div>
+						<div className={`Flex-Button Show-Button`}>
+							<span className={`Flex-Button__Text`}>모두 보기</span>
+						</div>
 					</div>
-					<div className={`Anchor-Container__Item`}>
-						<a href={`#question`} className={`Anchor-Container__Item-Text`}>
-							{`질문 보기`}
-						</a>
-						<span className={`Anchor-Container__Item-Number`}>
-							{0}
-						</span>
+
+					<hr className={`Normal-Band --Light-Dark`}/>
+
+					{renderAnchor}
+
+					<div id={`question`}>
+						<h3 className={`Question__Header`}>
+							질문 보기
+						</h3>
+
+						<div>
+
+							<hr className={`Normal-Band --Light-Dark`}/>
+							<div className={`Question-Grid-Board`}>
+								<div className={`Grid-Board__Row`}>
+									<div className={`Grid-Board__Item`}>
+										<span className={`Grid-Board__Item-Text`}>
+											{`번호`}
+										</span>
+									</div>
+									<div className={`Grid-Board__Item`}>
+										<span className={`Grid-Board__Item-Text`}>
+											{`제목`}
+										</span>
+									</div>
+									<div className={`Grid-Board__Item`}>
+										<div className={`Grid-Board__Item__Item`}>
+											<span className={`Grid-Board__Item-Text`}>
+												{`작성자`}
+											</span>
+										</div>
+										<div className={`Grid-Board__Item__Item`}>
+											<span className={`Grid-Board__Item-Text`}>
+												{`작성일`}
+											</span>
+										</div>
+										<div className={`Grid-Board__Item__Item`}>
+											<span className={`Grid-Board__Item-Text`}>
+												{`조회수`}
+											</span>
+										</div>
+									</div>
+								</div>
+
+								<div className={`Dummy-Height`}>
+
+								</div>
+
+								<hr className={`Normal-Band --Light-Dark`}/>
+
+								<div className={`Flex-Buttons`}>
+									<div className={`Flex-Button Write-Button`}>
+										<span className={`Flex-Button__Text`}>
+											{`질문 작성`}
+										</span>
+									</div>
+									<div className={`Flex-Button Show-Button`}>
+										<span className={`Flex-Button__Text`}>
+											{`모두 보기`}
+										</span>
+									</div>
+								</div>
+
+								<div className={`Page-Move`}>
+									<div className={`Grid-Page-Box`}>
+										<div className={`Grid-Page-Box__Item`}>
+											<FA className='FA16' name='angle-double-left'></FA>
+										</div>
+										<div className={`Grid-Page-Box__Item`}>
+											<FA className='FA16' name='angle-left'></FA>
+										</div>
+										<div className={`Grid-Page-Box__Item`}>
+											<span>
+												{1}
+											</span>
+										</div>
+										<div className={`Grid-Page-Box__Item`}>
+											<FA className='FA16' name='angle-right'></FA>
+										</div>
+										<div className={`Grid-Page-Box__Item`}>
+											<FA className='FA16' name='angle-double-right'></FA>
+										</div>
+									</div>
+								</div>
+							</div>
+
+						</div>
 					</div>
 				</div>
 			</div>
 		)
 	}
 }
+
+
+const renderAnchor = (
+	<div className={`Flex-Anchor-Container`}>
+		<div className={`Anchor-Container__Item`}>
+			<a href={`#prdDetail`} className={`Anchor-Container__Item-Text`}>
+				{`상세 정보`}
+			</a>
+		</div>
+		<div className={`Anchor-Container__Item`}>
+			<a href={`#relatedItem`} className={`Anchor-Container__Item-Text`}>
+				{`관련 아이템`}
+			</a>
+		</div>
+		<div className={`Anchor-Container__Item`}>
+			<a href={`#reply`} className={`Anchor-Container__Item-Text`}>
+				{`댓글 보기`}
+			</a>
+			<span className={`Anchor-Container__Item-Number`}>
+				{0}
+			</span>
+		</div>
+		<div className={`Anchor-Container__Item`}>
+			<a href={`#reply`} className={`Anchor-Container__Item-Text`}>
+				{`질문 보기`}
+			</a>
+			<span className={`Anchor-Container__Item-Number`}>
+				{0}
+			</span>
+		</div>
+	</div>
+)
+
+const mapStateToProps = state => {
+
+	return {
+		productDetailState : state.productDetailState
+	}
+
+}
+
+ProductDetail = withRouter(connect(mapStateToProps, null)(ProductDetail))
 
 export default ProductDetail

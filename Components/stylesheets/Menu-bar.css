@@ -93,10 +93,15 @@
     line-height: 30px;
 }
 
-.menu-top-left li:hover {
+.menu-top-left li a:hover {
 	transition: color 0.2s;
 	color: hsl(0, 0%, 60%);
 	cursor: pointer;
+}
+
+.menu-top-left li a {
+	color: black;
+	text-decoration: none;
 }
 
 .menu-top-right {

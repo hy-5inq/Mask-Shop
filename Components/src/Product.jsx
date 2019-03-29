@@ -24,7 +24,6 @@ class Product extends React.Component{
 	}
 }
 
-// eslint-disable-next-line no-class-assign
 Product = withRouter(connect(null, null)(Product))
 
 export default Product

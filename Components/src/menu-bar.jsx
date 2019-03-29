@@ -27,10 +27,10 @@ export default class MenuBar extends React.Component{
 				<div className='menu-top'>
 					<div className='inner'>
 						<ul className='menu-top-left'>
-							<li className='login' i18n-content='LOGIN'></li>
-							<li className='sign-up' i18n-content='SIGN_UP'></li>
-							<li className='shop-basket' i18n-content='SHOP_BASKET'></li>
-							<li className='my-page' i18n-content='MY_PAGE'></li>
+							<li className='login'><a href='/login' i18n-content='LOGIN'></a></li>
+							<li className='order-list'><a href='#' i18n-content='ORDER_LIST'></a></li>
+							<li className='shop-basket'><a href='#' i18n-content='SHOP_BASKET'></a></li>
+							<li className='my-page'><a href='#' i18n-content='MY_PAGE'></a></li>
 						</ul>									
 
 						<ul className='menu-top-right'>

@@ -12,15 +12,18 @@ const xmlParser = require(`xml2json`);
 const airPollution = require(`./utils.js`).airPollution;
 
 function requestAirPollutionInfo() {
-	for(const i in stations.slice(0, 5)){ // test를 위해 5개만
-		const queryParams = createQueryParams(stations[i], params);
+	/* https://www.data.go.kr/ 공공 데이터 포털로부터 대기오염 정보를 받아와 MongoDB에 저장합니다.
+	 */
+	let idx = 0;
+	for(idx in stations.slice(0,1)){ // 테스트 시 API 횟수 제한을 피하기 위해 조금 씩만
+		const queryParams = createQueryParams(`논산`, params); // 버그 stations[idx] 하면 왜 안 불러와지는지 모르겠음
 		request({
 			url: url + queryParams,
 			method: `GET`,
 		}, (err, res, body) => {
-			const jsonBody = JSON.parse(xmlParser.toJson(body));
-			const item = jsonBody.response.body.items.item;
 			try {
+				const jsonBody = JSON.parse(xmlParser.toJson(body));
+				const item = jsonBody.response.body.items.item;
 				airPollution.stationName = stations[i];
 				airPollution.dataTime = new Date(item.dataTime);
 				airPollution.so2Value = item.so2Value;
@@ -44,10 +47,10 @@ function requestAirPollutionInfo() {
 					if (err) return console.error(err);
 					input.verboseLog();})
 			} catch (exception) {
-				console.log(exception);
+				// console.log(exception);
+				console.log(`** 저장되지 않음 **`);
+				console.log(stations[idx]);
 			}
 		})
 	}
-
-
 }

@@ -1,7 +1,7 @@
 
 function createQueryParams(stationName, params) {
 	let queryParams = `?`;
-	queryParams += `&${  encodeURIComponent(`stationName`)  }=${  encodeURIComponent(stationName)}`;
+	queryParams += `${  encodeURIComponent(`stationName`)  }=${  encodeURIComponent(stationName)}`;
 	queryParams += `&${  encodeURIComponent(`dataTerm`)  }=${  encodeURIComponent(params.dataTerm)}`;
 	queryParams += `&${  encodeURIComponent(`pageNo`)  }=${  encodeURIComponent(params.pageNo)}`;
 	queryParams += `&${  encodeURIComponent(`numOfRows`)  }=${  encodeURIComponent(params.numOfRows)}`;
@@ -9,8 +9,8 @@ function createQueryParams(stationName, params) {
 	queryParams += `&${  encodeURIComponent(`ver`)  }=${  encodeURIComponent(params.ver)}`;
 	return queryParams;
 }
-
-
+// http://openapi.airkorea.or.kr/openapi/services/rest/ArpltnInforInqireSvc/getMsrstnAcctoRltmMesureDnsty?stationName=%EA%B4%91%EC%A7%84%EA%B5%AC%0D&dataTerm=month&pageNo=1&numOfRows=1&ServiceKey=LtPYpmiQtkWL4J3r5I4i8wJ5osI78dqTCQRu4LJ0K3ceb5KVQx%2Bu%2F7fnuGe7udm5cibtD5dG5vMcAy52FDIHNQ%3D%3D&ver=1.3
+// http://openapi.airkorea.or.kr/openapi/services/rest/ArpltnInforInqireSvc/getMsrstnAcctoRltmMesureDnsty?stationName=종로구&dataTerm=month&pageNo=1&numOfRows=10&ServiceKey=LtPYpmiQtkWL4J3r5I4i8wJ5osI78dqTCQRu4LJ0K3ceb5KVQx%2Bu%2F7fnuGe7udm5cibtD5dG5vMcAy52FDIHNQ%3D%3D&ver=1.3
 let airPollution = {
 	stationName: null,
 	dataTime: null,

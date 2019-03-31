@@ -51,7 +51,6 @@ module.exports = {
         }],
 
         // Stylistic Issues
-        "comma-dangle": [1, "always-multiline"],
         "eol-last": 1,
         "func-style": [1, `declaration`, { "allowArrowFunctions": true }],
         "indent": [1, "tab"],
@@ -65,8 +64,9 @@ module.exports = {
         }],
         "no-unneeded-ternary": 1,
         "quotes": [1, "backtick"],
-		"semi": 0,
-		"max-lines-per-function": [2, 30],
+        "semi": 0,
+        "no-class-assign" : 0,
+		// "max-lines-per-function": [2, 30],
 
         // ECMAScript 6
         "arrow-body-style": 1,
@@ -80,12 +80,16 @@ module.exports = {
         "prefer-numeric-literals": 1,
         "prefer-rest-params": 1,
         "prefer-spread": 1,
-        "prefer-template": 1
+		"prefer-template": 1,
+		
+		//React
+		"react/jsx-uses-vars": ["error"],
     },    
     // allow global variables
     "globals": {
         "Atomics": "readonly",
-        "SharedArrayBuffer": "readonly"
+		"SharedArrayBuffer": "readonly",
+		"i18n": true,
 	},
 
 	"plugins": [

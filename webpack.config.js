@@ -1,11 +1,16 @@
 const webpack = require(`webpack`);
 const path = require(`path`);
+const MiniCssExtractPlugin = require(`mini-css-extract-plugin`)
+const devMode = process.env.NODE_ENV !== `production`
 
 module.exports = {
-	entry : path.join(__dirname,`/Components/src/Root.jsx`),
+	entry : {
+		"bundle": path.join(__dirname,`/Components/src/Root.jsx`),
+		"i18n-contents": path.join(__dirname,`/Components/lib/i18n-contents.js`),
+	},
 	output : {
 
-		filename : `bundle.js`,
+		filename : `[name].js`,
 		path : path.join(__dirname,`/public`),
     
 	},
@@ -23,12 +28,17 @@ module.exports = {
 	module : {
 		rules : [
 			{
-				test : /\.(css|scss|sass)$/,
-				exclude : /node_modules/,
-				use : [
-					{loader : `style-loader`},
-					{loader : `css-loader`},
-					{loader : `sass-loader`},
+				test: /\.(sa|sc|c)ss$/,
+				use: [
+					devMode ? `style-loader` : MiniCssExtractPlugin.loader,
+					`css-loader`,
+					{
+						loader: `postcss-loader`,
+						options: {
+							plugins: () => [require(`autoprefixer`)]
+						}
+					},
+					`sass-loader`,
 				],
 			},
 			{
@@ -53,6 +63,12 @@ module.exports = {
 		new webpack.ProgressPlugin(),
 		new webpack.NamedModulesPlugin(),
 		new webpack.HotModuleReplacementPlugin(),
+		new MiniCssExtractPlugin({
+			// Options similar to the same options in webpackOptions.output
+			// both options are optional
+			filename: `[name].css`,
+			chunkFilename: `[id].css`
+		})
 	],
 	target : `web`,
 }

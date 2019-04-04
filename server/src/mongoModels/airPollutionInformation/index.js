@@ -4,6 +4,8 @@ const Schema = require(`mongoose`).Schema;
 
 // (1) Define object
 const airPollutionInformationSchema = new Schema({
+	stationId: Number,
+	localName: String,
 	stationName: String,
 	dataTime: Date,
 	mangName: String,

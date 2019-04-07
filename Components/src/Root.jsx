@@ -33,7 +33,7 @@ class Root extends React.Component{
 							<Route exact path="/" component={Home} ></Route>
 							<Route path="/Product" component={Product} ></Route>
 							<Route path="/Product-detail" component={ProductDetail} ></Route>
-
+							
 						</Switch>
 					</div>
 

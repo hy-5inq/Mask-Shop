@@ -18,6 +18,7 @@ import Home from './Home.jsx'
 import Product from './Product.jsx'
 import ProductDetail from './Product-detail.jsx'
 
+import '../stylesheets/Root.css'
 
 class Root extends React.Component{	
 	render(){

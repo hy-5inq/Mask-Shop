@@ -105,7 +105,7 @@ class ProductDetail extends React.Component{
 									</span>
 								</div>
 								<div className={`Order-Option`}>
-									<input className={`Option`} type="number" min={`1`} name={`quantity`} />
+									<input className={`Option`} type="number" value={1} min={`1`} name={`quantity`} />
 								</div>
 							</div>
 							<div className={`Option-Container__Item`}>
@@ -116,13 +116,30 @@ class ProductDetail extends React.Component{
 								</div>
 								<div className={`Order-Option`}>
 									<select className={`Option`} name="" id="">
-										<option value="">{`[필수] 사이즈를 선택하세요`}</option>
+										<option value="">{`사이즈 선택`}</option>
 										<option value="">{`-------------------------`}</option>
 										<option value="M">M</option>
 										<option value="L">L</option>
 										<option value="XL">XL</option>
 										<option value="XXL">XXL</option>
 										<option value="XXXL">XXXL</option>
+									</select>
+								</div>
+							</div>
+							<div className={`Option-Container__Item`}>
+								<div className={`Order-Option`}>
+									<span className={`Option-Key`}>
+										{`> 정기배송`}
+									</span>
+								</div>
+								<div className={`Order-Option`}>
+									<select className={`Option`} name="" id="">
+										<option value="">{`배송주기 선택`}</option>
+										<option value="">{`-------------------------`}</option>
+										<option value="M">1개월</option>
+										<option value="L">2개월</option>
+										<option value="XL">3개월</option>
+										<option value="XXL">4개월</option>
 									</select>
 								</div>
 							</div>
@@ -224,7 +241,7 @@ class ProductDetail extends React.Component{
 
 				{renderAnchor}
 
-				<div className={`Dummy-Product-Detail`}>
+				<div id={`prdDetail`} className={`Dummy-Product-Detail`}>
 					<span>
 						{`상품 설명이 이곳에 담긴다.`}
 					</span>
@@ -232,13 +249,10 @@ class ProductDetail extends React.Component{
 
 				<hr className={`Normal-Band --Light-Dark`}/>
 
-				{renderAnchor}
-
-				<div id={`relatedItem`}>
+				{/* <div id={`relatedItem`}>
 					<h3 className={`relatedItem__Header`}>
 						{`관련 아이템`}
 					</h3>
-
 
 					<div className={`relatedItem__Slider`} style={{width : `100%`}}>
 
@@ -257,7 +271,7 @@ class ProductDetail extends React.Component{
 
 					</div>
 
-				</div>
+				</div> */}
 
 				<hr className={`Normal-Band --Light-Dark`}/>
 
@@ -324,92 +338,89 @@ class ProductDetail extends React.Component{
 						</div>
 					</div>
 
-					<hr className={`Normal-Band --Light-Dark`}/>
+				</div>
+				<hr className={`Normal-Band --Light-Dark`}/>
+				<div id={`question`}>
+					<h3 className={`Question__Header`}>
+						Q & A
+					</h3>
 
-					{renderAnchor}
+					<div>
 
-					<div id={`question`}>
-						<h3 className={`Question__Header`}>
-							질문 보기
-						</h3>
-
-						<div>
-
-							<hr className={`Normal-Band --Light-Dark`}/>
-							<div className={`Question-Grid-Board`}>
-								<div className={`Grid-Board__Row`}>
-									<div className={`Grid-Board__Item`}>
+						<hr className={`Normal-Band --Light-Dark`}/>
+						<div className={`Question-Grid-Board`}>
+							<div className={`Grid-Board__Row`}>
+								<div className={`Grid-Board__Item`}>
+									<span className={`Grid-Board__Item-Text`}>
+										{`번호`}
+									</span>
+								</div>
+								<div className={`Grid-Board__Item`}>
+									<span className={`Grid-Board__Item-Text`}>
+										{`제목`}
+									</span>
+								</div>
+								<div className={`Grid-Board__Item`}>
+									<div className={`Grid-Board__Item__Item`}>
 										<span className={`Grid-Board__Item-Text`}>
-											{`번호`}
+											{`작성자`}
 										</span>
 									</div>
-									<div className={`Grid-Board__Item`}>
+									<div className={`Grid-Board__Item__Item`}>
 										<span className={`Grid-Board__Item-Text`}>
-											{`제목`}
+											{`작성일`}
 										</span>
 									</div>
-									<div className={`Grid-Board__Item`}>
-										<div className={`Grid-Board__Item__Item`}>
-											<span className={`Grid-Board__Item-Text`}>
-												{`작성자`}
-											</span>
-										</div>
-										<div className={`Grid-Board__Item__Item`}>
-											<span className={`Grid-Board__Item-Text`}>
-												{`작성일`}
-											</span>
-										</div>
-										<div className={`Grid-Board__Item__Item`}>
-											<span className={`Grid-Board__Item-Text`}>
-												{`조회수`}
-											</span>
-										</div>
-									</div>
-								</div>
-
-								<div className={`Dummy-Height`}>
-
-								</div>
-
-								<hr className={`Normal-Band --Light-Dark`}/>
-
-								<div className={`Flex-Buttons`}>
-									<div className={`Flex-Button Write-Button`}>
-										<span className={`Flex-Button__Text`}>
-											{`질문 작성`}
+									<div className={`Grid-Board__Item__Item`}>
+										<span className={`Grid-Board__Item-Text`}>
+											{`조회수`}
 										</span>
-									</div>
-									<div className={`Flex-Button Show-Button`}>
-										<span className={`Flex-Button__Text`}>
-											{`모두 보기`}
-										</span>
-									</div>
-								</div>
-
-								<div className={`Page-Move`}>
-									<div className={`Grid-Page-Box`}>
-										<div className={`Grid-Page-Box__Item`}>
-											<FA className='FA16' name='angle-double-left'></FA>
-										</div>
-										<div className={`Grid-Page-Box__Item`}>
-											<FA className='FA16' name='angle-left'></FA>
-										</div>
-										<div className={`Grid-Page-Box__Item`}>
-											<span>
-												{1}
-											</span>
-										</div>
-										<div className={`Grid-Page-Box__Item`}>
-											<FA className='FA16' name='angle-right'></FA>
-										</div>
-										<div className={`Grid-Page-Box__Item`}>
-											<FA className='FA16' name='angle-double-right'></FA>
-										</div>
 									</div>
 								</div>
 							</div>
 
+							<div className={`Dummy-Height`}>
+
+							</div>
+
+							<hr className={`Normal-Band --Light-Dark`}/>
+
+							<div className={`Flex-Buttons`}>
+								<div className={`Flex-Button Write-Button`}>
+									<span className={`Flex-Button__Text`}>
+										{`질문 작성`}
+									</span>
+								</div>
+								<div className={`Flex-Button Show-Button`}>
+									<span className={`Flex-Button__Text`}>
+										{`모두 보기`}
+									</span>
+								</div>
+							</div>
+
+							<div className={`Page-Move`}>
+								<div className={`Grid-Page-Box`}>
+									<div className={`Grid-Page-Box__Item`}>
+										<FA className='FA16' name='angle-double-left'></FA>
+									</div>
+									<div className={`Grid-Page-Box__Item`}>
+										<FA className='FA16' name='angle-left'></FA>
+									</div>
+									<div className={`Grid-Page-Box__Item`}>
+										<span>
+											{1}
+										</span>
+									</div>
+									<div className={`Grid-Page-Box__Item`}>
+										<FA className='FA16' name='angle-right'></FA>
+									</div>
+									<div className={`Grid-Page-Box__Item`}>
+										<FA className='FA16' name='angle-double-right'></FA>
+									</div>
+								</div>
+							</div>
 						</div>
+
 					</div>
 				</div>
 			</div>
@@ -425,13 +436,13 @@ const renderAnchor = (
 				{`상세 정보`}
 			</a>
 		</div>
-		<div className={`Anchor-Container__Item`}>
+		{/* <div className={`Anchor-Container__Item`}>
 			<a href={`#relatedItem`} className={`Anchor-Container__Item-Text`}>
 				{`관련 아이템`}
 			</a>
-		</div>
+		</div> */}
 		<div className={`Anchor-Container__Item`}>
-			<a href={`#reply`} className={`Anchor-Container__Item-Text`}>
+			<a href={`#question`} className={`Anchor-Container__Item-Text`}>
 				{`댓글 보기`}
 			</a>
 			<span className={`Anchor-Container__Item-Number`}>
@@ -440,7 +451,7 @@ const renderAnchor = (
 		</div>
 		<div className={`Anchor-Container__Item`}>
 			<a href={`#reply`} className={`Anchor-Container__Item-Text`}>
-				{`질문 보기`}
+				{`Q & A`}
 			</a>
 			<span className={`Anchor-Container__Item-Number`}>
 				{0}

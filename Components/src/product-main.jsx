@@ -1,7 +1,7 @@
 import React from 'react'
 import FA from 'react-fontawesome' // FontAwesome
 
-import '../stylesheets/Product-main.css'
+import '../stylesheets/product-main.css'
 
 export default class ProductMain extends React.Component{
 	render(){

@@ -3,7 +3,7 @@ export default {
 	MENU_TITLE: `<strong>MASK</strong> SHOP`,
 
 	LOGIN: `로그인`,
-	SIGN_UP: `회원가입`,
+	ORDER_LIST: `주문목록`,
 	SHOP_BASKET: `장바구니`,
 	MY_PAGE: `마이페이지`,
 
@@ -18,4 +18,13 @@ export default {
 	SORT_LOW_RPICE: `낮은가격순`,
 	SORT_HIGH_PRICE: `높은가격순`,
 	SORT_DATE: `신상품`,
+
+	LOGIN_TITLE: `LOGIN`,
+	LOGIN_ID: `ID`,
+	LOGIN_PASSWORD: `PASSWORD`,
+	LOGIN_SAVE_ID: `아이디 저장`,
+	LOGIN_BTN_KAKAO: `카카오 로그인`,
+	LOGIN_BTN_NAVER: `네이버 로그인`,
+	LOGIN_ID_SEARCH: `아이디 찾기`,
+	LOGIN_PWD_SEARCH: `비밀번호 찾기`,
 }

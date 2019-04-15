@@ -28,7 +28,7 @@ class Login extends React.Component{
 						</div>
 						<div className='login-pwd'>
 							<label for='login-pwd-input' className='login-pwd-text' i18n-content='LOGIN_PASSWORD'></label>
-							<input id='login-pwd-input' type='text' />
+							<input id='login-pwd-input' type='password' />
 						</div>
 						<div className='submenu'>
 							<input id='id-save-box' type='checkbox' />

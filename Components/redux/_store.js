@@ -6,12 +6,14 @@
 import { createStore , combineReducers , applyMiddleware } from 'redux'
 
 import homeReducer from './HomeReducer.js'
+import productDetailReducer from './ProductDetailReducer.js'
 
 import logger from 'redux-logger'
 import thunk from 'redux-thunk'
 
 const originReducer = combineReducers({
-	homeReducer : homeReducer
+	homeState : homeReducer,
+	productDetailState : productDetailReducer
 })
 
 const _store = createStore(originReducer , applyMiddleware(logger , thunk))

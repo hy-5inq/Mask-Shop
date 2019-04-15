@@ -6,6 +6,7 @@ import { withRouter } from 'react-router-dom'
 
 import MenuBar from './menu-bar.jsx'
 import ImageGallery from 'react-image-gallery'
+import AirMap from './air-map.jsx'
 
 import '../stylesheets/Home.css'
 import '../stylesheets/image-gallery.css'
@@ -26,18 +27,7 @@ class Home extends React.Component{
 
 			<div>
 				<MenuBar />
-				<div className="ImageGallery-Container">
-					<ImageGallery 
-						items={homeState.imageGalleryItems}
-						showBullets={true}
-						showFullscreenButton={false}
-						showThumbnails={false}
-						thumbnailPosition="bottom"
-						showNav={true}
-						slideInterval={3000}
-						autoPlay={true}
-					/>
-				</div>
+				<AirMap />		
 				<div className="Home-Hot-Menus">
 
 					<div className="Home-Hot-Menus__Item">
@@ -178,8 +168,7 @@ const ProductCard = props => {
 				
 			</div>
 		</div>
-	)
-	)
+	))
 
 	return result
 }

@@ -1,0 +1,42 @@
+.air-map {
+	position: relative;
+	text-align: center;
+	background-color: #B0CBE6;
+    max-width: 1260px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#clock {
+	display: inline-block;
+	font-size: 36px;
+}
+
+.air-map-img {
+	height: 350px;
+	vertical-align: middle;
+}
+
+.air-map-text {
+	color: white;
+	display: inline-block;
+	vertical-align: middle;
+    width: 200px;
+}
+
+.current-air {
+	color: rgb(191, 241, 206);
+	font-weight: bold;
+}
+
+.blue {
+	fill: #32a1ff;
+}
+
+.orange {
+	fill: #fd9b5a;
+}
+
+.red {
+	fill: #ff5959;
+}

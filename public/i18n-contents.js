@@ -63,7 +63,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "c428b198d38262508af5";
+/******/ 	var hotCurrentHash = "9d29cea7575ab648ebd8";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -801,7 +801,7 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n\tvalue: true\n});\nexports.default = {\n\tAPP_NAME: \"\\uB9C8\\uC2A4\\uD06C\\uC0F5\",\n\tMENU_TITLE: \"<strong>MASK</strong> SHOP\",\n\n\tLOGIN: \"\\uB85C\\uADF8\\uC778\",\n\tSIGN_UP: \"\\uD68C\\uC6D0\\uAC00\\uC785\",\n\tSHOP_BASKET: \"\\uC7A5\\uBC14\\uAD6C\\uB2C8\",\n\tMY_PAGE: \"\\uB9C8\\uC774\\uD398\\uC774\\uC9C0\",\n\n\tMENU_BY_DUST: \"\\uBBF8\\uC138\\uBA3C\\uC9C0 \\uB18D\\uB3C4\\uBCC4\",\n\tMENU_BY_SIZE: \"\\uD06C\\uAE30\\uBCC4\",\n\tMENU_BY_USAGE: \"\\uC0AC\\uC6A9\\uBCC4\",\n\tMENU_BY_COMPANY: \"\\uD68C\\uC0AC\\uBCC4\",\n\n\tTOTAL_NUMBER_ITEM: \"Total <strong>0</strong> items\",\n\tSORT_POPULARITY: \"\\uC778\\uAE30\\uC21C\",\n\tSORT_NAME: \"\\uC774\\uB984\\uC21C\",\n\tSORT_LOW_RPICE: \"\\uB0AE\\uC740\\uAC00\\uACA9\\uC21C\",\n\tSORT_HIGH_PRICE: \"\\uB192\\uC740\\uAC00\\uACA9\\uC21C\",\n\tSORT_DATE: \"\\uC2E0\\uC0C1\\uD488\"\n};\n\n//# sourceURL=webpack:///./Components/_locales/ko.js?");
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n\tvalue: true\n});\nexports.default = {\n\tAPP_NAME: \"\\uB9C8\\uC2A4\\uD06C\\uC0F5\",\n\tMENU_TITLE: \"<strong>MASK</strong> SHOP\",\n\n\tLOGIN: \"\\uB85C\\uADF8\\uC778\",\n\tORDER_LIST: \"\\uC8FC\\uBB38\\uBAA9\\uB85D\",\n\tSHOP_BASKET: \"\\uC7A5\\uBC14\\uAD6C\\uB2C8\",\n\tMY_PAGE: \"\\uB9C8\\uC774\\uD398\\uC774\\uC9C0\",\n\n\tMENU_BY_DUST: \"\\uBBF8\\uC138\\uBA3C\\uC9C0 \\uB18D\\uB3C4\\uBCC4\",\n\tMENU_BY_SIZE: \"\\uD06C\\uAE30\\uBCC4\",\n\tMENU_BY_USAGE: \"\\uC0AC\\uC6A9\\uBCC4\",\n\tMENU_BY_COMPANY: \"\\uD68C\\uC0AC\\uBCC4\",\n\n\tTOTAL_NUMBER_ITEM: \"Total <strong>0</strong> items\",\n\tSORT_POPULARITY: \"\\uC778\\uAE30\\uC21C\",\n\tSORT_NAME: \"\\uC774\\uB984\\uC21C\",\n\tSORT_LOW_RPICE: \"\\uB0AE\\uC740\\uAC00\\uACA9\\uC21C\",\n\tSORT_HIGH_PRICE: \"\\uB192\\uC740\\uAC00\\uACA9\\uC21C\",\n\tSORT_DATE: \"\\uC2E0\\uC0C1\\uD488\",\n\n\tLOGIN_TITLE: \"LOGIN\",\n\tLOGIN_ID: \"ID\",\n\tLOGIN_PASSWORD: \"PASSWORD\",\n\tLOGIN_SAVE_ID: \"\\uC544\\uC774\\uB514 \\uC800\\uC7A5\",\n\tLOGIN_BTN_KAKAO: \"\\uCE74\\uCE74\\uC624 \\uB85C\\uADF8\\uC778\",\n\tLOGIN_BTN_NAVER: \"\\uB124\\uC774\\uBC84 \\uB85C\\uADF8\\uC778\",\n\tLOGIN_ID_SEARCH: \"\\uC544\\uC774\\uB514 \\uCC3E\\uAE30\",\n\tLOGIN_PWD_SEARCH: \"\\uBE44\\uBC00\\uBC88\\uD638 \\uCC3E\\uAE30\",\n\n\tAIR_MAP_TEXT: \"\\uD604\\uC7AC\\uC9C0\\uC5ED \\uBBF8\\uC138\\uBA3C\\uC9C0 \\uC218\\uCE58 <br/> Loading...\"\n\n};\n\n//# sourceURL=webpack:///./Components/_locales/ko.js?");
 
 /***/ }),
 

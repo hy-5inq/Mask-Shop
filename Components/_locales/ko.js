@@ -29,5 +29,4 @@ export default {
 	LOGIN_PWD_SEARCH: `비밀번호 찾기`,
 
 	AIR_MAP_TEXT: `현재지역 미세먼지 수치 <br/> Loading...`,
-
 }

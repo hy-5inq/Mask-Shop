@@ -21,11 +21,34 @@ class AirMap extends React.Component{
 		this.eventMap = this.setColorInMap.bind(this)
 		this.eventMap()
 		this.intervalMap = setInterval(this.eventMap, 300000)
+
+		this.onEnterPath()
 	}
 
 	componentWillUnmount() {
 		clearInterval(this.intervalClock)
 		clearInterval(this.intervalMap)
+	}
+
+	onEnterPath() {
+		const region = [`제주`, `부산`, `울산`, `경남`, `대구`, `경북`, `광주`, `전남`, `전북`, `대전`, `세종`, `충남`, `충북`, `강원`, `경기`, `인천`, `서울`]
+		document.querySelector(`.air-map-img`).addEventListener(`load`, () => {
+			document.querySelector(`.air-map-img`).contentDocument.querySelectorAll(`path`).forEach(path => {
+				path.addEventListener(`mouseenter`, event => {
+					if (region.indexOf(event.target.id) !== -1) {
+						event.target.style.transition = `all .2s ease-out`
+						event.target.style.fillOpacity = `0.5`
+						document.querySelector(`.pm-value`).textContent = `${event.target.id} : ${event.target.dataset.pmValue}`
+					}					
+				})
+				path.addEventListener(`mouseleave`, event => {
+					if (region.indexOf(event.target.id) !== -1) {
+						event.target.style.fillOpacity = `1`
+						document.querySelector(`.pm-value`).textContent = ``
+					}					
+				})
+			})
+		})
 	}
 
 	setColorInMap() {
@@ -48,6 +71,7 @@ class AirMap extends React.Component{
 	setItemColor(item) {
 		let pmValue = item.querySelector(`pm10Value`).textContent
 		let location = document.querySelector(`.air-map-img`).contentDocument.querySelector(`#${item.querySelector(`stationName`).textContent}`)
+		location.dataset.pmValue = pmValue
 		return {	
 			setColorBlue() {		
 				if (pmValue !== `-` && pmValue < 30) {					
@@ -164,8 +188,9 @@ class AirMap extends React.Component{
 	render(){
 		return(
 			<div className='air-map'>
-				<object className='air-map-img' data={map} type='image/svg+xml'></object>				
-				<span className='air-map-text'>
+				<object className='air-map-img' data={map} type='image/svg+xml'></object>
+				<span className='air-map-text'>			
+					<span className='pm-value'></span>		
 					<span id='clock'>00:00:00</span>
 					<p i18n-content='AIR_MAP_TEXT'></p>					
 				</span>

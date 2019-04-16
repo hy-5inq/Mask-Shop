@@ -17,11 +17,20 @@
 	vertical-align: middle;
 }
 
+.pm-value {
+	position: absolute;
+	width: 200px;
+	top: -30px;
+	pointer-events: none;
+	color: rgba(255, 255, 255, 0.8);
+}
+
 .air-map-text {
 	color: white;
 	display: inline-block;
 	vertical-align: middle;
-    width: 200px;
+	width: 200px;	
+	position: relative;
 }
 
 .current-air {

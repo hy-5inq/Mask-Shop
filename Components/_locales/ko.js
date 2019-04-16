@@ -28,5 +28,5 @@ export default {
 	LOGIN_ID_SEARCH: `아이디 찾기`,
 	LOGIN_PWD_SEARCH: `비밀번호 찾기`,
 
-	AIR_MAP_TEXT: `현재지역 미세먼지 수치 <br/> Loading...`,
+	AIR_MAP_TEXT: `현재지역 미세먼지 수치 <br/> <span class='current-air'>Loading...</span>`,
 }

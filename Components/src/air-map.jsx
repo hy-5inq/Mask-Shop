@@ -38,7 +38,7 @@ class AirMap extends React.Component{
 					if (region.indexOf(event.target.id) !== -1) {
 						event.target.style.transition = `all .2s ease-out`
 						event.target.style.fillOpacity = `0.5`
-						document.querySelector(`.pm-value`).textContent = `${event.target.id} : ${event.target.dataset.pmValue}`
+						document.querySelector(`.pm-value`).textContent = `${event.target.id} : ${event.target.dataset.pmValue || `loading...`}`
 					}					
 				})
 				path.addEventListener(`mouseleave`, event => {
@@ -71,7 +71,9 @@ class AirMap extends React.Component{
 	setItemColor(item) {
 		let pmValue = item.querySelector(`pm10Value`).textContent
 		let location = document.querySelector(`.air-map-img`).contentDocument.querySelector(`#${item.querySelector(`stationName`).textContent}`)
-		location.dataset.pmValue = pmValue
+		if (location) {
+			location.dataset.pmValue = pmValue
+		}
 		return {	
 			setColorBlue() {		
 				if (pmValue !== `-` && pmValue < 30) {					
@@ -145,6 +147,9 @@ class AirMap extends React.Component{
 				document.querySelector(`.air-map-img`).addEventListener(`load`, () => {
 					pmValue = item.querySelector(`pm10Value`).textContent
 					location = document.querySelector(`.air-map-img`).contentDocument.querySelector(`#${item.querySelector(`stationName`).textContent}`)
+					if (location) {
+						location.dataset.pmValue = pmValue
+					}
 					this.setCurrentLocation()
 						.setColorBlue()
 						.setColorOrange()

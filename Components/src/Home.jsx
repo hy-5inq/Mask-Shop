@@ -15,7 +15,7 @@ import mask from '../../public/images/mask.svg'
 import chat from '../../public/images/chat.svg'
 import conversation from '../../public/images/conversation.svg'
 import speaker from '../../public/images/speaker.svg'
-import rabbit from '../../public/images/rabbit.gif' 
+import regularDelivery from '../../public/images/regular-delivery.png' 
 
 class Home extends React.Component{
 
@@ -24,8 +24,7 @@ class Home extends React.Component{
 		const { homeState } = this.props
 				
 		return(
-
-			<div>
+			<React.Fragment>
 				<MenuBar />
 				<AirMap />		
 				<div className="Home-Hot-Menus">
@@ -98,29 +97,25 @@ class Home extends React.Component{
 
 				<div className="Home-Ads-Section">
 					<div className="Section__Item">
-						<ImageGallery 
-							items={homeState.imageGalleryItems}
-							showBullets={false}
-							showFullscreenButton={true}
-							showThumbnails={false}
-							thumbnailPosition="bottom"
-							showNav={false}
-							slideInterval={3000}
-							autoPlay={true}
-						/>
+						<img className='banner-regular-delivery' src={regularDelivery} width='200' />
+						<span className='regular-delivery-text'>
+							<div className='regular-delivery-text-1' i18n-content='REGULAR_SERVICE_TITLE'></div>
+							<div className='regular-delivery-text-2' i18n-content='REGULAR_SERVICE_DES'></div>
+							<button className='regular-delivery-btn' i18n-content='REGULAR_SERVICE_BTN'></button>
+						</span>						
 					</div>
 
 					<div className="Section__Item">
 						<div className="Section__Item__Item">
 							<div className="Section__Item__Item__Item">
-								<img src={rabbit} alt=""/>
+								<img src='#' alt=""/>
 							</div>
 							<div className="Section__Item__Item__Item">
-								<img src={rabbit} alt=""/>
+								<img src='#' alt=""/>
 							</div>
 						</div>
 						<div className="Section__Item__Item">
-							<img src={rabbit} alt=""/>
+							<img src='#' alt=""/>
 						</div>
 					</div>
 				</div>
@@ -133,7 +128,7 @@ class Home extends React.Component{
 				<div className="Home-Recommend-Items-Container">
 					{ProductCard(homeState.recommendedItems)}
 				</div>
-			</div>
+			</React.Fragment>
 
 		)
 	}
@@ -141,13 +136,11 @@ class Home extends React.Component{
 }
 
 const ProductCard = props => {
-
-	const result = props.map( el => (
-	
-		<div className="Home-Recommend-Container__Item">
+	const result = props.map((el,index) => (
+		<div className="Home-Recommend-Container__Item" key={index}>
 
 			<div className="Container__Item-ImageBox">
-				<img src={el.src} alt="추천 아이템 이미지"/>
+				<img src={el.src} />
 			</div>
 
 			<div className="Container__Item-ProductTextBox">

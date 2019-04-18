@@ -42,7 +42,7 @@ function verboseLog(){
 		station: ${  this.stationName}
 		dataTime: ${  this.dataTime}`
 		: `INSERTED airPollutionInformation's dataTime is Null`;
-	console.log(log);
+	console.info(log);
 }
 airPollutionInformationSchema.methods.verboseLog = verboseLog;
 

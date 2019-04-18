@@ -8,84 +8,75 @@ mongoose.connect(`mongodb://localhost/${dbName}`, {useNewUrlParser: true});
 
 const airPollutionInformation = model(`airPollutionInformation`, airPollutionInformationSchema);
 
-const airPollution = {
-	stationId: null,
-	localName: null,
-	stationName: null,
-	dataTime: null,
-	mangName: null,
-	so2Value: null,
-	coValue: null,
-	o3Value: null,
-	no2Value: null,
-	pm10Value: null,
-	pm10Value24: null,
-	pm25Value: null,
-	pm25Value24: null,
-	khaiValue: null,
-	khaiGrade: null,
-	so2Grade: null,
-	coGrade: null,
-	no2Grade: null,
-	pm10Grade: null,
-	pm25Grade: null,
-	pm10Grade1h: null,
-	pm25Grade1h: null,
-};
-
-function item_to_airPollution(item){
+class airPollution{
+	constructor(stationId, localName, stationName, dataTime, mangName, so2Value, coValue, o3Value, no2Value,
+		pm10Value, pm10Value24, khaiValue, khaiGrade, so2Grade, coGrade, no2Grade, pm10Grade, pm25Grade, pm10Grade1h, pm25Grade15){
+		this.stationId = stationId;
+		this.localName = localName;
+		this.stationName = stationName;
+		this.dataTime = dataTime;
+		this.mangName = mangName;
+		this.so2Value = so2Value;
+		this.coValue = coValue;
+		this.no2Value = no2Value;
+		this.pm10Value = pm10Value;
+		this.pm10Value24 = pm10Value24;
+		this.khaiValue = khaiValue;
+		this.khaiGrade = khaiGrade;
+		this.so2Grade = so2Grade;
+		this.coGrade = coGrade;
+		this.no2Grade = no2Grade;
+		this.pm10Grade = pm10Grade;
+		this.pm25Grade = pm25Grade;
+		this.pm10Grade1h = pm10Grade1h;
+		this.pm25Grade15 = pm25Grade15;
+	}
+}
+function item_to_airPollution(stationId, item){
 	// airPollution.stationId = item.stationId;
-	airPollution.localName = item.localName;
-	airPollution.stationName = item.stationName;
-	airPollution.dataTime = new Date(item.dataTime);
-	airPollution.so2Value = item.so2Value;
-	airPollution.coValue = item.coValue;
-	airPollution.o3Value = item.o3Value;
-	airPollution.no2Value = item.no2Value;
-	airPollution.pm10Value = item.pm10Value;
-	airPollution.pm10Value24 = item.pm10Value24;
-	airPollution.pm25Value = item.pm25Value;
-	airPollution.pm25Value24 = item.pm25Value24;
-	airPollution.khaiValue = item.khaiValue;
-	airPollution.khaiGrade = item.khaiGrade;
-	airPollution.so2Grade = item.so2Grade;
-	airPollution.coGrade = item.coGrade;
-	airPollution.no2Grade = item.no2Grade;
-	airPollution.pm10Grade = item.pm10Grade;
-	airPollution.pm25Grade = item.pm25Grade;
-	airPollution.pm10Grade1h = item.pm10Grade1h;
-	airPollution.pm25Grade1h = item.pm25Grade1h;
-	return airPollution;
+	const ap = new airPollution(stationId, item.localName, item.stationName, item.dataTime, item.mangName, item.so2Value, item.coValue, item.o3Value, item.no2Value,
+		item.pm10Value, item.pm10Value24, item.khaiValue, item.khaiGrade, item.so2Grade, item.coGrade, item.no2Grade, item.pm10Grade, item.pm25Grade, item.pm10Grade1h, item.pm25Grade15);
+	return ap;
 }
 
-function insert_air(air, localCode){
+function insertAir(air, localCode){
+	/* air로부터 데이터를 파싱하여 MongoDB에 적절한 형태로 변환한 뒤 삽입 */
 	const tot_cnt = air[`tot_cnt`];
-	console.log(tot_cnt);
 	for(let i = 0; i< tot_cnt; i++){
 		const stationId = parseInt(localCode) + i;
 		const stationCode = `item_${  String(stationId)}`;
 		const item = air[stationCode];
 		try {
-			let input = item_to_airPollution(item);
+			let input = item_to_airPollution(stationId, item);
 			input = new airPollutionInformation(input);
-			input.stationId = stationId;
 			input.save((err, input) => {
-				if(err) return console.log(err);
+				if(err) return console.info(`FAILED TO INSERT ${stationCode}`);
 				input.verboseLog();
 			})
 		}
-		catch (e) {console.log(e);
+		catch (e) {console.error(e);
 		}
 	}
 }
+function getAirPollutionInformation(stationId){
+	const query = airPollutionInformation.where({stationId: stationId});
+	return new Promise(((resolve, reject) => {
+		query.findOne((err, api) => {
+			if(err) reject(err);
+			const airPollution = item_to_airPollution(stationId, api);
+			resolve(airPollution);
+		})
+	}))
+}
 
-function empty_db(){
-	airPollutionInformation.remove({}, (err) => {
-		if(err) console.log(err);
-		console.log(`all data removed`);
+function resetAirPollutionInformations(){
+	airPollutionInformation.remove({}, err => {
+		if(err) console.error(err);
+		console.info(`ALL DATA REMOVED`);
 	})
 }
 module.exports = {
-	insert_air: insert_air,
-	empty_db: empty_db
+	insertAir: insertAir,
+	resetAirPollutionInformations: resetAirPollutionInformations,
+	getAirPollutionInformation: getAirPollutionInformation
 };

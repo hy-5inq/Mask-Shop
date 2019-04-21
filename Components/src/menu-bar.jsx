@@ -4,6 +4,19 @@ import FA from 'react-fontawesome' // FontAwesome
 import '../stylesheets/Menu-bar.css'
 
 export default class MenuBar extends React.Component{
+
+	componentDidMount() {
+		this.onClickCategory()
+	}
+
+	onClickCategory() {
+		document.querySelectorAll(`.hover li`).forEach(li => {
+			li.addEventListener(`click`, () => {
+				location.href = `/product`
+			})
+		})
+	}
+
 	onClickTitle() {
 		location.href = `/`
 	}

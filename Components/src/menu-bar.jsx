@@ -1,7 +1,7 @@
 import React from 'react'
 import FA from 'react-fontawesome' // FontAwesome
 
-import '../stylesheets/menu-bar.css'
+import '../stylesheets/Menu-bar.css'
 
 export default class MenuBar extends React.Component{
 	onClickTitle() {
@@ -10,12 +10,12 @@ export default class MenuBar extends React.Component{
 
 	onMouseEnterMenu(event) {
 		const menu = event.target.closest(`.menu`)
-		this.setVisibilityMenuAll(menu, `block`)
+		this.setVisibilityMenuAll(menu, `block`)		
 	}
 
 	onMouseLeaveMenu(event) {
 		const menu = event.target.closest(`.menu`)
-		this.setVisibilityMenuAll(menu, `none`)
+		this.setVisibilityMenuAll(menu, `none`)		
 	}
 
 	setVisibilityMenuAll(target, state) {
@@ -35,7 +35,7 @@ export default class MenuBar extends React.Component{
 							<li className='order-list'><a href='#' i18n-content='ORDER_LIST'></a></li>
 							<li className='shop-basket'><a href='#' i18n-content='SHOP_BASKET'></a></li>
 							<li className='my-page'><a href='#' i18n-content='MY_PAGE'></a></li>
-						</ul>									
+						</ul>
 
 						<ul className='menu-top-right'>
 							<li className='search'>
@@ -61,31 +61,84 @@ export default class MenuBar extends React.Component{
 							onMouseEnter={this.onMouseEnterMenu.bind(this)}
 							onMouseLeave={this.onMouseLeaveMenu.bind(this)} >
 							<FA name='bars' size='2x' />
-							<div className='hover menu-all-hover' ></div>
+							<div className='hover menu-all-hover' >
+								<ul className='ul-by-dust'>
+									<li i18n-content='MENU_BY_DUST_1'></li>
+									<li i18n-content='MENU_BY_DUST_2'></li>
+									<li i18n-content='MENU_BY_DUST_3'></li>
+									<li i18n-content='MENU_BY_DUST_4'></li>
+								</ul>
+								<ul className='ul-by-size'>
+									<li i18n-content='MENU_BY_SIZE_SMALL'></li>
+									<li i18n-content='MENU_BY_SIZE_MIDDLE'></li>
+									<li i18n-content='MENU_BY_SIZE_BIG'></li>
+								</ul>
+								<ul className='ul-by-usage'>
+									<li i18n-content='MENU_BY_USAGE_1'></li>
+									<li i18n-content='MENU_BY_USAGE_2'></li>
+									<li i18n-content='MENU_BY_USAGE_3'></li>
+									<li i18n-content='MENU_BY_USAGE_4'></li>
+									<li i18n-content='MENU_BY_USAGE_5'></li>
+									<li i18n-content='MENU_BY_USAGE_6'></li>
+								</ul>
+								<ul className='ul-by-company'>
+									<li i18n-content='MENU_BY_COMPANY_1'></li>
+									<li i18n-content='MENU_BY_COMPANY_2'></li>
+									<li i18n-content='MENU_BY_COMPANY_3'></li>
+									<li i18n-content='MENU_BY_COMPANY_4'></li>
+									<li i18n-content='MENU_BY_COMPANY_5'></li>
+									<li i18n-content='MENU_BY_COMPANY_6'></li>
+									<li i18n-content='MENU_BY_COMPANY_7'></li>
+								</ul>
+							</div>
 						</span>
 						<span className='menu menu-by-dust'
 							onMouseEnter={this.onMouseEnterMenu.bind(this)}
 							onMouseLeave={this.onMouseLeaveMenu.bind(this)}>
 							<p i18n-content='MENU_BY_DUST'></p>
-							<div className='hover menu-by-dust-hover' ></div>
+							<ul className='hover menu-by-dust-hover' >
+								<li i18n-content='MENU_BY_DUST_1'></li>
+								<li i18n-content='MENU_BY_DUST_2'></li>
+								<li i18n-content='MENU_BY_DUST_3'></li>
+								<li i18n-content='MENU_BY_DUST_4'></li>
+							</ul>
 						</span>
 						<span className='menu menu-by-size'
 							onMouseEnter={this.onMouseEnterMenu.bind(this)}
 							onMouseLeave={this.onMouseLeaveMenu.bind(this)}>
 							<p i18n-content='MENU_BY_SIZE'></p>
-							<div className='hover menu-by-size-hover' ></div>
+							<ul className='hover menu-by-size-hover' >
+								<li i18n-content='MENU_BY_SIZE_SMALL'></li>
+								<li i18n-content='MENU_BY_SIZE_MIDDLE'></li>
+								<li i18n-content='MENU_BY_SIZE_BIG'></li>
+							</ul>
 						</span>
 						<span className='menu menu-by-usage'
 							onMouseEnter={this.onMouseEnterMenu.bind(this)}
 							onMouseLeave={this.onMouseLeaveMenu.bind(this)}>
 							<p i18n-content='MENU_BY_USAGE'></p>
-							<div className='hover menu-by-size-usage' ></div>
+							<ul className='hover menu-by-size-usage'>
+								<li i18n-content='MENU_BY_USAGE_1'></li>
+								<li i18n-content='MENU_BY_USAGE_2'></li>
+								<li i18n-content='MENU_BY_USAGE_3'></li>
+								<li i18n-content='MENU_BY_USAGE_4'></li>
+								<li i18n-content='MENU_BY_USAGE_5'></li>
+								<li i18n-content='MENU_BY_USAGE_6'></li>
+							</ul>
 						</span>
 						<span className='menu menu-by-company'
 							onMouseEnter={this.onMouseEnterMenu.bind(this)}
 							onMouseLeave={this.onMouseLeaveMenu.bind(this)}>
 							<p i18n-content='MENU_BY_COMPANY'></p>
-							<div className='hover menu-by-size-company' ></div>
+							<ul className='hover menu-by-size-company'>
+								<li i18n-content='MENU_BY_COMPANY_1'></li>
+								<li i18n-content='MENU_BY_COMPANY_2'></li>
+								<li i18n-content='MENU_BY_COMPANY_3'></li>
+								<li i18n-content='MENU_BY_COMPANY_4'></li>
+								<li i18n-content='MENU_BY_COMPANY_5'></li>
+								<li i18n-content='MENU_BY_COMPANY_6'></li>
+								<li i18n-content='MENU_BY_COMPANY_7'></li>
+							</ul>
 						</span>
 					</div>
 				</div>

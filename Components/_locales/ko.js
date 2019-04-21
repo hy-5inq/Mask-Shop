@@ -33,4 +33,28 @@ export default {
 	REGULAR_SERVICE_TITLE: `<strong>정기배송</strong> 서비스`,
 	REGULAR_SERVICE_DES: `<strong style='color:#F47751;'>원하는 날짜</strong>에 자동으로 배송!`,
 	REGULAR_SERVICE_BTN: `이용하기`,
+
+	MENU_BY_DUST_1: `50 - 80㎍/m³`,
+	MENU_BY_DUST_2: `80 - 100㎍/m³`,
+	MENU_BY_DUST_3: `100 - 150㎍/m³`,
+	MENU_BY_DUST_4: `150㎍/m³ 이상`,
+
+	MENU_BY_SIZE_SMALL: `소형`,
+	MENU_BY_SIZE_MIDDLE: `중형`,
+	MENU_BY_SIZE_BIG: `대형`,
+
+	MENU_BY_USAGE_1: `방한용`,
+	MENU_BY_USAGE_2: `황사용`,
+	MENU_BY_USAGE_3: `보건용`,
+	MENU_BY_USAGE_4: `방역용`,
+	MENU_BY_USAGE_5: `수술용`,
+	MENU_BY_USAGE_6: `산업용`,
+
+	MENU_BY_COMPANY_1: `3M`,
+	MENU_BY_COMPANY_2: `SG생활안전`,
+	MENU_BY_COMPANY_3: `유한킴벌리`,
+	MENU_BY_COMPANY_4: `모나리자`,
+	MENU_BY_COMPANY_5: `크린탑`,
+	MENU_BY_COMPANY_6: `애니가드`,
+	MENU_BY_COMPANY_7: `3Q`,
 }

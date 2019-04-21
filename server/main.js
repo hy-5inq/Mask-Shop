@@ -19,7 +19,7 @@ cors_proxy.createServer({
 	console.info(`Running...`)
 })
 
-app.use(`/`, express.static(`${__dirname  }/../public`))
+app.use(`/`, express.static(`${__dirname}/../public`))
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 
@@ -33,7 +33,7 @@ app.use(bodyParser.json())
 // });
 
 app.get(`/`, (req, res) => {
-	res.sendFile(path.join(`${__dirname}../public/index.html`))
+	res.sendFile(path.join(`${__dirname}/../public/index.html`))
 })
 
 const server = app.listen(port, () => {

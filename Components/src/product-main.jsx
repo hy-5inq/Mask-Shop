@@ -3,7 +3,25 @@ import FA from 'react-fontawesome' // FontAwesome
 
 import '../stylesheets/product-main.css'
 
-export default class ProductMain extends React.Component{
+export default class ProductMain extends React.Component {
+	componentDidMount() {
+		document.querySelectorAll(`.item img`).forEach(item => {
+			item.addEventListener(`click`, () => {
+				this.onClickProduct()
+			})
+		})
+
+		document.querySelectorAll(`.item p`).forEach(item => {
+			item.addEventListener(`click`, () => {
+				this.onClickProduct()
+			})
+		})
+	}
+
+	onClickProduct() {
+		location.href = `/product-detail`
+	}
+
 	render(){
 		return(
 			<div className='product-main'>

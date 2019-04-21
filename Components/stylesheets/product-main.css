@@ -141,7 +141,11 @@
 	box-sizing: border-box;
 	font-size: 12px;
 	margin-left: 15px;
-    margin-right: 15px;
+	margin-right: 15px;
+}
+
+.item-view .list .inner .item img, .item-view .list .inner .item p {	
+	cursor: pointer;
 }
 
 .item-view .list .inner .item .photo {

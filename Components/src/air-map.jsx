@@ -125,12 +125,12 @@ class AirMap extends React.Component{
 					인천: 28,
 					서울: 11,
 				}
-				fetch(`https://ipapi.co/json/`)
+				fetch(`http://ip-api.com/json`)
 					.then(res => res.json())
 					.then(data => {
 						let region						
 						for(let i = 0; i < Object.entries(ISO3166).length; i++) {
-							if (Object.entries(ISO3166)[i][1] === Number(data.region_code)) {
+							if (Object.entries(ISO3166)[i][1] === Number(data.region)) {
 								region = Object.entries(ISO3166)[i][0]
 							}							
 						}					

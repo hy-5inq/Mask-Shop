@@ -4,6 +4,10 @@ import FA from 'react-fontawesome' // FontAwesome
 import '../stylesheets/menu-bar.css'
 
 export default class MenuBar extends React.Component{
+	onClickTitle() {
+		location.href = `/`
+	}
+
 	onMouseEnterMenu(event) {
 		const menu = event.target.closest(`.menu`)
 		this.setVisibilityMenuAll(menu, `block`)
@@ -50,7 +54,7 @@ export default class MenuBar extends React.Component{
 						</ul>
 					</div>
 				</div>
-				<div className='menu-title' i18n-content='MENU_TITLE'></div>
+				<div className='menu-title' i18n-content='MENU_TITLE' onClick={this.onClickTitle}></div>
 				<div className='menu-bottom'>
 					<div className='inner'>
 						<span className='menu menu-all' 

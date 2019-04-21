@@ -167,13 +167,15 @@ class AirMap extends React.Component{
 		let currentHours = this.addZeros(currentDate.getHours(), 2)
 		const currentMinute = this.addZeros(currentDate.getMinutes(), 2)
 		let currentSeconds =  this.addZeros(currentDate.getSeconds(), 2)
-		
-		if(currentHours >= 12) {
+
+		if (currentHours >= 12) {
 			amPm = `PM`
-			currentHours = this.addZeros(currentHours - 12,2)
+			if (currentHours > 12) {
+				currentHours = this.addZeros(currentHours - 12,2)
+			}			
 		}
 
-		if(currentSeconds >= 50) {
+		if (currentSeconds >= 50) {
 			currentSeconds = `<span>${currentSeconds}</span>`
 		}
 		clock.innerHTML = `${currentHours}:${currentMinute}:${currentSeconds} <span>${amPm}</span>`		

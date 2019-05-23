@@ -1,0 +1,167 @@
+.OrderCart-Container{
+    min-height : 410px;
+    height : auto;
+    overflow-y: auto;
+}
+
+.OrderCart__Header{
+
+    /* 선택상자 , 제품명 , 수량 , 가격 , 사이즈 , 정기배송 */
+    display: grid;
+    grid-template-columns: 40px 1fr 80px 140px 80px 80px;
+    height : 40px;
+    border-top : 1px solid black;
+    border-bottom : 1px solid black;
+
+}
+.OrderCart__Header__Item{
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+.OrderCart__Header__Item__Text{
+
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.OrderCart__Element{
+
+    /* 선택상자 , 제품명 , 수량 , 가격 , 사이즈 , 정기배송 */
+    display: grid;
+    grid-template-columns: 40px 1fr 80px 140px 80px 80px;
+    height : 40px;
+    border-bottom : 1px solid black;
+
+}
+.OrderCart__Element__Item{
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+.OrderCart__Element__Item__Text{
+
+    font-size: 12px;
+    font-weight: bold;
+    color : hsl(0, 0%, 28%);
+}
+.OrderCart__Element__Item__Input-Number{
+
+    text-align: center;
+    width : 80%;
+}
+
+.OrderCart-Controller{
+    height : 80px;
+    border-top : 1px solid #ccc;
+    display: grid;
+    grid-template-columns: auto 1fr 300px;
+}
+
+.Controller__Item{
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.Controller__Item:nth-child(1){
+    padding-left: 25px;
+    padding-right : 25px;
+}
+
+.Controller__Item__Btn{
+
+    width : 140px;
+    height : 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+
+}
+.Controller__Item__Btn:hover{
+
+    box-shadow: 2px 2px 2px hsl(0, 0%, 26%);
+    transition: all 300ms ease;
+    color : white;
+}
+#REMOVE_ITEM{
+   background-color: hsl(4, 90%, 58%);
+}
+#GO_ORDER{
+    border : 1px solid hsl(231, 99%, 62%);
+}
+#GO_ORDER:hover {
+    background-color: hsl(231, 99%, 62%);
+}
+.Controller__Item__Btn:nth-child(2){
+    margin-left: 15px;
+}
+
+.Controller__Item__Btn__Icon{
+
+    width : 20px;
+    height : 20px;
+
+}
+.Controller__Item__Btn__Text{
+
+   margin-left: 15px;
+   
+}
+
+.Credit-Box__Divider{
+
+    margin : 0 10px;
+    font-size : 20px;
+}
+.Credit-Box__Text{
+
+    font-size: 20px;
+    
+}
+
+.--Bg-Red{
+
+    background-color: hsl(4, 90%, 58%);
+
+}
+.--Bg-Blue{
+
+    background-color: hsl(231, 99%, 62%);
+
+}
+
+@media screen and (max-width: 645px) {
+
+    .OrderCart__Element , .OrderCart__Header{
+        grid-template-columns: 40px 1fr 80px 100px 60px 60px;
+    }
+
+    .OrderCart-Container{
+        min-height : calc(100vh - 220px);
+        height : auto;
+    }
+
+    .OrderCart-Controller{
+        height : 80px;
+        border-top : 1px solid #ccc;
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+
+    .Controller__Item{
+        height : 80px;
+    }
+
+    .Controller__Item:nth-child(2){
+        display: none;
+    }
+
+    
+}

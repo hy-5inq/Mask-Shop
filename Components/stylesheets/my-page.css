@@ -1,0 +1,163 @@
+.MyPage-Grid-Container{
+
+    display: grid;
+    height : 490px;
+    grid-template-columns: 1fr;
+    grid-column-gap: 20px;
+    margin-top : 30px;
+    padding : 0 20px;
+
+}
+
+.MyPage-Grid-Container__Item{
+
+    border : 1px solid #ccc;
+    border-radius: 4px;
+    padding : 20px 0 0 0;
+    height : 440px;
+
+}
+
+.MyPage-Grid-Container__Item__User-Box{
+
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    height : auto;
+    padding : 0 20px 20px 20px;
+    border-bottom: 1px solid #ccc;
+
+}
+
+.MyPage-Grid-Container__Item__User-Box__Img-Box{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width : 100%;
+    border-radius: 50%;
+}
+.MyPage-Grid-Container__Item__User-Box__Img-Box img{
+
+    width : 100%;
+    height : 100%;
+    border-radius: 50%;
+    box-shadow: 2px 2px 2px #ccc;
+
+}
+
+.MyPage-Grid-Container__Item__User-Box__Text-Box{
+
+    padding-left : 20px;
+    display: flex;
+    align-items: center;
+}
+.MyPage-Grid-Container__Item__User-Box__Text-Box__Text{
+    font-size: 20px;
+    font-weight: bold;
+}
+.MyPage-Grid-Container__Item__User-Box__Text-Box__Mileage{
+    font-size : 12px;
+}
+
+.MyPage-Grid-Container__Item__Info-Box{
+
+    display: grid;
+    grid-template-columns: repeat(4 , 1fr);
+    height : 140px;
+    border-bottom: 1px solid #ccc;
+
+}
+.MyPage-Grid-Container__Item__Info-Box__Item:nth-child(1),
+.MyPage-Grid-Container__Item__Info-Box__Item:nth-child(2),
+.MyPage-Grid-Container__Item__Info-Box__Item:nth-child(3){
+
+    border-right: 1px solid #ccc;
+
+}
+.MyPage-Grid-Container__Item__Info-Box__Item{
+
+    display: grid;
+    grid-template-rows: 60px 80px;
+
+}
+
+.MyPage-Grid-Container__Item__Info-Box__Item__Header{
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+.MyPage-Grid-Container__Item__Info-Box__Item__Header__Text{
+
+    color : hsl(0, 0%, 26%);
+    font-weight: bold;
+
+}
+.MyPage-Grid-Container__Item__Info-Box__Item__Content{
+
+    text-align: center;
+    margin-top : 5px;
+
+}
+.MyPage-Grid-Container__Item__Info-Box__Item__Content__Text{
+
+    color : hsl(0, 0%, 26%);
+    font-weight: bold;
+
+}
+.MyPage-Grid-Container__Item__Nav-box{
+
+    height : 60px;
+    border-bottom: 1px solid #ccc;
+    padding : 0 20px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+
+}
+.MyPage-Grid-Container__Item__Nav-box:last-child{
+
+    border: none;
+
+}
+.MyPage-Grid-Container__Item__Nav-box__Icon{
+
+    width : 20px;
+    height : 20px;
+    color : hsl(0, 0%, 26%);
+    
+}
+.MyPage-Grid-Container__Item__Nav-box__Text{
+
+    font-size: 16px;
+    margin-left: 15px;
+    font-weight: bold;
+    color : hsl(0, 0%, 26%);
+    
+}
+
+
+.--Color-Brown{
+    color : hsl(16, 25%, 38%);
+}
+
+@media screen and (max-width: 930px) {
+
+
+}
+@media screen and (max-width : 645px){
+
+    .MyPage-Grid-Container{
+
+        grid-template-columns: 1fr;
+        
+    }
+
+    .MyPage-Grid-Container__Item{
+
+        border : 1px solid #ccc;
+        border-radius: 4px;
+        
+    }
+
+}

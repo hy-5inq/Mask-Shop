@@ -7,6 +7,8 @@ import { withRouter } from 'react-router-dom'
 import MenuBar from './menu-bar.jsx'
 import ImageGallery from 'react-image-gallery'
 import AirMap from './air-map.jsx'
+import OrderCart from './order-cart.jsx'
+import MyPage from './my-page.jsx'
 
 import '../stylesheets/Home.css'
 import '../stylesheets/image-gallery.css'
@@ -26,7 +28,9 @@ class Home extends React.Component{
 		return(
 			<React.Fragment>
 				<MenuBar />
-				<AirMap />		
+				<AirMap />
+				<OrderCart />
+				<MyPage />
 				<div className="Home-Hot-Menus">
 
 					<div className="Home-Hot-Menus__Item">

@@ -20,7 +20,22 @@ export default class MenuBar extends React.Component{
 	onClickTitle() {
 		location.href = `/`
 	}
-
+	
+	onClickShopBasket() {
+		
+		foldAll()
+		const ORDER_CART = document.body.querySelector('#ORDER_CART')
+		ORDER_CART.classList.remove(`--Fold-Off`)
+		
+	}
+	onClickMyPage() {
+		
+		foldAll()
+		const MY_PAGE = document.body.querySelector('#MY_PAGE')
+		MY_PAGE.classList.remove(`--Fold-Off`)
+		
+	}
+	
 	onMouseEnterMenu(event) {
 		const menu = event.target.closest(`.menu`)
 		this.setVisibilityMenuAll(menu, `block`)		
@@ -46,8 +61,8 @@ export default class MenuBar extends React.Component{
 						<ul className='menu-top-left'>
 							<li className='login'><a href='/login' i18n-content='LOGIN'></a></li>
 							<li className='order-list'><a href='#' i18n-content='ORDER_LIST'></a></li>
-							<li className='shop-basket'><a href='#' i18n-content='SHOP_BASKET'></a></li>
-							<li className='my-page'><a href='#' i18n-content='MY_PAGE'></a></li>
+							<li className='shop-basket' onClick={this.onClickShopBasket}><a href='#' i18n-content='SHOP_BASKET'></a></li>
+							<li className='my-page' onClick={this.onClickMyPage}><a href='#' i18n-content='MY_PAGE'></a></li>
 						</ul>
 
 						<ul className='menu-top-right'>
@@ -159,4 +174,16 @@ export default class MenuBar extends React.Component{
 		)
 	}
 
+}
+
+const foldAll = () => {
+	
+	let snapCards = document.querySelectorAll('.SnapCard-Container').forEach((el) => {
+		
+		if( el.classList.contains(`--Fold-Off`) === false){
+			el.classList.add(`--Fold-Off`)
+		}
+		
+	})
+	
 }

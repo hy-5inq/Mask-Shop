@@ -75,7 +75,7 @@ exports.login = (req, res) => {
         if(!user) {
             // user does not exist
             throw new Error('login failed')
-        } else {
+        } else {9
             // user exists, check the password
             if(user.verify(password)) {
                 // create a promise that generates jwt asynchronously

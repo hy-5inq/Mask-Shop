@@ -25,7 +25,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/busdata',busdataRouter);
-
+app.listen(8080, () => {
+  console.log('Express App on port 8080!');
+});
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

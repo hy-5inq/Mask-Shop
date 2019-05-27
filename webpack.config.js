@@ -22,6 +22,8 @@ module.exports = {
 		watchContentBase: true,
 		historyApiFallback: true,
 		compress: true,
+		host: `0.0.0.0`,
+		disableHostCheck: true,
 		port: 9000,
 	},
 	mode : `development`,

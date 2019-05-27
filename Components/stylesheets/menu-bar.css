@@ -93,10 +93,15 @@
     line-height: 30px;
 }
 
-.menu-top-left li:hover {
+.menu-top-left li a:hover {
 	transition: color 0.2s;
 	color: hsl(0, 0%, 60%);
 	cursor: pointer;
+}
+
+.menu-top-left li a {
+	color: black;
+	text-decoration: none;
 }
 
 .menu-top-right {
@@ -197,6 +202,7 @@
 	line-height: 100px;
 	background-color: hsla(0, 0%, 50%, 0.1);
 	font-size: 30px;
+	cursor: pointer;
 	z-index: 40;
 }
 
@@ -230,7 +236,7 @@
 	position: relative;
 }
 
-.menu:hover {
+.menu p:hover {
 	transition: color 0.2s ease-in-out;
 	color: hsl(0, 0%, 60%);
 	cursor: pointer;
@@ -265,9 +271,9 @@
 	position: absolute;
 	top: 49px;
 	left: 0;
-	max-width: 1250px;
+	max-width: 1270px;
 	width: calc(100vw - 10px);
-	height: 200px;
+	height: 350px;
 	background-color: white;
 	border: 1px solid #444;
 	border-radius: 1px;
@@ -279,12 +285,12 @@
 	top: 50px;
 	left: 50%;
 	transform: translateX(-50%);
-	height: 200px;
+	min-height: 150px;
 	background-color: white;
 	border: 1px solid rgb(221, 221, 221);
 	border-radius: 1px;
 	box-sizing: content-box;
-	min-width: 100px;
+	min-width: 100px;	
 }
 
 .menu-by-dust-hover::after, .menu-by-size-hover::after, .menu-by-size-usage::after, .menu-by-size-company::after {
@@ -307,4 +313,47 @@
     top: -7px;
 	left: 50%;
 	transform: translateX(-50%);
+}
+
+.ul-by-dust {
+	position: absolute;
+	top: 0;
+	left: 130px;
+	min-height: 200px;
+	width: 175px;
+}
+
+.ul-by-size {
+	position: absolute;
+	top: 0;
+	left: 460px;
+	min-height: 150px;
+	width: 130px;
+}
+
+.ul-by-usage {
+	position: absolute;
+	top: 0;
+	left: 750px;
+	min-height: 300px;
+	width: 130px;
+}
+
+.ul-by-company {
+	position: absolute;
+	top: 0;
+	left: 1040px;
+	min-height: 350px;
+	width: 130px;
+}
+
+.hover li {
+	list-style: none;
+	user-select: none;
+}
+
+.hover li:hover {
+	transition: color 0.2s ease-in-out;
+	color: hsl(0, 0%, 60%);
+	cursor: pointer;
 }

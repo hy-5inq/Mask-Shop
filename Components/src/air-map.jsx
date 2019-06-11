@@ -52,7 +52,7 @@ class AirMap extends React.Component{
 	}
 
 	setColorInMap() {
-		fetch(`http://localhost:8089/http://www.kweather.co.kr/air/data/api/air_1hr_all2.xml`).then(res =>
+		fetch(`/update_map/www.kweather.co.kr/air/data/api/air_1hr_all2.xml`).then(res =>
 			res.text()
 		).then(data => {
 			const oParser = new DOMParser()
@@ -125,14 +125,16 @@ class AirMap extends React.Component{
 					인천: 28,
 					서울: 11,
 				}
-				fetch(`http://ip-api.com/json`)
+				fetch(`https://mask-shop.kro.kr/update_map/ip-api.com/json`)
 					.then(res => res.json())
 					.then(data => {
 						let region						
 						for(let i = 0; i < Object.entries(ISO3166).length; i++) {
 							if (Object.entries(ISO3166)[i][1] === Number(data.region)) {
 								region = Object.entries(ISO3166)[i][0]
-							}							
+							}
+							region = `경기`
+							data.city = `Ansan`
 						}					
 						if (item.querySelector(`stationName`).textContent === region) {
 							location.style.stroke = `white`

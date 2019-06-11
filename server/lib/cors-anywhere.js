@@ -27,7 +27,6 @@ function showUsage(help_file, headers, response) {
 	headers[`content-type`] = isGif ? `image/gif` : headers[`content-type`]
 	headers[`content-type`] = isJpeg ? `image/jpeg` : headers[`content-type`]
 	headers[`content-type`] = isSvg ? `image/svg+xml` : headers[`content-type`]
-	console.log(`test`, headers[`content-type`])
 	if (isPng || isGif || isJpeg) {
 		const img = fs.readFileSync(help_file)
      	response.end(img, `base64`)

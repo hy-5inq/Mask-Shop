@@ -2,6 +2,7 @@ const webpack = require(`webpack`);
 const path = require(`path`);
 const MiniCssExtractPlugin = require(`mini-css-extract-plugin`)
 const devMode = process.env.NODE_ENV !== `production`
+const TerserPlugin = require('terser-webpack-plugin')
 
 module.exports = {
 	entry : {
@@ -34,13 +35,6 @@ module.exports = {
 				use: [
 					devMode ? `style-loader` : MiniCssExtractPlugin.loader,
 					`css-loader`,
-					{
-						loader: `postcss-loader`,
-						options: {
-							plugins: () => [require(`autoprefixer`)]
-						}
-					},
-					`sass-loader`,
 				],
 			},
 			{

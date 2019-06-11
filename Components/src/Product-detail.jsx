@@ -6,8 +6,8 @@ import MenuBar from './menu-bar.jsx'
 
 import '../stylesheets/Product-Detail.css'
 import FA from 'react-fontawesome'
-import { FaAngleLeft , FaAngleRight , FaSearch } from 'react-icons/fa'
-import { IconContext } from 'react-icons'
+// import { FaAngleLeft , FaAngleRight , FaSearch } from 'react-icons/fa'
+// import { IconContext } from 'react-icons'
 
 
 class ProductDetail extends React.Component{
@@ -320,9 +320,9 @@ class ProductDetail extends React.Component{
 							<div className={`Search-By`}>
 								<div className={`IconSearch`}>
 									<input type="text" placeholder={`검색어 입력 ...`}/>
-									<IconContext.Provider value={{color : `#555` , width : `20%`}}>
+									{/* <IconContext.Provider value={{color : `#555` , width : `20%`}}>
 										<FaSearch />
-									</IconContext.Provider>
+									</IconContext.Provider> */}
 								</div>
 							</div>
 

@@ -1,7 +1,7 @@
 import React from 'react'
 
-import { MdPerson , MdKeyboardArrowLeft } from 'react-icons/md'
-import { FaHistory, FaTruckMoving, FaUserCog } from 'react-icons/fa'
+// import { MdPerson , MdKeyboardArrowLeft } from 'react-icons/md'
+// import { FaHistory, FaTruckMoving, FaUserCog } from 'react-icons/fa'
 
 import '../stylesheets/snap-card.css'
 import '../stylesheets/my-page.css'
@@ -24,7 +24,7 @@ class MyPage extends React.Component {
 				<div className="SnapCard-Container__Header --Bg-OrderCart">
 
 					<div className="Header__Item">
-						<MdPerson className="Header__Item__Icon" />
+						{/* <MdPerson className="Header__Item__Icon" /> */}
 					</div>
 
 					<div className="Header__Item">
@@ -32,7 +32,7 @@ class MyPage extends React.Component {
 					</div>
 
 					<div className="Header__Item">
-						<MdKeyboardArrowLeft onClick={this.handleFold} className="Header__Item__Icon --Fold" />
+						{/* <MdKeyboardArrowLeft onClick={this.handleFold} className="Header__Item__Icon --Fold" /> */}
 					</div>
 				</div>
 
@@ -99,20 +99,20 @@ class MyPage extends React.Component {
 
 						<div className="MyPage-Grid-Container__Item__Nav-box">
 
-							<FaHistory className="MyPage-Grid-Container__Item__Nav-box__Icon"/>
+							{/* <FaHistory className="MyPage-Grid-Container__Item__Nav-box__Icon"/> */}
 							<span className="MyPage-Grid-Container__Item__Nav-box__Text">주문 조회</span>
 
 						</div>
 
 						<div className="MyPage-Grid-Container__Item__Nav-box">
 
-							<FaTruckMoving className="MyPage-Grid-Container__Item__Nav-box__Icon"/>
+							{/* <FaTruckMoving className="MyPage-Grid-Container__Item__Nav-box__Icon"/> */}
 							<span className="MyPage-Grid-Container__Item__Nav-box__Text">배송 조회</span>
 
 						</div>
 						<div className="MyPage-Grid-Container__Item__Nav-box">
 
-							<FaUserCog className="MyPage-Grid-Container__Item__Nav-box__Icon"/>
+							{/* <FaUserCog className="MyPage-Grid-Container__Item__Nav-box__Icon"/> */}
 							<span className="MyPage-Grid-Container__Item__Nav-box__Text">회원정보 수정</span>
 
 						</div>

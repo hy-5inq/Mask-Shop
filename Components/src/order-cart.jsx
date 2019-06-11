@@ -1,8 +1,8 @@
 
 import React from 'react'
 
-import { MdShoppingCart, MdKeyboardArrowLeft } from 'react-icons/md'
-import { FaTrashAlt , FaCreditCard } from 'react-icons/fa'
+// import { MdShoppingCart, MdKeyboardArrowLeft } from 'react-icons/md'
+// import { FaTrashAlt , FaCreditCard } from 'react-icons/fa'
 import '../stylesheets/snap-card.css'
 import '../stylesheets/order-cart.css'
 
@@ -24,7 +24,7 @@ class OrderCart extends React.Component {
 				<div className="SnapCard-Container__Header --Bg-OrderCart">
 
 					<div className="Header__Item">
-						<MdShoppingCart className="Header__Item__Icon" />
+						{/* <MdShoppingCart className="Header__Item__Icon" /> */}
 					</div>
 
 					<div className="Header__Item">
@@ -32,7 +32,7 @@ class OrderCart extends React.Component {
 					</div>
 
 					<div className="Header__Item">
-						<MdKeyboardArrowLeft onClick={this.handleFold} className="Header__Item__Icon --Fold" />
+						{/* <MdKeyboardArrowLeft onClick={this.handleFold} className="Header__Item__Icon --Fold" /> */}
 					</div>
 				</div>
 
@@ -86,11 +86,11 @@ class OrderCart extends React.Component {
 
 					<div className="Controller__Item">
 						<div className="Controller__Item__Btn" id="REMOVE_ITEM">
-							<FaTrashAlt className="Controller__Item__Btn__Icon" />
+							{/* <FaTrashAlt className="Controller__Item__Btn__Icon" /> */}
 							<span className="Controller__Item__Btn__Text">선택상품 삭제</span>
 						</div>
 						<div className="Controller__Item__Btn" id="GO_ORDER">
-							<FaCreditCard className="Controller__Item__Btn__Icon" />
+							{/* <FaCreditCard className="Controller__Item__Btn__Icon" /> */}
 							<span className="Controller__Item__Btn__Text">주문하기</span>
 						</div>
 					</div>

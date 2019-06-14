@@ -1,12 +1,62 @@
 import React from 'react'
 import FA from 'react-fontawesome' // FontAwesome
 
-import '../stylesheets/Menu-bar.css'
+import '../stylesheets/menu-bar.css'
 
 export default class MenuBar extends React.Component{
+	constructor(props) {
+		super(props)
+
+		this.state = {
+			userName: ``,
+		}
+	}	
 
 	componentDidMount() {
 		this.onClickCategory()
+	}
+
+	componentWillMount() {
+		this.checkLogin()
+	}	
+
+	checkLogin() {
+		if (this.Login.isLogin()) {
+			this.Login.getNickname()
+		}
+	}
+
+	get Login() {
+		const menuBar = this
+		return {
+			isLogin() {
+				if (window.Kakao && !Kakao.Auth.getAccessToken()) {
+					return false
+				}
+				return true
+			},
+
+			getNickname() {
+				Kakao.API.request({
+					url: `/v1/user/me`,
+					success: res => {
+						menuBar.setState({
+							userName: res[`properties`][`nickname`],
+						})
+
+						return res[`properties`][`nickname`]
+					},
+					fail: err => {
+						console.error(err)
+					}
+				})
+			},
+
+			kakaoLogout() {
+				Kakao.Auth.logout()
+				location.href = `/`
+			}
+		}
 	}
 
 	onClickCategory() {
@@ -28,7 +78,14 @@ export default class MenuBar extends React.Component{
 		TARGET_CARD.classList.remove(`--Fold-Off`)
 		
 	}
-
+	
+	onClickMyPage() {
+		foldAll()
+		const MY_PAGE = document.body.querySelector('#MY_PAGE')
+		MY_PAGE.classList.remove(`--Fold-Off`)
+		
+	}
+	
 	onMouseEnterMenu(event) {
 		const menu = event.target.closest(`.menu`)
 		this.setVisibilityMenuAll(menu, `block`)		
@@ -52,7 +109,14 @@ export default class MenuBar extends React.Component{
 				<div className='menu-top'>
 					<div className='inner'>
 						<ul className='menu-top-left'>
-							<li className='login'><a href='/login' i18n-content='LOGIN'></a></li>
+							<li className='login'>
+								<a href='/login'>
+									{this.Login.isLogin() ? 
+										<span><strong>{this.state.userName}</strong>님 환영합니다!</span>
+										: <span>로그인</span>}
+								</a>
+							</li>
+							{this.Login.isLogin() ? <li className='logout' onClickCapture={this.Login.kakaoLogout}><a>로그아웃</a></li> : <React.Fragment></React.Fragment>}
 							<li className='join'><a href='/join' i18n-content='JOIN'></a></li>
 							<li className='order-list'><a href='#' i18n-content='ORDER_LIST'></a></li>
 							<li className='shop-basket' onClick={() => {
@@ -70,12 +134,6 @@ export default class MenuBar extends React.Component{
 							</li>
 							<li className='recent-product'>
 								<a className='recent-product-btn'><FA name='eye' /></a>
-							</li>
-							<li className='favorite-product'>
-								<a className='favorite-product-btn'><FA name='star' /></a>
-							</li>
-							<li className='make-shorcut'>
-								<a className='make-shortcut-btn'><FA name='map-pin' /></a>
 							</li>
 						</ul>
 					</div>

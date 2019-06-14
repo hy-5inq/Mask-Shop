@@ -22,8 +22,7 @@ import conversation from '../../public/images/conversation.svg'
 import speaker from '../../public/images/speaker.svg'
 import regularDelivery from '../../public/images/regular-delivery.png' 
 
-class Home extends React.Component{
-
+class Home extends React.Component {	
 	render(){
 
 		const { homeState } = this.props

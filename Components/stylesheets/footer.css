@@ -1,7 +1,10 @@
 footer {
 	width: 100vw;
     background: #FFFFFF;
-    height: 200px;	
+	height: 230px;	
+	overflow: hidden;
+	position: absolute;
+	bottom: 0;	
 }
 
 footer .inner {
@@ -9,7 +12,8 @@ footer .inner {
     flex-flow: wrap;
     position: relative;
     max-width: 1260px;
-    margin: 0 auto;
+	margin: 0 auto;
+	margin-bottom: 20px;
 }
 
 .line {

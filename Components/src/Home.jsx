@@ -22,7 +22,12 @@ import conversation from '../../public/images/conversation.svg'
 import speaker from '../../public/images/speaker.svg'
 import regularDelivery from '../../public/images/regular-delivery.png' 
 
-class Home extends React.Component {	
+class Home extends React.Component {
+	
+	handleRouteToFAQ(){
+		location.href = '/faq'
+	}
+
 	render(){
 
 		const { homeState } = this.props
@@ -72,7 +77,7 @@ class Home extends React.Component {
 						<div className="Menus_Item-ImageBox">
 							<img className="ImageBox__Img" src={conversation} alt="conversation"/>
 						</div>
-						<div className="Menus_Item-ContentBox">
+						<div onClick={this.handleRouteToFAQ} className="Menus_Item-ContentBox">
 							
 							<div className="ContentBox__Item-Header">
 								<h4>자주 묻는 질문 모음</h4>

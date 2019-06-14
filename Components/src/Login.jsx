@@ -13,6 +13,10 @@ class Login extends React.Component{
 
 	constructor(props){
 		super(props)
+		this.state = {
+			defaultLoginResponsed : false,
+			
+		}
 	}
 
 	handleRouteToHome(){
@@ -21,12 +25,19 @@ class Login extends React.Component{
 
 	componentWillMount() {
 		this.checkLogin()
+		
 	}
 
 	checkLogin() {
 		if (this.isLogin || this.isDefaultLogin) {			
 			location.href = `/`
 			return
+		}
+		else{
+			if(window.sessionStorage.getItem('accountid')){
+				location.href = `/`
+				return
+			}
 		}		
 	}
 

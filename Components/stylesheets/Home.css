@@ -16,6 +16,7 @@
     border : 1px solid hsl(0, 0%, 91%);
     display: grid;
     grid-template-columns: 2fr 3fr;
+    cursor: pointer;
 }
 
 .Menus_Item-ImageBox{
@@ -42,6 +43,7 @@
     justify-content: center;
     flex-direction: column;
     padding-right: 15px;
+    
     
 }
 div.ContentBox__Item-Header > h4 {

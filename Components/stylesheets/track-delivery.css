@@ -1,0 +1,38 @@
+
+
+.TrackDelivery__Header{
+
+    /* 주문번호 , 주문내용 , 주문가격 , 배송 추적 , 정기배송 , 취소/반품 */
+    display: grid;
+    grid-template-columns: 40px 1fr 140px 80px 80px 80px;
+    height : 40px;
+    border-top : 1px solid black;
+    border-bottom : 1px solid black;
+
+}
+
+
+.TrackDelivery__Element{
+
+     /* 주문번호 , 주문내용 , 주문가격 , 배송 추적 , 정기배송 , 취소/반품 */
+    display: grid;
+    grid-template-columns: 40px 1fr 140px 80px 80px 80px;
+    height : 40px;
+    border-bottom : 1px solid black;
+
+}
+
+.TrackDelivery__Element__Item__Btn{
+    outline: none;
+    border: 1px solid rgb(122, 122, 122);
+    cursor: pointer;
+    width : 35px;
+    height : 20px;
+}
+
+@media screen and (max-width: 645px) {
+
+
+
+    
+}

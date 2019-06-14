@@ -357,3 +357,7 @@
 	color: hsl(0, 0%, 60%);
 	cursor: pointer;
 }
+
+.search-text {
+	color: white;
+}

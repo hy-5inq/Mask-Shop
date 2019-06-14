@@ -19,7 +19,7 @@
 		width: 180px;	
 	}
 
-	.menu-by-dust-hover, .menu-by-size-hover, .menu-by-size-usage, .menu-by-size-company {
+	.menu-by-dust-hover, .menu-by-size-hover, .menu-by-usage-hover, .menu-by-company-hover {
 		width: calc(100% - 160px);
 	}
 
@@ -45,7 +45,7 @@
 		width: 100%;
 	}
 
-	.menu-by-dust-hover, .menu-by-size-hover, .menu-by-size-usage, .menu-by-size-company {
+	.menu-by-dust-hover, .menu-by-size-hover, .menu-by-usage-hover, .menu-by-company-hover {
 		width: calc(100% - 20px);
 	}
 
@@ -279,7 +279,7 @@
 	border-radius: 1px;
 }
 
-.menu-by-dust-hover, .menu-by-size-hover, .menu-by-size-usage, .menu-by-size-company {
+.menu-by-dust-hover, .menu-by-size-hover, .menu-by-usage-hover, .menu-by-company-hover {
 	display: none;
 	position: absolute;
 	top: 50px;
@@ -293,7 +293,7 @@
 	min-width: 100px;	
 }
 
-.menu-by-dust-hover::after, .menu-by-size-hover::after, .menu-by-size-usage::after, .menu-by-size-company::after {
+.menu-by-dust-hover::after, .menu-by-size-hover::after, .menu-by-usage-hover::after, .menu-by-company-hover::after {
 	content: '';
     position: absolute;
     border-bottom: 7px solid white;
@@ -304,7 +304,7 @@
 	transform: translateX(-50%);
 }
 
-.menu-by-dust-hover::before, .menu-by-size-hover::before, .menu-by-size-usage::before, .menu-by-size-company::before {
+.menu-by-dust-hover::before, .menu-by-size-hover::before, .menu-by-usage-hover::before, .menu-by-company-hover::before {
 	content: '';
     position: absolute;
     border-bottom: 7px solid rgb(221, 221, 221);

@@ -15,24 +15,13 @@ export default class MenuBar extends React.Component{
 		}
 	}	
 
-	componentDidMount() {
-		this.onClickCategory()
-	}
-
 	componentWillMount() {
-		
 		this.checkLogin()
-
 	}	
 
 	checkLogin() {
-		// alert('카카오 닉네임111')
-		console.log(this.Login.isLogin())
-		console.log(this.DefaultLogin.isLogin())
 		if (this.Login.isLogin()) {
-			
 			this.Login.getNickname()
-		
 		}
 		else{
 
@@ -164,14 +153,6 @@ export default class MenuBar extends React.Component{
 		}
 	}
 
-	onClickCategory() {
-		document.querySelectorAll(`.hover li`).forEach(li => {
-			li.addEventListener(`click`, () => {
-				location.href = `/product`
-			})
-		})
-	}
-
 	onClickTitle() {
 		location.href = `/`
 	}
@@ -207,6 +188,13 @@ export default class MenuBar extends React.Component{
 		}
 	}
 
+	isDisplayJoin() {
+		if (this.Login.isLogin() || this.state.defaultLoginResponsed) {
+			return `none`
+		}
+		return `list-item`
+	}
+
 	render(){
 		return(
 			<React.Fragment>
@@ -225,7 +213,7 @@ export default class MenuBar extends React.Component{
 								this.Login.kakaoLogout()
 								this.DefaultLogin.Logout()
 							}}><a>로그아웃</a></li> : <React.Fragment></React.Fragment>}
-							<li className='join'><a href='/join' i18n-content='JOIN'></a></li>
+							<li className='join' style={{display : `${this.isDisplayJoin()}`}}><a href='/join' i18n-content='JOIN' ></a></li>
 							<li className='order-list'><a href='#' i18n-content='ORDER_LIST'></a></li>
 							<li className='shop-basket' onClick={() => {
 								this.onClickSnapCard(`ORDER_CART`)
@@ -290,10 +278,10 @@ export default class MenuBar extends React.Component{
 							onMouseLeave={this.onMouseLeaveMenu.bind(this)}>
 							<p i18n-content='MENU_BY_DUST'></p>
 							<ul className='hover menu-by-dust-hover' >
-								<li i18n-content='MENU_BY_DUST_1'></li>
-								<li i18n-content='MENU_BY_DUST_2'></li>
-								<li i18n-content='MENU_BY_DUST_3'></li>
-								<li i18n-content='MENU_BY_DUST_4'></li>
+								<li onClick={() => location.href=`/product?category=dust&subcategory=0`} i18n-content='MENU_BY_DUST_1'></li>
+								<li onClick={() => location.href=`/product?category=dust&subcategory=1`} i18n-content='MENU_BY_DUST_2'></li>
+								<li onClick={() => location.href=`/product?category=dust&subcategory=2`} i18n-content='MENU_BY_DUST_3'></li>
+								<li onClick={() => location.href=`/product?category=dust&subcategory=3`} i18n-content='MENU_BY_DUST_4'></li>
 							</ul>
 						</span>
 						<span className='menu menu-by-size'
@@ -301,36 +289,36 @@ export default class MenuBar extends React.Component{
 							onMouseLeave={this.onMouseLeaveMenu.bind(this)}>
 							<p i18n-content='MENU_BY_SIZE'></p>
 							<ul className='hover menu-by-size-hover' >
-								<li i18n-content='MENU_BY_SIZE_SMALL'></li>
-								<li i18n-content='MENU_BY_SIZE_MIDDLE'></li>
-								<li i18n-content='MENU_BY_SIZE_BIG'></li>
+								<li onClick={() => location.href=`/product?category=size&subcategory=0`} i18n-content='MENU_BY_SIZE_SMALL'></li>
+								<li onClick={() => location.href=`/product?category=size&subcategory=1`} i18n-content='MENU_BY_SIZE_MIDDLE'></li>
+								<li onClick={() => location.href=`/product?category=size&subcategory=2`} i18n-content='MENU_BY_SIZE_BIG'></li>
 							</ul>
 						</span>
 						<span className='menu menu-by-usage'
 							onMouseEnter={this.onMouseEnterMenu.bind(this)}
 							onMouseLeave={this.onMouseLeaveMenu.bind(this)}>
 							<p i18n-content='MENU_BY_USAGE'></p>
-							<ul className='hover menu-by-size-usage'>
-								<li i18n-content='MENU_BY_USAGE_1'></li>
-								<li i18n-content='MENU_BY_USAGE_2'></li>
-								<li i18n-content='MENU_BY_USAGE_3'></li>
-								<li i18n-content='MENU_BY_USAGE_4'></li>
-								<li i18n-content='MENU_BY_USAGE_5'></li>
-								<li i18n-content='MENU_BY_USAGE_6'></li>
+							<ul className='hover menu-by-usage-hover'>
+								<li onClick={() => location.href=`/product?category=usage&subcategory=0`} i18n-content='MENU_BY_USAGE_1'></li>
+								<li onClick={() => location.href=`/product?category=usage&subcategory=1`} i18n-content='MENU_BY_USAGE_2'></li>
+								<li onClick={() => location.href=`/product?category=usage&subcategory=2`} i18n-content='MENU_BY_USAGE_3'></li>
+								<li onClick={() => location.href=`/product?category=usage&subcategory=3`} i18n-content='MENU_BY_USAGE_4'></li>
+								<li onClick={() => location.href=`/product?category=usage&subcategory=4`} i18n-content='MENU_BY_USAGE_5'></li>
+								<li onClick={() => location.href=`/product?category=usage&subcategory=5`} i18n-content='MENU_BY_USAGE_6'></li>
 							</ul>
 						</span>
 						<span className='menu menu-by-company'
 							onMouseEnter={this.onMouseEnterMenu.bind(this)}
 							onMouseLeave={this.onMouseLeaveMenu.bind(this)}>
 							<p i18n-content='MENU_BY_COMPANY'></p>
-							<ul className='hover menu-by-size-company'>
-								<li i18n-content='MENU_BY_COMPANY_1'></li>
-								<li i18n-content='MENU_BY_COMPANY_2'></li>
-								<li i18n-content='MENU_BY_COMPANY_3'></li>
-								<li i18n-content='MENU_BY_COMPANY_4'></li>
-								<li i18n-content='MENU_BY_COMPANY_5'></li>
-								<li i18n-content='MENU_BY_COMPANY_6'></li>
-								<li i18n-content='MENU_BY_COMPANY_7'></li>
+							<ul className='hover menu-by-company-hover'>
+								<li onClick={() => location.href=`/product?category=company&subcategory=0`} i18n-content='MENU_BY_COMPANY_1'></li>
+								<li onClick={() => location.href=`/product?category=company&subcategory=1`} i18n-content='MENU_BY_COMPANY_2'></li>
+								<li onClick={() => location.href=`/product?category=company&subcategory=2`} i18n-content='MENU_BY_COMPANY_3'></li>
+								<li onClick={() => location.href=`/product?category=company&subcategory=3`} i18n-content='MENU_BY_COMPANY_4'></li>
+								<li onClick={() => location.href=`/product?category=company&subcategory=4`} i18n-content='MENU_BY_COMPANY_5'></li>
+								<li onClick={() => location.href=`/product?category=company&subcategory=5`} i18n-content='MENU_BY_COMPANY_6'></li>
+								<li onClick={() => location.href=`/product?category=company&subcategory=6`} i18n-content='MENU_BY_COMPANY_7'></li>
 							</ul>
 						</span>
 					</div>

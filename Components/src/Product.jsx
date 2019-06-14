@@ -10,6 +10,7 @@ import MyPage from './my-page.jsx'
 import TrackDelivery from './track-delivery.jsx'
 import MenuBar from './menu-bar.jsx'
 import ProductMain from './product-main.jsx'
+import Footer from './footer.jsx'
 
 class Product extends React.Component{	
 	handleRouteToHome(){
@@ -18,13 +19,16 @@ class Product extends React.Component{
 
 	render(){
 		return(
-			<div className='product'>
-				<MenuBar></MenuBar>
-				<ProductMain></ProductMain>
-				<OrderCart></OrderCart>
-				<TrackDelivery></TrackDelivery>
-				<MyPage></MyPage>
-			</div>
+			<React.Fragment>
+				<div className='product'>
+					<MenuBar></MenuBar>
+					<ProductMain></ProductMain>
+					<OrderCart></OrderCart>
+					<TrackDelivery></TrackDelivery>
+					<MyPage></MyPage>					
+				</div>
+				<Footer />
+			</React.Fragment>
 		)
 	}
 }

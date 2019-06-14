@@ -91,7 +91,6 @@ class Login extends React.Component{
 	}
 
 	get isDefaultLogin() {
-		console.log('!window.sessionStorage.getItem(`accountid`)', !window.sessionStorage.getItem(`accountid`))
 		if (!window.sessionStorage.getItem(`accountid`)) {
 			return false
 		}

@@ -3,12 +3,17 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import _history from '../history/_history.js'
-
+import CookieJS from 'js-cookie'
 import '../stylesheets/Login.css'
 import MenuBar from './menu-bar.jsx';
 import Footer from './footer.jsx'
+import { AC_SUCCESS_DEFAULT_LOGIN } from '../redux/LoginAction.js'
 
 class Login extends React.Component{
+
+	constructor(props){
+		super(props)
+	}
 
 	handleRouteToHome(){
 		_history.push(`/`)
@@ -25,6 +30,9 @@ class Login extends React.Component{
 		}		
 	}
 
+	// get isDefaultLogin(){
+	// 	if()
+	// }
 	get isLogin() {
 		console.log('window.Kakao', window.Kakao)
 		console.log('Kakao.Auth.getAccessToken()', Kakao.Auth.getAccessToken())
@@ -47,6 +55,44 @@ class Login extends React.Component{
 
 	kakaoLogout() {
 		Kakao.Auth.logout()
+	}
+
+	handleDefaultLogin(){
+	
+		let INPUT_ID = document.getElementById('login-id-input').value
+		let INPUT_PW = document.getElementById('login-pwd-input').value
+
+		fetch(`https://mask-shop.kro.kr/v1/api/auth/login`,{
+
+			method : 'POST',
+			headers: {
+				'Accept': 'application/json',
+				'Content-Type': 'application/json'
+			},
+			body : JSON.stringify({
+				accountid : INPUT_ID,
+				password : INPUT_PW
+			})
+			
+		}).then(response => (response.json())).then((Jres) => {
+			if(Jres.success === true){
+				
+				if(typeof(CookieJS.get('webtoken')) == "undefined"){
+
+					CookieJS.set('webtoken',Jres.data)
+				
+				}
+				else{
+
+					CookieJS.remove('webtoken')
+					CookieJS.set('webtoken',Jres.data)
+				
+				}
+				
+				location.href = '/'
+
+			}
+		}).catch()
 	}
 
 	render(){
@@ -75,7 +121,7 @@ class Login extends React.Component{
 									<label for='id-save-box' className='id-save-text' i18n-content='LOGIN_SAVE_ID'></label>
 								</div>
 								<div className='login-btn'>
-									<button className='login-btn-default' onClick={this.logout}>
+									<button className='login-btn-default' onClick={this.handleDefaultLogin}>
 										<span className='icon-btn-default'>M</span>
 										<span i18n-content='LOGIN_BTN_DEFAULT'></span>
 									</button>

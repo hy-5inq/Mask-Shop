@@ -1,6 +1,6 @@
 import React from 'react'
 import FA from 'react-fontawesome' // FontAwesome
-
+import CookieJS from 'js-cookie'
 import '../stylesheets/menu-bar.css'
 
 export default class MenuBar extends React.Component{
@@ -9,6 +9,7 @@ export default class MenuBar extends React.Component{
 
 		this.state = {
 			userName: ``,
+			defaultLoginResponsed : false
 		}
 	}	
 
@@ -17,12 +18,24 @@ export default class MenuBar extends React.Component{
 	}
 
 	componentWillMount() {
+		
 		this.checkLogin()
+
 	}	
 
 	checkLogin() {
+		// alert('카카오 닉네임111')
+		console.log(this.Login.isLogin())
+		console.log(this.DefaultLogin.isLogin())
 		if (this.Login.isLogin()) {
+			
 			this.Login.getNickname()
+		
+		}
+		else{
+
+			this.DefaultLogin.isLogin()
+
 		}
 	}
 
@@ -57,6 +70,90 @@ export default class MenuBar extends React.Component{
 				location.href = `/`
 			}
 		}
+	}
+
+	get DefaultLogin() {
+		const menuBar = this
+		return {
+
+			isLogin(){
+				this.getUserDataByToken()
+			},
+
+			getUserDataByToken(){
+
+				return new Promise((resolve,reject) => {
+
+					const webtoken = CookieJS.get('webtoken')
+
+					if(webtoken !== 'undefined'){
+	
+						let myHeader = new Headers()
+						myHeader.append("X-access-token", webtoken);
+
+						fetch('https://mask-shop.kro.kr/v1/api/users',{
+						method : 'GET',
+						headers : myHeader
+						}).then(response => (response.json()).then((Jres) => {
+
+							console.log(Jres)
+
+							window.sessionStorage.setItem('name',Jres.data.name)
+							window.sessionStorage.setItem('accountid',Jres.data.accountid)
+							window.sessionStorage.setItem('address',Jres.data.address)
+							window.sessionStorage.setItem('confirmPasswordQuestion',Jres.data.confirmPasswordQuestion)
+							window.sessionStorage.setItem('email',Jres.data.email)
+							window.sessionStorage.setItem('mileage',Jres.data.mileage)
+							window.sessionStorage.setItem('passwordQuestion',Jres.data.passwordQuestion)
+							window.sessionStorage.setItem('phone',Jres.data.phone)
+							window.sessionStorage.setItem('postCode',Jres.data.postCode)
+							window.sessionStorage.setItem('rank',Jres.data.rank)
+
+							menuBar.setState({
+								userName : window.sessionStorage.getItem('name'),
+								defaultLoginResponsed : true
+							})
+
+
+							resolve({
+								status : true
+							})
+								
+						}))
+						
+					}
+
+				})
+			},
+			getNickName(){
+
+				let name = window.sessionStorage.getItem('name')
+				if(name != "undefined"){
+					menuBar.setState({
+						userName : name
+					})
+				}
+
+			},
+
+			Logout(){
+
+				CookieJS.remove('webtoken')
+				window.sessionStorage.removeItem('name')
+				window.sessionStorage.removeItem('accountid')
+				window.sessionStorage.removeItem('address')
+				window.sessionStorage.removeItem('confirmPasswordQuestion')
+				window.sessionStorage.removeItem('email')
+				window.sessionStorage.removeItem('mileage')
+				window.sessionStorage.removeItem('passwordQuestion')
+				window.sessionStorage.removeItem('phone')
+				window.sessionStorage.removeItem('postCode')
+				window.sessionStorage.removeItem('rank')
+				location.href = '/'
+
+			}
+		}
+
 	}
 
 	onClickCategory() {
@@ -111,12 +208,15 @@ export default class MenuBar extends React.Component{
 						<ul className='menu-top-left'>
 							<li className='login'>
 								<a href='/login'>
-									{this.Login.isLogin() ? 
+									{this.Login.isLogin() || this.state.defaultLoginResponsed ? 
 										<span><strong>{this.state.userName}</strong>님 환영합니다!</span>
 										: <span>로그인</span>}
 								</a>
 							</li>
-							{this.Login.isLogin() ? <li className='logout' onClickCapture={this.Login.kakaoLogout}><a>로그아웃</a></li> : <React.Fragment></React.Fragment>}
+							{this.Login.isLogin() || this.state.defaultLoginResponsed ? <li className='logout' onClickCapture={()=>{
+								this.Login.kakaoLogout()
+								this.DefaultLogin.Logout()
+							}}><a>로그아웃</a></li> : <React.Fragment></React.Fragment>}
 							<li className='join'><a href='/join' i18n-content='JOIN'></a></li>
 							<li className='order-list'><a href='#' i18n-content='ORDER_LIST'></a></li>
 							<li className='shop-basket' onClick={() => {

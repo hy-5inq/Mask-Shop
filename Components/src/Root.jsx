@@ -22,7 +22,8 @@ import Join from './Join.jsx'
 
 import '../stylesheets/Root.css'
 
-class Root extends React.Component{	
+class Root extends React.Component{
+
 	render(){
 		return(
 

@@ -5,6 +5,9 @@ import { withRouter } from 'react-router-dom'
 import _history from '../history/_history.js'
 
 import '../stylesheets/Product.css'
+import OrderCart from './order-cart.jsx'
+import MyPage from './my-page.jsx'
+import TrackDelivery from './track-delivery.jsx'
 import MenuBar from './menu-bar.jsx'
 import ProductMain from './product-main.jsx'
 
@@ -18,6 +21,9 @@ class Product extends React.Component{
 			<div className='product'>
 				<MenuBar></MenuBar>
 				<ProductMain></ProductMain>
+				<OrderCart></OrderCart>
+				<TrackDelivery></TrackDelivery>
+				<MyPage></MyPage>
 			</div>
 		)
 	}

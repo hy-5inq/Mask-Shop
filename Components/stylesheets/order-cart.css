@@ -82,6 +82,7 @@
     align-items: center;
     justify-content: center;
     border-radius: 8px;
+    cursor: pointer;
 
 }
 .Controller__Item__Btn:hover{
@@ -111,7 +112,7 @@
 }
 .Controller__Item__Btn__Text{
 
-   margin-left: 15px;
+   margin-left: 0;
    
 }
 

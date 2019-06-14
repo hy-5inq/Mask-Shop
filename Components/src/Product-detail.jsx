@@ -3,7 +3,9 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import MenuBar from './menu-bar.jsx'
-
+import OrderCart from './order-cart.jsx'
+import MyPage from './my-page.jsx'
+import TrackDelivery from './track-delivery.jsx'
 import '../stylesheets/Product-Detail.css'
 import FA from 'react-fontawesome'
 // import { FaAngleLeft , FaAngleRight , FaSearch } from 'react-icons/fa'
@@ -17,7 +19,9 @@ class ProductDetail extends React.Component{
 		return (
 			<div className={`Wrapper`}>
 				<MenuBar/>
-
+				<OrderCart></OrderCart>
+				<MyPage></MyPage>
+				<TrackDelivery></TrackDelivery>
 				<div className={`Flex-Nav-Monitor`}>
 					<span className={`Flex-Nav-Monitor__Text`}>{`Home`} > {`선택된 메뉴명`} > {`선택된 아이템명`}</span>
 				</div>

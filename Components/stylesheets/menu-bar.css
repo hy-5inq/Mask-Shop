@@ -79,7 +79,7 @@
 }
 
 .menu-top-left {
-	grid-template-columns: auto auto auto auto;
+	grid-template-columns: auto auto auto auto auto;
 	position: absolute;
 	left: 0;
 }
@@ -356,4 +356,7 @@
 	transition: color 0.2s ease-in-out;
 	color: hsl(0, 0%, 60%);
 	cursor: pointer;
+}
+.search-text{
+	color : white;
 }

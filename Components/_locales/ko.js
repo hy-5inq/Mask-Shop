@@ -6,6 +6,8 @@ export default {
 	ORDER_LIST: `주문목록`,
 	SHOP_BASKET: `장바구니`,
 	MY_PAGE: `마이페이지`,
+	TRACK_DELIVERY: `배송조회`,
+	JOIN : `회원가입`,
 
 	MENU_BY_DUST: `미세먼지 농도별`,
 	MENU_BY_SIZE: `크기별`,

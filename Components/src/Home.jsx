@@ -9,6 +9,7 @@ import ImageGallery from 'react-image-gallery'
 import AirMap from './air-map.jsx'
 import OrderCart from './order-cart.jsx'
 import MyPage from './my-page.jsx'
+import TrackDelivery from './track-delivery.jsx'
 import NewsList from './news-list.jsx'
 import Footer from './footer.jsx'
 
@@ -33,6 +34,7 @@ class Home extends React.Component{
 				<AirMap />
 				<OrderCart />
 				<MyPage />
+				<TrackDelivery />
 				<div className="Home-Hot-Menus">
 
 					<div className="Home-Hot-Menus__Item">

@@ -21,21 +21,14 @@ export default class MenuBar extends React.Component{
 		location.href = `/`
 	}
 	
-	onClickShopBasket() {
+	onClickSnapCard(id) {
 		
 		foldAll()
-		const ORDER_CART = document.body.querySelector('#ORDER_CART')
-		ORDER_CART.classList.remove(`--Fold-Off`)
+		const TARGET_CARD = document.body.querySelector(`#${id}`)
+		TARGET_CARD.classList.remove(`--Fold-Off`)
 		
 	}
-	onClickMyPage() {
-		
-		foldAll()
-		const MY_PAGE = document.body.querySelector('#MY_PAGE')
-		MY_PAGE.classList.remove(`--Fold-Off`)
-		
-	}
-	
+
 	onMouseEnterMenu(event) {
 		const menu = event.target.closest(`.menu`)
 		this.setVisibilityMenuAll(menu, `block`)		
@@ -60,9 +53,14 @@ export default class MenuBar extends React.Component{
 					<div className='inner'>
 						<ul className='menu-top-left'>
 							<li className='login'><a href='/login' i18n-content='LOGIN'></a></li>
+							<li className='join'><a href='/join' i18n-content='JOIN'></a></li>
 							<li className='order-list'><a href='#' i18n-content='ORDER_LIST'></a></li>
-							<li className='shop-basket' onClick={this.onClickShopBasket}><a href='#' i18n-content='SHOP_BASKET'></a></li>
-							<li className='my-page' onClick={this.onClickMyPage}><a href='#' i18n-content='MY_PAGE'></a></li>
+							<li className='shop-basket' onClick={() => {
+								this.onClickSnapCard(`ORDER_CART`)
+							}}><a href='#' i18n-content='SHOP_BASKET'></a></li>
+							<li className='track-delivery' onClick={() => {
+								this.onClickSnapCard(`TRACK_DELIVERY`)
+							}}><a href='#' i18n-content='TRACK_DELIVERY'></a></li>
 						</ul>
 
 						<ul className='menu-top-right'>

@@ -411,7 +411,37 @@ class Join extends React.Component{
         }
 
         if(SubmitAvailable){
+
             alert('서버로 폼 전송')
+
+            fetch('http://35.200.138.35:3333/api/account',{
+                method : 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+    
+                body : JSON.stringify({
+
+                    accountid : document.getElementById('ID_INPUT').value,
+                    password : document.getElementById('PW_INPUT').value,
+                    passwordQuestion : document.getElementById('PW_FIND_QUESTION').value,
+                    confirmPasswordQuestion : document.getElementById('PW_FIND_ANSWER').value,
+                    name : `${document.getElementById('NAME').value}`,
+                    postCode : document.getElementById('ZONE_CODE_INPUT').value,
+                    address : (document.getElementById('ADDRESS').value).concat(document.getElementById('ADDRESS_SUB').value),
+                    phone : `${document.getElementById('PHONE_1').value}-${document.getElementById('PHONE_2').value}-${document.getElementById('PHONE_3').value}`,
+                    email : `${document.getElementById('EMAIL').value}@${document.getElementById('EMAIL_DOMAIN').value}`
+
+                    })
+                })
+                .then(response=>(response.json())).then((Jres)=>{
+                    if(Jres.status === 'SUCCESS'){
+                        location.href = '/'
+                    }
+            })
+
+
         }
         
 
@@ -444,7 +474,7 @@ class Join extends React.Component{
                                 <span className="Star --Color-Red">*</span>
                             </div>
                             <div id="ID_FORM_ROW" className="Join-Form-Row__Item Value-Box">
-                                <input onChange={this.handleIdChecker} className="Join-Form-Row__Item__Input" type="text"/>
+                                <input id="ID_INPUT" onChange={this.handleIdChecker} className="Join-Form-Row__Item__Input" type="text"/>
                                 <span className="Join-Form-Row__Item__Span">(영문소문자/숫자, 4~16자)</span>
                             </div>
                         </div>
@@ -477,14 +507,14 @@ class Join extends React.Component{
                                 <span className="Star --Color-Red">*</span>
                             </div>
                             <div className="Join-Form-Row__Item Value-Box">
-                                <select className="Password-Find-Question">
-                                    <option value="기억에 남는 추억의 장소는?">기억에 남는 추억의 장소는?</option>
-                                    <option value="자신의 인생 좌우명은?">자신의 인생 좌우명은?</option>
-                                    <option value="자신의 보물 제 1호는?">자신의 보물 제 1호는?</option>
-                                    <option value="가장 기억에 남는 선생님 성함은?">가장 기억에 남는 선생님 성함은?</option>
-                                    <option value="타인이 모르는 자신만의 신체비밀이 있다면?">타인이 모르는 자신만의 신체비밀이 있다면?</option>
-                                    <option value="추억하고 싶은 날짜가 있다면?">추억하고 싶은 날짜가 있다면?</option>
-                                    <option value="인상깊게 읽은 책 이름은?">인상깊게 읽은 책 이름은?</option>
+                                <select id="PW_FIND_QUESTION" className="Password-Find-Question">
+                                    <option value="1">기억에 남는 추억의 장소는?</option>
+                                    <option value="2">자신의 인생 좌우명은?</option>
+                                    <option value="3">자신의 보물 제 1호는?</option>
+                                    <option value="4">가장 기억에 남는 선생님 성함은?</option>
+                                    <option value="5">타인이 모르는 자신만의 신체비밀이 있다면?</option>
+                                    <option value="6">추억하고 싶은 날짜가 있다면?</option>
+                                    <option value="7">인상깊게 읽은 책 이름은?</option>
                                 </select>
                             </div>
                         </div>
@@ -495,7 +525,7 @@ class Join extends React.Component{
                                 <span className="Star --Color-Red">*</span>
                             </div>
                             <div className="Join-Form-Row__Item Value-Box">
-                                <input onChange={this.handlePwAnswer} className="Password-Find-Question Join-Form-Row__Item__Input" type="text"/>
+                                <input id="PW_FIND_ANSWER" onChange={this.handlePwAnswer} className="Password-Find-Question Join-Form-Row__Item__Input" type="text"/>
                                 <span className="Join-Form-Row__Item__Span"></span>
                             </div>
                         </div>
@@ -507,7 +537,7 @@ class Join extends React.Component{
                                 <span className="Star --Color-Red">*</span>
                             </div>
                             <div className="Join-Form-Row__Item Value-Box">
-                                <input onChange={this.handleNameChecker} className="Join-Form-Row__Item__Input" type="text"/>
+                                <input id="NAME" onChange={this.handleNameChecker} className="Join-Form-Row__Item__Input" type="text"/>
                                 <span className="Join-Form-Row__Item__Span"></span>
                             </div>
                         </div>
@@ -541,11 +571,11 @@ class Join extends React.Component{
                                 <span className="Star --Color-Red">*</span>
                             </div>
                             <div className="Join-Form-Row__Item Value-Box">
-                                <input onChange={this.handlePhoneChecker} className="Join-Form-Row__Item__Input Phone-Input" type="text"/>
+                                <input id="PHONE_1" onChange={this.handlePhoneChecker} className="Join-Form-Row__Item__Input Phone-Input" type="text"/>
                                 <span className="Join-Form-Row__Item__Span">-</span>
-                                <input onChange={this.handlePhoneChecker} className="Join-Form-Row__Item__Input Phone-Input" type="text"/>
+                                <input id="PHONE_2" onChange={this.handlePhoneChecker} className="Join-Form-Row__Item__Input Phone-Input" type="text"/>
                                 <span className="Join-Form-Row__Item__Span">-</span>
-                                <input onChange={this.handlePhoneChecker} className="Join-Form-Row__Item__Input Phone-Input" type="text"/>
+                                <input id="PHONE_3" onChange={this.handlePhoneChecker} className="Join-Form-Row__Item__Input Phone-Input" type="text"/>
                             </div>
                         </div>
 
@@ -555,7 +585,7 @@ class Join extends React.Component{
                                 <span className="Star --Color-Red">*</span>
                             </div>
                             <div className="Join-Form-Row__Item Value-Box">
-                                <input onChange={this.handleEmailChange} className="Join-Form-Row__Item__Input" type="text"/>
+                                <input id="EMAIL" onChange={this.handleEmailChange} className="Join-Form-Row__Item__Input" type="text"/>
                                 <span className="Join-Form-Row__Item__Span">@</span>
                                 <input id="EMAIL_DOMAIN" onChange={this.handleEmailDomainDirect} disabled={this.state.EMAIL_INPUT_DISABLED} className="Join-Form-Row__Item__Input" type="text"/>
                                 <select onChange={this.handleEmailDomainChange} className="Email-Assist">

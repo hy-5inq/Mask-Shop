@@ -2,7 +2,7 @@
 	display: none;
 	position: absolute;
     top: 50px;
-    right: -35px;
+    right: 0px;
     width: 250px;
     padding: 0px;
     background: white;
@@ -21,7 +21,7 @@
 	width: 0;
 	z-index: 1;
 	top: -15px;
-	left: 186px;
+	right: 10px;
 	z-index: 100000;
 }
 

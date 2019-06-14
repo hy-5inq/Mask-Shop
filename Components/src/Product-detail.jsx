@@ -28,7 +28,7 @@ class ProductDetail extends React.Component{
 			buyer_tel : `010-1234-5678`,
 			buyer_addr : `주소`,
 			buyer_postcode : `123-456`,
-			m_redirect_url : `/`,
+			m_redirect_url : `https://mask-shop.kro.kr/`,
 		}, rsp => {
 			if ( rsp.success ) {
 				let msg = `결제가 완료되었습니다.`

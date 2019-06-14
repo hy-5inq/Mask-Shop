@@ -138,8 +138,7 @@ export default class MenuBar extends React.Component{
 
 			},
 
-			Logout(){
-
+			Logout() {
 				CookieJS.remove('webtoken')
 				window.sessionStorage.removeItem('name')
 				window.sessionStorage.removeItem('accountid')
@@ -152,9 +151,9 @@ export default class MenuBar extends React.Component{
 				window.sessionStorage.removeItem('postCode')
 				window.sessionStorage.removeItem('rank')
 				location.href = '/'
-
 			}
 		}
+	}
 
 	onClickRecentList() {
 		const recentList = document.querySelector(`.recent-list`)
@@ -163,7 +162,6 @@ export default class MenuBar extends React.Component{
 		} else {
 			recentList.style.display = `none`
 		}
-		
 	}
 
 	onClickCategory() {

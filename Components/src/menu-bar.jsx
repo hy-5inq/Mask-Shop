@@ -220,7 +220,8 @@ export default class MenuBar extends React.Component{
 										: <span>로그인</span>}
 								</a>
 							</li>
-							{this.Login.isLogin() || this.state.defaultLoginResponsed ? <li className='logout' onClickCapture={()=>{
+							{this.Login.isLogin() || this.state.defaultLoginResponsed ? <li className='logout' onClickCapture={event => {
+								event.stopPropagation()
 								this.Login.kakaoLogout()
 								this.DefaultLogin.Logout()
 							}}><a>로그아웃</a></li> : <React.Fragment></React.Fragment>}

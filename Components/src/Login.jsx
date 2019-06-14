@@ -29,7 +29,7 @@ class Login extends React.Component{
 	}
 
 	checkLogin() {
-		if (this.isLogin) {			
+		if (this.isLogin || this.isDefaultLogin) {			
 			location.href = `/`
 			return
 		}
@@ -41,92 +41,6 @@ class Login extends React.Component{
 		}		
 	}
 
-	get DefaultLogin() {
-		const menuBar = this
-		return {
-
-			isLogin(){
-				this.getUserDataByToken()
-			},
-
-			getUserDataByToken(){
-
-				return new Promise((resolve,reject) => {
-
-					const webtoken = CookieJS.get('webtoken')
-
-					if(webtoken !== 'undefined'){
-	
-						let myHeader = new Headers()
-						myHeader.append("X-access-token", webtoken);
-
-
-
-						fetch('https://mask-shop.kro.kr/v1/api/users',{
-						method : 'GET',
-						headers : myHeader
-						}).then(response => (response.json()).then((Jres) => {
-
-							console.log(Jres)
-
-							window.sessionStorage.setItem('name',Jres.data.name)
-							window.sessionStorage.setItem('accountid',Jres.data.accountid)
-							window.sessionStorage.setItem('address',Jres.data.address)
-							window.sessionStorage.setItem('confirmPasswordQuestion',Jres.data.confirmPasswordQuestion)
-							window.sessionStorage.setItem('email',Jres.data.email)
-							window.sessionStorage.setItem('mileage',Jres.data.mileage)
-							window.sessionStorage.setItem('passwordQuestion',Jres.data.passwordQuestion)
-							window.sessionStorage.setItem('phone',Jres.data.phone)
-							window.sessionStorage.setItem('postCode',Jres.data.postCode)
-							window.sessionStorage.setItem('rank',Jres.data.rank)
-
-							// if(Jres.success === true){
-							// 	menuBar.setState({
-							// 		userName : window.sessionStorage.getItem('name'),
-							// 		defaultLoginResponsed : true,
-									
-							// 	},()=>{
-							// 		location.href = "/"
-							// 	})
-							// }
-								
-						}))
-						
-					}
-
-				})
-			},
-			getNickName(){
-
-				let name = window.sessionStorage.getItem('name')
-				if(name != "undefined"){
-					menuBar.setState({
-						userName : name
-					})
-				}
-
-			},
-
-			Logout() {
-				CookieJS.remove('webtoken')
-				window.sessionStorage.removeItem('name')
-				window.sessionStorage.removeItem('accountid')
-				window.sessionStorage.removeItem('address')
-				window.sessionStorage.removeItem('confirmPasswordQuestion')
-				window.sessionStorage.removeItem('email')
-				window.sessionStorage.removeItem('mileage')
-				window.sessionStorage.removeItem('passwordQuestion')
-				window.sessionStorage.removeItem('phone')
-				window.sessionStorage.removeItem('postCode')
-				window.sessionStorage.removeItem('rank')
-				location.href = '/'
-			}
-		}
-	}
-
-	// get isDefaultLogin(){
-	// 	if()
-	// }
 	get isLogin() {
 		if (window.Kakao && Kakao.Auth.getAccessToken()) {
 			return true
@@ -187,10 +101,18 @@ class Login extends React.Component{
 		}).catch()
 	}
 
+	get isDefaultLogin() {
+		console.log('!window.sessionStorage.getItem(`accountid`)', !window.sessionStorage.getItem(`accountid`))
+		if (!window.sessionStorage.getItem(`accountid`)) {
+			return false
+		}
+		return true
+	}
+
 	render(){
 		return(			
 			<React.Fragment>
-				{this.isLogin || this.state.defaultLoginResponsed ? 
+				{this.isLogin || this.isDefaultLogin ? 
 					<span></span>
 					:
 					<React.Fragment>

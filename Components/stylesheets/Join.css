@@ -52,6 +52,9 @@
     grid-template-columns: 150px 1fr;
     border-top : 1px solid rgb(215, 213, 213);
 }
+.Join-Form-Row__Item > input , .Address-Box__Item input {
+    text-align: center;
+}
 .Join-Form-Row:last-child{
     border-bottom : 1px solid rgb(215, 213, 213);
 }
@@ -151,5 +154,8 @@
 .--Bg-Grey{
     background: rgb(140, 140, 140);
 }
-
+.valid-pw2-mesg , .valid-pw-mesg , .valid-id-mesg{
+    color : brown;
+    font-size: 10px;
+}
 

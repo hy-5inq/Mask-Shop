@@ -7,12 +7,415 @@ import _history from '../history/_history.js'
 import '../stylesheets/Join.css'
 import MenuBar from './menu-bar.jsx';
 
+
 class Join extends React.Component{
+
+    constructor(props){
+        
+        super(props)
+
+        this.state = {
+
+            EMAIL_INPUT_DISABLED : true,
+            IS_VALID_ID : false,
+            IS_VALID_PW : false,
+            IS_PW2_EQAUL_TO_PW : false,
+            IS_PW_ANSWER_TYPED : false,
+            IS_USERNAME_TYPED : false,
+            IS_VALID_EMAIL_DOMAIN : false,
+            IS_ADDRESS_ZONECODE_TYPED : false,
+            IS_ADDRESS_TYPED : false,
+            IS_ADDRESS_SUB_TYPED : false,
+            IS_PHONE_NUMBER_TYPED : false,
+            IS_EMAIL_TYPED : false,
+            ACCEPT_ALL : false,
+            IS_CONTRACTION_1_CHECKED : false,
+            IS_CONTRACTION_2_CHECKED : false
+
+        }
+
+        this.handleEmailDomainChange = this.handleEmailDomainChange.bind(this)
+        this.handleContraction_1 = this.handleContraction_1.bind(this)
+        this.handleContraction_2 = this.handleContraction_2.bind(this)
+        this.handleAcceptAll = this.handleAcceptAll.bind(this)
+        this.handleFindPostCode = this.handleFindPostCode.bind(this)
+        this.handleIdChecker = this.handleIdChecker.bind(this)
+        this.handlePWChecker = this.handlePWChecker.bind(this)
+        this.handlePw2EqualToPw = this.handlePw2EqualToPw.bind(this)
+        this.handlePwAnswer = this.handlePwAnswer.bind(this)
+        this.handleAddressSub =  this.handleAddressSub.bind(this)
+        this.handlePhoneChecker = this.handlePhoneChecker.bind(this)
+        this.handleEmailChange = this.handleEmailChange.bind(this)
+        this.handleNameChecker = this.handleNameChecker.bind(this)
+        this.handleSubmitForm = this.handleSubmitForm.bind(this)
+
+    }
 
 	handleRouteToHome(){
 		_history.push(`/`)
 	}
 
+    handleFindPostCode(that){
+
+        new daum.Postcode({
+            oncomplete: function(data) {
+                
+                // console.log(data)
+                let zoneCodeInput = document.querySelector(`#ZONE_CODE_INPUT`)
+                let addressInput = document.querySelector(`#ADDRESS`)
+
+                zoneCodeInput.value = data.zonecode
+                addressInput.value = data.address
+
+                that.setState({
+                    IS_ADDRESS_ZONECODE_TYPED : true,
+                    IS_ADDRESS_TYPED : true,
+                })
+
+            }
+        }).open();
+
+    }
+    handleIdChecker(event){
+
+        const mesgBefore = document.querySelector(`.valid-id-mesg`)
+       
+        if(mesgBefore !== null){
+            mesgBefore.remove()
+        }
+        
+        const ID_REGEX = new RegExp(/^[a-zA-Z0-9]{4,16}$/)
+
+        let $ID_FORM_ROW = document.querySelector(`#ID_FORM_ROW`)
+        
+        const $passMesg = document.createElement(`span`)
+        $passMesg.classList.add(`valid-id-mesg`)
+
+        if(ID_REGEX.test(event.target.value)){
+            
+            $passMesg.textContent = `올바른 아이디 입력입니다.`
+            this.setState({
+                IS_VALID_ID : true
+            })
+        }
+        else{
+
+            $passMesg.textContent = `올바르지 않은 아이디 입력입니다.`
+            this.setState({
+                IS_VALID_ID : false
+            })
+          
+        }
+        
+        $ID_FORM_ROW.append($passMesg)
+
+    }
+
+    handleEmailDomainChange(event){
+
+        let $EMAIL_DOMAIN_INPUT = document.querySelector('#EMAIL_DOMAIN')
+
+        if(event.target.value !== '직접입력'){
+            $EMAIL_DOMAIN_INPUT.value = event.target.value
+            this.setState({
+                IS_VALID_EMAIL_DOMAIN : true
+            })
+        }
+        else{
+
+            $EMAIL_DOMAIN_INPUT.value = ""
+
+            this.setState({
+                EMAIL_INPUT_DISABLED : false
+            })
+
+        }
+
+    }
+
+    handlePWChecker(event){
+
+        const mesgBefore = document.querySelector(`.valid-pw-mesg`)
+        const mesgBefore2 = document.querySelector(`.valid-pw2-mesg`)
+
+        if(mesgBefore !== null){
+            mesgBefore.remove()
+        }
+        if(mesgBefore2 !== null){
+            mesgBefore2.remove()
+        }
+        
+        const PW_REGEX = new RegExp(/(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,16}|(?=.*[A-Za-z])(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,16}/)
+
+        let $PW_FORM_ROW = document.querySelector(`#PW_INPUT`).parentNode
+        let $PW2_INPUT =  document.querySelector(`#PW2_INPUT`)
+        const $PW2_FORM_ROW  = $PW2_INPUT.parentNode
+
+        const $passMesg = document.createElement(`span`)
+        $passMesg.classList.add(`valid-pw-mesg`)
+        const $passMesg2 = document.createElement(`span`)
+        $passMesg2.classList.add(`valid-pw2-mesg`)
+
+        if(PW_REGEX.test(event.target.value)){
+            
+            $passMesg.textContent = `올바른 비밀번호 입력입니다.`
+            this.setState({
+                IS_VALID_PW : true
+            })
+        }
+        else{
+
+            $passMesg.textContent = `올바르지 않은 비밀번호 입력입니다.`
+            this.setState({
+                IS_VALID_PW : false
+            })            
+        }
+        
+        if(event.target.value !== $PW2_INPUT.value){
+
+            $passMesg2.textContent = "비밀번호와 동일하지 않습니다."
+           
+        }
+        else{
+
+            $passMesg2.textContent = "비밀번호와 동일합니다."
+           
+        }
+
+        $PW_FORM_ROW.append($passMesg)
+        $PW2_FORM_ROW.append($passMesg2)
+    }
+
+    handlePw2EqualToPw(event){
+
+        const mesgBefore2 = document.querySelector(`.valid-pw2-mesg`)
+       
+        if(mesgBefore2 !== null){
+            mesgBefore2.remove()
+        }
+        
+        let $PW_INPUT = document.querySelector(`#PW_INPUT`)
+        let $PW2_INPUT =  document.querySelector(`#PW2_INPUT`)
+        const $PW2_FORM_ROW  = $PW2_INPUT.parentNode
+
+        const $passMesg = document.createElement(`span`)
+        $passMesg.classList.add(`valid-pw2-mesg`)
+
+        if($PW_INPUT.value === event.target.value){
+            $passMesg.textContent = "비밀번호와 동일합니다."
+            this.setState({
+                IS_PW2_EQAUL_TO_PW : true
+            })
+        }
+        else{
+            $passMesg.textContent = "비밀번호와 동일하지 않습니다."
+            this.setState({
+                IS_PW2_EQAUL_TO_PW : false
+            })
+        }
+        
+        $PW2_FORM_ROW.append($passMesg)
+
+    }
+
+    handleEmailDomainDirect(event){
+
+        let emailDomainRegex = new RegExp(/[a-z]+\.[a-z]/)
+        
+        if(emailDomainRegex.test(event.target.value)){
+            this.setState({
+                IS_VALID_EMAIL_DOMAIN : true,
+            })
+        }
+        else{
+
+        }
+
+    }
+
+    handleContraction_1(){
+
+        const TOGGLE_VALUE = !(this.state.IS_CONTRACTION_1_CHECKED)
+
+        this.setState({
+            IS_CONTRACTION_1_CHECKED : TOGGLE_VALUE
+        })
+
+    }
+    handleContraction_2(){
+
+        const TOGGLE_VALUE = !(this.state.IS_CONTRACTION_2_CHECKED)
+
+        this.setState({
+            IS_CONTRACTION_2_CHECKED : TOGGLE_VALUE
+        })
+
+    }
+    handleAcceptAll(event){
+        
+        let TOGGLE_VALUE = !(this.state.ACCEPT_ALL)
+       
+        this.setState({
+
+            ACCEPT_ALL : TOGGLE_VALUE,
+            IS_CONTRACTION_1_CHECKED : TOGGLE_VALUE,
+            IS_CONTRACTION_2_CHECKED : TOGGLE_VALUE
+
+        })
+
+        // alert(TOGGLE_VALUE)
+    }
+    handleAddressSub(event){
+
+        if(event.target.value.length > 0){
+            this.setState({
+                IS_ADDRESS_SUB_TYPED : true
+            })
+        }
+        else{
+            this.setState({
+                IS_ADDRESS_SUB_TYPED : false
+            })
+        }
+
+    }
+    handlePwAnswer(event){
+
+        if(event.target.value.length > 0){
+            this.setState({
+                IS_PW_ANSWER_TYPED : true
+            })
+        }
+        else{
+            this.setState({
+                IS_PW_ANSWER_TYPED : false
+            })
+        }
+
+    }
+    handleEmailChange(event){
+
+        if(event.target.value.length > 0){
+            this.setState({
+                IS_EMAIL_TYPED : true
+                
+            })
+        }
+        else{
+            this.setState({
+                IS_EMAIL_TYPED : false
+            })
+        }
+
+    }
+    handleNameChecker(event){
+
+        if(event.target.value.length > 0){
+            this.setState({
+                IS_USERNAME_TYPED : true
+            })
+        }
+        else{
+            this.setState({
+                IS_USERNAME_TYPED : false
+            })
+        }
+
+    }
+    handlePhoneChecker(event){
+
+        let concatedPhoneNumber = new String();
+
+        let $PHONE_INPUTS = document.querySelectorAll('.Phone-Input')
+        console.log($PHONE_INPUTS)
+        $PHONE_INPUTS.forEach((el,index) => {
+            // alert(el.value)
+            if(index !== 2){
+                concatedPhoneNumber = concatedPhoneNumber.concat(`${el.value}-`)
+            }
+            else{
+                concatedPhoneNumber = concatedPhoneNumber.concat(`${el.value}`)
+            }
+
+        })
+        // alert(concatedPhoneNumber)
+        let PhoneRegex =  new RegExp(/[0-9]{3}-[0-9]{3,4}-[0-9]{4}/)
+
+        if(PhoneRegex.test(concatedPhoneNumber)){
+            this.setState({
+                IS_PHONE_NUMBER_TYPED : true
+            })
+        }
+        else{
+            this.setState({
+                IS_PHONE_NUMBER_TYPED : false
+            })
+        }
+
+    }
+    handleSubmitForm(){
+
+        let SubmitAvailable = true
+
+        if(this.state.IS_VALID_ID === false){
+            alert('아이디를 다시 확인하여 주세요!')
+            SubmitAvailable = false
+        }
+        if(this.state.IS_VALID_PW === false){
+            alert('아이디를 다시 확인하여 주세요!')
+            SubmitAvailable = false
+        }
+        if(this.state.IS_PW2_EQAUL_TO_PW === false){
+            alert('비밀번호와 비밀번호 확인이 동일하지 않습니다!')
+            SubmitAvailable = false
+        }
+        if(this.state.IS_PW_ANSWER_TYPED === false){
+            alert('비밀번호 확인 답변이 입력되지 않았습니다!')
+            SubmitAvailable = false
+        }
+        if(this.state.IS_USERNAME_TYPED === false){
+            alert('이름이 입력되지 않았습니다!')
+            SubmitAvailable = false
+        }
+        if(this.state.IS_VALID_EMAIL_DOMAIN === false){
+            alert('직접입력한 이메일 도메인이 유효하지 않습니다!')
+            SubmitAvailable = false
+        }
+        if(this.state.IS_ADDRESS_ZONECODE_TYPED === false){
+            alert('우편번호가 입력되지 않았습니다!')
+            SubmitAvailable = false
+        }
+        if(this.state.IS_ADDRESS_TYPED === false){
+            alert('기본 주소가 입력되지 않았습니다!')
+            SubmitAvailable = false
+        }
+        if(this.state.IS_ADDRESS_SUB_TYPED === false){
+            alert('상세 주소가 입력지 않았습니다!')
+            SubmitAvailable = false
+        }
+        if(this.state.IS_PHONE_NUMBER_TYPED === false){
+            alert('휴대 전화 번호가 올바르지 않습니다!')
+            SubmitAvailable = false
+        }
+        if(this.state.IS_EMAIL_TYPED  === false){
+            alert('이메일을 다시 확인해주세요!')
+            SubmitAvailable = false
+        }
+        if(this.state.IS_CONTRACTION_1_CHECKED === false){
+            alert('이용약관 동의를 확인해주세요!')
+            SubmitAvailable = false
+        }
+        if(this.state.IS_CONTRACTION_2_CHECKED === false){
+            alert('개인정보 수집 및 이용동의를 확인하여 주세요!')
+            SubmitAvailable = false
+        }
+
+        if(SubmitAvailable){
+            alert('서버로 폼 전송')
+        }
+        
+
+    }   
 	render(){
 		return(
 			<React.Fragment>
@@ -40,8 +443,8 @@ class Join extends React.Component{
                                 <span>아이디</span>
                                 <span className="Star --Color-Red">*</span>
                             </div>
-                            <div className="Join-Form-Row__Item Value-Box">
-                                <input className="Join-Form-Row__Item__Input" type="text"/>
+                            <div id="ID_FORM_ROW" className="Join-Form-Row__Item Value-Box">
+                                <input onChange={this.handleIdChecker} className="Join-Form-Row__Item__Input" type="text"/>
                                 <span className="Join-Form-Row__Item__Span">(영문소문자/숫자, 4~16자)</span>
                             </div>
                         </div>
@@ -52,8 +455,8 @@ class Join extends React.Component{
                                 <span className="Star --Color-Red">*</span>
                             </div>
                             <div className="Join-Form-Row__Item Value-Box">
-                                <input className="Join-Form-Row__Item__Input" type="password"/>
-                                <span className="Join-Form-Row__Item__Span">(영문 대소문자/숫자/특수문자 중 2가지 이상 조합, 8자~16자)</span>
+                                <input id="PW_INPUT" onChange={this.handlePWChecker} className="Join-Form-Row__Item__Input" type="password"/>
+                                <span className="Join-Form-Row__Item__Span">(영문 대소문자/숫자/특수문자를 모두 조합, 8자~16자)</span>
                             </div>
                         </div>
 
@@ -63,7 +466,7 @@ class Join extends React.Component{
                                 <span className="Star --Color-Red">*</span>
                             </div>
                             <div className="Join-Form-Row__Item Value-Box">
-                                <input className="Join-Form-Row__Item__Input" type="password"/>
+                                <input id="PW2_INPUT" onChange={this.handlePw2EqualToPw} className="Join-Form-Row__Item__Input" type="password"/>
                                 <span className="Join-Form-Row__Item__Span"></span>
                             </div>
                         </div>
@@ -92,7 +495,7 @@ class Join extends React.Component{
                                 <span className="Star --Color-Red">*</span>
                             </div>
                             <div className="Join-Form-Row__Item Value-Box">
-                                <input className="Password-Find-Question Join-Form-Row__Item__Input" type="text"/>
+                                <input onChange={this.handlePwAnswer} className="Password-Find-Question Join-Form-Row__Item__Input" type="text"/>
                                 <span className="Join-Form-Row__Item__Span"></span>
                             </div>
                         </div>
@@ -104,7 +507,7 @@ class Join extends React.Component{
                                 <span className="Star --Color-Red">*</span>
                             </div>
                             <div className="Join-Form-Row__Item Value-Box">
-                                <input className="Join-Form-Row__Item__Input" type="text"/>
+                                <input onChange={this.handleNameChecker} className="Join-Form-Row__Item__Input" type="text"/>
                                 <span className="Join-Form-Row__Item__Span"></span>
                             </div>
                         </div>
@@ -116,15 +519,17 @@ class Join extends React.Component{
                             </div>
                             <div className="Join-Form-Row__Item Value-Box Address-Box">
                                 <div className="Address-Box__Item">
-                                    <input className="Join-Form-Row__Item__Input" type="text"/>
-                                    <button>우편번호 찾기</button>
+                                    <input disabled={'true'} id="ZONE_CODE_INPUT" className="Join-Form-Row__Item__Input" type="text"/>
+                                    <button onClick={()=>{
+                                        this.handleFindPostCode(this)
+                                    }}>우편번호 찾기</button>
                                 </div>
                                 <div className="Address-Box__Item">
-                                    <input className="Password-Find-Question Join-Form-Row__Item__Input" type="text"/>
+                                    <input disabled={'true'} id="ADDRESS" className="Password-Find-Question Join-Form-Row__Item__Input" type="text"/>
                                     <span className="Join-Form-Row__Item__Span">(기본주소)</span>
                                 </div>
                                 <div className="Address-Box__Item">
-                                    <input className="Password-Find-Question Join-Form-Row__Item__Input" type="text"/>
+                                    <input onChange={this.handleAddressSub} id="ADDRESS_SUB" className="Password-Find-Question Join-Form-Row__Item__Input" type="text"/>
                                     <span className="Join-Form-Row__Item__Span">(나머지주소)</span>
                                 </div>
                             </div>
@@ -136,11 +541,11 @@ class Join extends React.Component{
                                 <span className="Star --Color-Red">*</span>
                             </div>
                             <div className="Join-Form-Row__Item Value-Box">
-                                <input className="Join-Form-Row__Item__Input Phone-Input" type="text"/>
+                                <input onChange={this.handlePhoneChecker} className="Join-Form-Row__Item__Input Phone-Input" type="text"/>
                                 <span className="Join-Form-Row__Item__Span">-</span>
-                                <input className="Join-Form-Row__Item__Input Phone-Input" type="text"/>
+                                <input onChange={this.handlePhoneChecker} className="Join-Form-Row__Item__Input Phone-Input" type="text"/>
                                 <span className="Join-Form-Row__Item__Span">-</span>
-                                <input className="Join-Form-Row__Item__Input Phone-Input" type="text"/>
+                                <input onChange={this.handlePhoneChecker} className="Join-Form-Row__Item__Input Phone-Input" type="text"/>
                             </div>
                         </div>
 
@@ -150,11 +555,11 @@ class Join extends React.Component{
                                 <span className="Star --Color-Red">*</span>
                             </div>
                             <div className="Join-Form-Row__Item Value-Box">
-                                <input className="Join-Form-Row__Item__Input" type="text"/>
+                                <input onChange={this.handleEmailChange} className="Join-Form-Row__Item__Input" type="text"/>
                                 <span className="Join-Form-Row__Item__Span">@</span>
-                                <input className="Join-Form-Row__Item__Input" type="text"/>
-                                <select className="Email-Assist">
-                                    <option selected value="">이메일 선택</option>
+                                <input id="EMAIL_DOMAIN" onChange={this.handleEmailDomainDirect} disabled={this.state.EMAIL_INPUT_DISABLED} className="Join-Form-Row__Item__Input" type="text"/>
+                                <select onChange={this.handleEmailDomainChange} className="Email-Assist">
+                                    <option selected value="None">이메일 선택</option>
                                     <option value="gmail.com">gmail.com</option>
                                     <option value="naver.com">naver.com</option>
                                     <option value="daum.net">daum.net</option>
@@ -180,7 +585,7 @@ class Join extends React.Component{
 
                     <div className="Join-Contraction-Wrapper">
                         <div className="Join-Contraction-Row">
-                            <input type="checkbox"/>
+                            <input value={this.state.ACCEPT_ALL} onChange={this.handleAcceptAll} type="checkbox"/>
                             <span className="--Font-Bold">이용약관 및 개인정보수집 및 이용, 쇼핑정보 수신(선택)에 모두 동의합니다.</span>
                         </div>
                         <div className="Join-Contraction-Row">
@@ -255,7 +660,7 @@ class Join extends React.Component{
                             </div>
                             <div>
                                 <span>이용약관에 동의 하십니까?</span>
-                                <input type="checkbox"/>동의함
+                                <input checked={this.state.IS_CONTRACTION_1_CHECKED} onChange={this.handleContraction_1} type="checkbox"/>동의함
                             </div>
                         </div>
                         <div className="Join-Contraction-Row">
@@ -312,15 +717,17 @@ o 로그 기록
                                 </div>
                             </div>
                             <span>개인정보 수집 및 이용에 동의하십니까?</span>
-                            <input type="checkbox"/>동의함
+                            <input checked={this.state.IS_CONTRACTION_2_CHECKED} onChange={this.handleContraction_2} type="checkbox"/>동의함
                         </div>
 
                        
                     </div>
 
                     <div className="Join-Btn-Wrapper">
-                            <div className="Join-Btn --Bg-Navy">회원가입</div>
-                            <div className="Join-Btn --Bg-Grey">회원가입 취소</div>
+                            <div onClick={this.handleSubmitForm} className="Join-Btn --Bg-Navy">회원가입</div>
+                            <div onClick={()=>{
+                                location.href = '/'
+                            }} className="Join-Btn --Bg-Grey">회원가입 취소</div>
                     </div>
                 </div>
 

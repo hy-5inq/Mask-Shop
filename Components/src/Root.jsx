@@ -19,6 +19,7 @@ import Product from './Product.jsx'
 import Login from './Login.jsx'
 import ProductDetail from './Product-detail.jsx'
 import Join from './Join.jsx'
+import FAQ from './FAQ.jsx'
 
 import '../stylesheets/Root.css'
 
@@ -38,6 +39,7 @@ class Root extends React.Component{
 							<Route path="/Login" component={Login} ></Route>
 							<Route path="/Product-detail" component={ProductDetail} ></Route>
 							<Route path="/Join" component={Join}></Route>
+							<Route path="/faq" component={FAQ}></Route>
 						</Switch>
 					</div>
 

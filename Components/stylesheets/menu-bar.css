@@ -214,7 +214,7 @@
 	border-bottom: 1px solid rgba(0, 0, 0, 0.09);
 	position: sticky;	
 	background-color: hsla(0, 0%, 100%, 0.9);
-	z-index: 50;
+	z-index: 48;
 }
 
 .menu-bottom .inner {

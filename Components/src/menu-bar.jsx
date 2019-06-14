@@ -3,6 +3,8 @@ import FA from 'react-fontawesome' // FontAwesome
 import CookieJS from 'js-cookie'
 import '../stylesheets/menu-bar.css'
 
+import RecentList from './recent-list.jsx'
+
 export default class MenuBar extends React.Component{
 	constructor(props) {
 		super(props)
@@ -154,6 +156,14 @@ export default class MenuBar extends React.Component{
 			}
 		}
 
+	onClickRecentList() {
+		const recentList = document.querySelector(`.recent-list`)
+		if (getComputedStyle(recentList).display === `none`) {			
+			recentList.style.display = `inline-block`
+		} else {
+			recentList.style.display = `none`
+		}
+		
 	}
 
 	onClickCategory() {
@@ -169,7 +179,6 @@ export default class MenuBar extends React.Component{
 	}
 	
 	onClickSnapCard(id) {
-		
 		foldAll()
 		const TARGET_CARD = document.body.querySelector(`#${id}`)
 		TARGET_CARD.classList.remove(`--Fold-Off`)
@@ -233,7 +242,8 @@ export default class MenuBar extends React.Component{
 								<a className='search-btn'><FA name='search' /></a>
 							</li>
 							<li className='recent-product'>
-								<a className='recent-product-btn'><FA name='eye' /></a>
+								<a onClick={this.onClickRecentList} className='recent-product-btn'><FA name='eye' /></a>
+								<RecentList />
 							</li>
 						</ul>
 					</div>

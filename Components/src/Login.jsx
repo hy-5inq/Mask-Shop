@@ -34,8 +34,6 @@ class Login extends React.Component{
 	// 	if()
 	// }
 	get isLogin() {
-		console.log('window.Kakao', window.Kakao)
-		console.log('Kakao.Auth.getAccessToken()', Kakao.Auth.getAccessToken())
 		if (window.Kakao && Kakao.Auth.getAccessToken()) {
 			return true
 		}

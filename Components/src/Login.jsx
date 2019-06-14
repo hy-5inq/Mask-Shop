@@ -24,15 +24,12 @@ class Login extends React.Component{
 	}
 
 	checkLogin() {
-		if (this.isLogin) {			
+		if (this.isLogin || this.isDefaultLogin) {			
 			location.href = `/`
 			return
 		}		
 	}
 
-	// get isDefaultLogin(){
-	// 	if()
-	// }
 	get isLogin() {
 		if (window.Kakao && Kakao.Auth.getAccessToken()) {
 			return true
@@ -93,10 +90,18 @@ class Login extends React.Component{
 		}).catch()
 	}
 
+	get isDefaultLogin() {
+		console.log('!window.sessionStorage.getItem(`accountid`)', !window.sessionStorage.getItem(`accountid`))
+		if (!window.sessionStorage.getItem(`accountid`)) {
+			return false
+		}
+		return true
+	}
+
 	render(){
 		return(			
 			<React.Fragment>
-				{this.isLogin ? 
+				{this.isLogin || this.isDefaultLogin ? 
 					<span></span>
 					:
 					<React.Fragment>

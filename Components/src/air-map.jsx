@@ -54,12 +54,19 @@ class AirMap extends React.Component{
 	setColorInMap() {
 		fetch(`/update_map/www.kweather.co.kr/air/data/api/air_1hr_all2.xml`).then(res =>
 			res.text()
-		).then(data => {
+		).then(async data => {
 			const oParser = new DOMParser()
 			const oDOM = oParser.parseFromString(data, `text/xml`)
+			let json
+
+			await fetch(`https://ip-api.io/json/`)
+				.then(res => res.json())
+				.then(data => {
+					json = data
+				})
 			for (const item of oDOM.querySelector(`air`).children) {
-				this.setItemColor(item)
-					.setCurrentLocation()
+				this.setItemColor(item, json)
+					.setCurrentLocation(json)
 					.setColorBlue()					
 					.setColorOrange()
 					.setColorRed()					
@@ -68,7 +75,8 @@ class AirMap extends React.Component{
 		})
 	}
 
-	setItemColor(item) {
+	setItemColor(item, json) {
+		const _json = json
 		let pmValue = item.querySelector(`pm10Value`).textContent
 		let location = document.querySelector(`.air-map-img`).contentDocument.querySelector(`#${item.querySelector(`stationName`).textContent}`)
 		if (location) {
@@ -125,24 +133,17 @@ class AirMap extends React.Component{
 					인천: 28,
 					서울: 11,
 				}
-				fetch(`https://mask-shop.kro.kr/update_map/ip-api.com/json`)
-					.then(res => res.json())
-					.then(data => {
-						let region						
-						for(let i = 0; i < Object.entries(ISO3166).length; i++) {
-							if (Object.entries(ISO3166)[i][1] === Number(data.region)) {
-								region = Object.entries(ISO3166)[i][0]
-							}
-							region = `경기`
-							data.city = `Ansan`
-						}					
-						if (item.querySelector(`stationName`).textContent === region) {
-							location.style.stroke = `white`
-							location.style.strokeWidth = `2`
-							document.querySelector(`.air-map-text p`).innerHTML = `현재지역 미세먼지 수치 <br/> ${data.city}: <span class='current-air'>${pmValue}</span>`
-						}
-						
-					})
+				let region						
+				for(let i = 0; i < Object.entries(ISO3166).length; i++) {
+					if (Object.entries(ISO3166)[i][1] === Number(_json.region_code)) {
+						region = Object.entries(ISO3166)[i][0]
+					}
+				}					
+				if (item.querySelector(`stationName`).textContent === region) {
+					location.style.stroke = `white`
+					location.style.strokeWidth = `2`
+					document.querySelector(`.air-map-text p`).innerHTML = `현재지역 미세먼지 수치 <br/> ${region}: <span class='current-air'>${pmValue}</span>`
+				}
 				return this
 			},
 			setEventLoadSVG() {					

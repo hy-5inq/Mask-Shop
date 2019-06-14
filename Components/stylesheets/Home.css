@@ -59,7 +59,7 @@ div.ContentBox__Item-Text > p {
     width : 100%;
     max-width: 1260px;
     grid-template-columns: 1fr 1fr;
-    grid-column-gap: 20px;
+    grid-column-gap: 15px;
     height : auto;
     margin : 0 auto 15px auto;
 
@@ -81,20 +81,25 @@ div.ContentBox__Item-Text > p {
 
 }
 .Section__Item__Item:nth-child(1){
-
     display: grid;
     grid-template-columns: 1fr 1fr ;
     grid-column-gap: 20px;
 
 }
 .Section__Item__Item:nth-child(2){
+	display: flex;
+	align-items: center;
+	justify-content: center;
     text-align: center;
 	border : 1px solid #e8e8e8;
 	height: 190px;
 
 }
 
-.Section__Item__Item__Item{
+.Section__Item__Item__Item {
+	display: flex;
+	justify-content: center;
+	align-items: center;
     border : 1px solid #e8e8e8;
 	text-align: center;
 	height: 190px;

@@ -2,7 +2,8 @@ const webpack = require(`webpack`);
 const path = require(`path`);
 const MiniCssExtractPlugin = require(`mini-css-extract-plugin`)
 const devMode = process.env.NODE_ENV !== `production`
-const TerserPlugin = require('terser-webpack-plugin')
+const CompressionPlugin = require('compression-webpack-plugin')
+const zopfli = require('@gfx/zopfli')
 
 module.exports = {
 	entry : {
@@ -40,7 +41,17 @@ module.exports = {
 			{
 				test : /\.(js|jsx)$/,
 				exclude: /node_modules/,
-				use : `babel-loader`,
+				use :  {
+					loader: `babel-loader`,
+					options: {
+						plugins: [
+							["transform-runtime", {
+								"polyfill": false,
+								"regenerator": true
+							}]
+						],
+					},
+				},
 			},
 			{
 				test : /\.(woff|jpe?g|png|gif|svg)$/,
@@ -56,6 +67,14 @@ module.exports = {
 		],
 	},
 	plugins : [
+		// new CompressionPlugin({
+		// 	compressionOptions: {
+		// 	  numiterations: 15,
+		// 	},
+		// 	algorithm(input, compressionOptions, callback) {
+		// 	  return zopfli.gzip(input, compressionOptions, callback);
+		// 	},
+		// }),
 		new webpack.ProgressPlugin(),
 		new webpack.NamedModulesPlugin(),
 		new webpack.HotModuleReplacementPlugin(),
@@ -64,7 +83,7 @@ module.exports = {
 			// both options are optional
 			filename: `[name].css`,
 			chunkFilename: `[id].css`
-		})
+		}),
 	],
 	target : `web`,
 }

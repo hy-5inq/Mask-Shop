@@ -1,16 +1,19 @@
 @font-face{
+  font-display: block; 
   font-family: "NotoSansKR";
-  src: url("../fonts/NotoSansKR-Medium-Hestia.woff") format("woff");
+  src: url("/fonts/NotoSansKR-Medium-Hestia.woff") format("woff");
   font-weight: normal;
 }
 @font-face{
+  font-display: block;
   font-family: "NotoSansKR";
-  src: url("../fonts/NotoSansKR-Bold-Hestia.woff") format("woff");
+  src: url("/fonts/NotoSansKR-Bold-Hestia.woff") format("woff");
   font-weight: bold;
 }
 @font-face{
+  font-display: block;
   font-family: "NotoSansKR";
-  src: url("../fonts/NotoSansKR-Light-Hestia.woff") format("woff");
+  src: url("/fonts/NotoSansKR-Light-Hestia.woff") format("woff");
   font-weight: lighter;
 }
 

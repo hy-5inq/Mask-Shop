@@ -9,6 +9,8 @@ import ImageGallery from 'react-image-gallery'
 import AirMap from './air-map.jsx'
 import OrderCart from './order-cart.jsx'
 import MyPage from './my-page.jsx'
+import NewsList from './news-list.jsx'
+import Footer from './footer.jsx'
 
 import '../stylesheets/Home.css'
 import '../stylesheets/image-gallery.css'
@@ -113,13 +115,16 @@ class Home extends React.Component{
 						<div className="Section__Item__Item">
 							<div className="Section__Item__Item__Item">
 								<img src='#' alt=""/>
+								오늘의 인기 아이템
 							</div>
 							<div className="Section__Item__Item__Item">
 								<img src='#' alt=""/>
+								추천 아이템
 							</div>
 						</div>
 						<div className="Section__Item__Item">
 							<img src='#' alt=""/>
+							<NewsList />
 						</div>
 					</div>
 				</div>
@@ -132,6 +137,7 @@ class Home extends React.Component{
 				<div className="Home-Recommend-Items-Container">
 					{ProductCard(homeState.recommendedItems)}
 				</div>
+				<Footer />
 			</React.Fragment>
 
 		)

@@ -77,7 +77,7 @@
 	grid-column-gap: 10px;
 }
 
-.login-btn-kakao, .login-btn-naver {
+.login-btn-kakao, .login-btn-default {
 	border: 0;
 	outline: none;
 	color: white;
@@ -86,7 +86,7 @@
 	font-size: 12px;
 }
 
-.login-btn-kakao:hover, .login-btn-naver:hover {
+.login-btn-kakao:hover, .login-btn-default:hover {
 	background-color: gray;
 	transition: all 0.2s ease-in-out;
 	cursor: pointer;
@@ -96,7 +96,7 @@
 	background-color: #FFE000;
 }
 
-.icon-btn-naver, .icon-btn-kakao {
+.icon-btn-default, .icon-btn-kakao {
 	font-weight: bold;
 	font-size: 16px;
     float: left;
@@ -106,8 +106,8 @@
     border-right: 1px solid rgba(255, 255, 255, 0.4);
 }
 
-.login-btn-naver {
-	background-color: #68d968;	
+.login-btn-default {
+	background-color: lightblue;	
 }
 
 .id-pwd-search {

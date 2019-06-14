@@ -72,14 +72,13 @@
 	position: relative;
 }
 
-.menu-top-left, .menu-top-right {
-	display: grid;	
+.menu-top-left, .menu-top-right {		
 	list-style: none;
     height: 40px;
 }
 
 .menu-top-left {
-	grid-template-columns: auto auto auto auto;
+	display: flex;
 	position: absolute;
 	left: 0;
 }
@@ -105,7 +104,8 @@
 }
 
 .menu-top-right {
-	grid-template-columns: auto auto auto auto;
+	display: grid;
+	grid-template-columns: repeat(4, auto);
 	grid-column-gap: 5px;
 	position: absolute;
 	right: 0;

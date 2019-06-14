@@ -1,7 +1,7 @@
 {
-	"name": "air_shop",
+	"name": "mask_shop",
 	"version": "0.0.1",
-	"description": "air shopping mall website",
+	"description": "mask shopping mall website",
 	"main": "webpack.config.js",
 	"scripts": {
 		"dev": "webpack-dev-server --hot",

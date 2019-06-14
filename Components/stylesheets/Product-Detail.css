@@ -219,12 +219,12 @@
 }
 
 .Flex-Anchor-Container{
-
     display: flex;
     justify-content: center;
     position : sticky;
-    top : 90px;
-    
+	top : 90px;
+	background-color: hsla(0, 0%, 100%, 0.8);
+    border-bottom: 1px solid #ccc;
 }
 .Anchor-Container__Item{
 

@@ -24,7 +24,7 @@ export default {
 	LOGIN_PASSWORD: `PASSWORD`,
 	LOGIN_SAVE_ID: `아이디 저장`,
 	LOGIN_BTN_KAKAO: `카카오 로그인`,
-	LOGIN_BTN_NAVER: `네이버 로그인`,
+	LOGIN_BTN_DEFAULT: `마스크샵 로그인`,
 	LOGIN_ID_SEARCH: `아이디 찾기`,
 	LOGIN_PWD_SEARCH: `비밀번호 찾기`,
 

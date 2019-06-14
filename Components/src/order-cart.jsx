@@ -1,8 +1,8 @@
 
 import React from 'react'
 
-// import { MdShoppingCart, MdKeyboardArrowLeft } from 'react-icons/md'
-// import { FaTrashAlt , FaCreditCard } from 'react-icons/fa'
+import FA from 'react-fontawesome'
+
 import '../stylesheets/snap-card.css'
 import '../stylesheets/order-cart.css'
 
@@ -24,15 +24,16 @@ class OrderCart extends React.Component {
 				<div className="SnapCard-Container__Header --Bg-OrderCart">
 
 					<div className="Header__Item">
-						{/* <MdShoppingCart className="Header__Item__Icon" /> */}
+						
+						<FA className="Header__Item__Icon" name="shopping-cart" />
 					</div>
 
 					<div className="Header__Item">
 						<h3 className="Header__Item__Text">장바구니</h3>
 					</div>
 
-					<div className="Header__Item">
-						{/* <MdKeyboardArrowLeft onClick={this.handleFold} className="Header__Item__Icon --Fold" /> */}
+					<div onClick={this.handleFold} className="Header__Item">
+						<FA className="Header__Item__Icon --Fold"  name="angle-left" />
 					</div>
 				</div>
 

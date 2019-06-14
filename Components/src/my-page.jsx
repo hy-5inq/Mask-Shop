@@ -1,7 +1,6 @@
 import React from 'react'
 
-// import { MdPerson , MdKeyboardArrowLeft } from 'react-icons/md'
-// import { FaHistory, FaTruckMoving, FaUserCog } from 'react-icons/fa'
+import FA from 'react-fontawesome'
 
 import '../stylesheets/snap-card.css'
 import '../stylesheets/my-page.css'
@@ -24,15 +23,15 @@ class MyPage extends React.Component {
 				<div className="SnapCard-Container__Header --Bg-OrderCart">
 
 					<div className="Header__Item">
-						{/* <MdPerson className="Header__Item__Icon" /> */}
+						<FA className="Header__Item__Icon" name="user" />
 					</div>
 
 					<div className="Header__Item">
 						<h3 className="Header__Item__Text">마이 페이지</h3>
 					</div>
 
-					<div className="Header__Item">
-						{/* <MdKeyboardArrowLeft onClick={this.handleFold} className="Header__Item__Icon --Fold" /> */}
+					<div onClick={this.handleFold} className="Header__Item">
+						<FA className="Header__Item__Icon --Fold"  name="angle-left" />
 					</div>
 				</div>
 

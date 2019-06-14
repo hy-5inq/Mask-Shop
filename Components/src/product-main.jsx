@@ -78,19 +78,14 @@ export default class ProductMain extends React.Component {
 			},
 
 			getItem() {
-				let array = [`50-80`, `80-100`, `100-150`, `150`]
+				let array
+				if (url.searchParams.get(`category`) === `dust`) array = [`50-80`, `80-100`, `100-150`, `150`]
+				if (url.searchParams.get(`category`) === `size`) array = [`소형`, `중형`, `대형`]
+				if (url.searchParams.get(`category`) === `using`) array = [`방한용`, `황사용`, `보건용`, `방역용`, `수술용`, `산업용`]
+				if (url.searchParams.get(`category`) === `company`) array = [`3M`, `SG생활안전`, `유한킴벌리`, `모나리자`, `크린탑`, `애니가드`, `3Q`]
 				fetch(`/v1/api/item/${url.searchParams.get(`category`)}/${array[url.searchParams.get(`subcategory`)]}`)
 					.then(res => res.json())
 					.then(json => {
-						console.log(json)
-						console.log(json.map(each => {
-							return <span className='item'>
-										<img className='photo' src={each[`contentimg`][0]} alt='현재 사진 X'></img>
-										<p className='item-name'>{each.itemname}</p>
-										<p className='item-tag'>{each.feature}</p>
-										<p className='item-price'>{each.customprice}</p>
-									</span>
-						}) 	)
 						main.setState({
 							item : json.map(each => {
 								return <span className='item'>
@@ -141,12 +136,6 @@ export default class ProductMain extends React.Component {
 					</div>
 					<div className='list'>
 						<div className='inner'>
-							{/* <span className='item'>
-								<img className='photo' src='/images/rabbit.gif' alt='현재 사진 X'></img>
-								<p className='item-name'>상품명</p>
-								<p className='item-tag'>#상품 키워드</p>
-								<p className='item-price'>18,800원</p>
-							</span> */}
 							{this.state.item}
 						</div>
 					</div>

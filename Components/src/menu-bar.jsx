@@ -299,12 +299,12 @@ export default class MenuBar extends React.Component{
 							onMouseLeave={this.onMouseLeaveMenu.bind(this)}>
 							<p i18n-content='MENU_BY_USAGE'></p>
 							<ul className='hover menu-by-usage-hover'>
-								<li onClick={() => location.href=`/product?category=usage&subcategory=0`} i18n-content='MENU_BY_USAGE_1'></li>
-								<li onClick={() => location.href=`/product?category=usage&subcategory=1`} i18n-content='MENU_BY_USAGE_2'></li>
-								<li onClick={() => location.href=`/product?category=usage&subcategory=2`} i18n-content='MENU_BY_USAGE_3'></li>
-								<li onClick={() => location.href=`/product?category=usage&subcategory=3`} i18n-content='MENU_BY_USAGE_4'></li>
-								<li onClick={() => location.href=`/product?category=usage&subcategory=4`} i18n-content='MENU_BY_USAGE_5'></li>
-								<li onClick={() => location.href=`/product?category=usage&subcategory=5`} i18n-content='MENU_BY_USAGE_6'></li>
+								<li onClick={() => location.href=`/product?category=using&subcategory=0`} i18n-content='MENU_BY_USAGE_1'></li>
+								<li onClick={() => location.href=`/product?category=using&subcategory=1`} i18n-content='MENU_BY_USAGE_2'></li>
+								<li onClick={() => location.href=`/product?category=using&subcategory=2`} i18n-content='MENU_BY_USAGE_3'></li>
+								<li onClick={() => location.href=`/product?category=using&subcategory=3`} i18n-content='MENU_BY_USAGE_4'></li>
+								<li onClick={() => location.href=`/product?category=using&subcategory=4`} i18n-content='MENU_BY_USAGE_5'></li>
+								<li onClick={() => location.href=`/product?category=using&subcategory=5`} i18n-content='MENU_BY_USAGE_6'></li>
 							</ul>
 						</span>
 						<span className='menu menu-by-company'

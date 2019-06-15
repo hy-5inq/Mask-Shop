@@ -12,6 +12,7 @@ import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import '../stylesheets/order-list.css'
 import FA from 'react-fontawesome'
+import CookieJS from 'js-cookie'
 
 class OrderList extends React.Component{
 
@@ -22,12 +23,15 @@ class OrderList extends React.Component{
     let today = new Date()
 
     this.state = {
+
       orderListType : true,
       selectedStartDate : today,
       selectedEndDate : today,
       selectedOrderStatus : "전체주문",
       userOrderList : [],
       filteredUserOrderList : [],
+      isUserQueriedData : false
+
     }
 
     this.handleChangeOrderListType = this.handleChangeOrderListType.bind(this)
@@ -35,19 +39,67 @@ class OrderList extends React.Component{
     this.handleEndDateSelectionChange = this.handleEndDateSelectionChange.bind(this)
     this.handleSearchQueryButtonClick = this.handleSearchQueryButtonClick.bind(this)
     this.handleOrderStatusChange = this.handleOrderStatusChange.bind(this)
+    this.handleShowAll = this.handleShowAll.bind(this)
+
+  }
+
+  componentWillMount(){
+
+    const webToken = CookieJS.get('webtoken')
+    const webTokenHeader = new Headers({
+      "x-access-token" : webToken
+    })
+
+    fetch(`https://mask-shop.kro.kr/v1/api/users`,{
+      method : 'GET',
+      headers : webTokenHeader,
+    }).then( response => (response.json())).then((Jres)=>{
+      console.log(`About Token Verify : ${JSON.stringify(Jres)}`)
+      if(Jres.success === false){
+        alert('잘못된 유저입니다.')
+        CookieJS.remove('webToken')
+        window.sessionStorage.removeItem('name')
+        window.sessionStorage.removeItem('accountid')
+        window.sessionStorage.removeItem('address')
+        window.sessionStorage.removeItem('confirmPasswordQuestion')
+        window.sessionStorage.removeItem('email')
+        window.sessionStorage.removeItem('mileage')
+        window.sessionStorage.removeItem('passwordQuestion')
+        window.sessionStorage.removeItem('phone')
+        window.sessionStorage.removeItem('postCode')
+        window.sessionStorage.removeItem('rank')
+        location.href = '/'
+      }
+      else{
+        alert('올바른 유저입니다.')
+        window.sessionStorage.setItem('name',Jres.data.name)
+        window.sessionStorage.setItem('accountid',Jres.data.accountid)
+        window.sessionStorage.setItem('address',Jres.data.address)
+        window.sessionStorage.setItem('confirmPasswordQuestion',Jres.data.confirmPasswordQuestion)
+        window.sessionStorage.setItem('email',Jres.data.email)
+        window.sessionStorage.setItem('mileage',Jres.data.mileage)
+        window.sessionStorage.setItem('passwordQuestion',Jres.data.passwordQuestion)
+        window.sessionStorage.setItem('phone',Jres.data.phone)
+        window.sessionStorage.setItem('postCode',Jres.data.postCode)
+        window.sessionStorage.setItem('rank',Jres.data.rank)
+      }    
+    })
 
   }
 
   componentDidMount(){
 
-    fetch(`https://mask-shop.kro.kr/v1/api/order/admin`,{
-      method : 'GET',
-      mode : 'cors'
-    }).then(response=>(response.json())).then((Jres)=>{
-      this.setState({
-        userOrderList : Jres
+    let user = window.sessionStorage.getItem('accountid')
+
+    if(user !== null){
+        fetch(`https://mask-shop.kro.kr/v1/api/order/admin`,{
+        method : 'GET',
+      }).then(response=>(response.json())).then((Jres)=>{
+        this.setState({
+          userOrderList : Jres
+        })
       })
-    })
+    }
 
   }
 
@@ -95,7 +147,11 @@ class OrderList extends React.Component{
       }
 
   }
-
+  handleShowAll(){
+    this.setState({
+      isUserQueriedData : false
+    })
+  }
   handleOrderStatusChange(event){
     this.setState({
       selectedOrderStatus : event.target.value
@@ -107,12 +163,9 @@ class OrderList extends React.Component{
     if(this.state.userOrderList.length > 0){
 
       const QueryStartDateStamp = new Date(this.state.selectedStartDate).getTime()
-     
       const QueryEndDateStamp = new Date(this.state.selectedEndDate).getTime()
-    
       const QueryDeliveryStatus = this.state.selectedOrderStatus
 
-    
       let filteredUserOrderList = this.state.userOrderList.reduce((acc,curr) => {
  
         const PaymentDateStamp = new Date(parseInt(curr.time)).getTime()
@@ -126,12 +179,11 @@ class OrderList extends React.Component{
         }
         else{
           
-          
           if((QueryDeliveryStatus === curr.deliver)){
-            acc = acc.concat([curr])
-            // if((QueryStartDateStamp <= PaymentDateStamp) && (PaymentDateStamp) <= (QueryEndDateStamp)){
-            //   acc = acc.concat([curr])
-            // }
+           
+            if((QueryStartDateStamp <= PaymentDateStamp) && (PaymentDateStamp) <= (QueryEndDateStamp)){
+              acc = acc.concat([curr])
+            }
 
           }
 
@@ -144,7 +196,8 @@ class OrderList extends React.Component{
       console.log(`*****${JSON.stringify(filteredUserOrderList)}*****`)
 
       this.setState({
-        filteredUserOrderList : filteredUserOrderList
+        filteredUserOrderList : filteredUserOrderList,
+        isUserQueriedData : true
       },console.log(this.state))
 
      
@@ -223,6 +276,10 @@ class OrderList extends React.Component{
             <div className="OrderList-Body-Config__Item">
               <button onClick={this.handleSearchQueryButtonClick} id="QUERY_BUTTON">조회</button>
             </div>
+
+            <div className="OrderList-Body-Config__Item">
+              <button onClick={this.handleShowAll} id="QUERY_BUTTON2">조건없이 보기</button>
+            </div>
             
           </div>
 
@@ -275,7 +332,7 @@ const RENDER_ORDER_LIST = (state) => {
 
   let OrderListNow;
 
-  if(state.selectedOrderStatus === "전체주문"){
+  if(!state.isUserQueriedData){
 
     OrderListNow = state.userOrderList.reverse().reduce((acc,curr) => {
 
@@ -360,18 +417,16 @@ const RENDER_ORDER_LIST = (state) => {
 
 const ACTIVATE_DELETE_API_THIS_ORDER = (event,orderNum) => {
 
-  event.target.closest('.OrderList-ListBody-Wrapper').remove()
-
-  // fetch(`https://mask-shop.kro.kr/v1/api/order/list/${orderNum}`,{
-  //   method : 'DELETE',
-  // }).then(response => (response.json())).then((Jres) => {
-  //   if(Jres.status === 'success'){
+  fetch(`https://mask-shop.kro.kr/v1/api/order/list/${orderNum}`,{
+    method : 'DELETE',
+  }).then(response => (response.json())).then((Jres) => {
+    if(Jres.status === 'success'){
       
-  //     alert('취소/반품 신청되었습니다.')
+      alert('취소/반품 신청되었습니다.')
+      event.target.closest('.OrderList-ListBody-Wrapper').remove()
       
-      
-  //   }
-  // }) 
+    }
+  }) 
 
 }
 

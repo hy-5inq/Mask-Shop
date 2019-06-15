@@ -92,13 +92,17 @@ class OrderList extends React.Component{
     let user = window.sessionStorage.getItem('accountid')
 
     if(user !== null){
-        fetch(`https://mask-shop.kro.kr/v1/api/order/admin`,{
+        fetch(`https://mask-shop.kro.kr/v1/api/order/${user}`,{
         method : 'GET',
       }).then(response=>(response.json())).then((Jres)=>{
         this.setState({
           userOrderList : Jres
         })
       })
+    }
+    else{
+      alert('잘못된 접근입니다.')
+      location.href = '/'
     }
 
   }

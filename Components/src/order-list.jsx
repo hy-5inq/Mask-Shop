@@ -12,6 +12,7 @@ import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import '../stylesheets/order-list.css'
 import FA from 'react-fontawesome'
+import CookieJS from 'js-cookie'
 
 class OrderList extends React.Component{
 
@@ -22,21 +23,87 @@ class OrderList extends React.Component{
     let today = new Date()
 
     this.state = {
+
       orderListType : true,
       selectedStartDate : today,
       selectedEndDate : today,
-      userOrderList : []
+      selectedOrderStatus : "전체주문",
+      userOrderList : [],
+      filteredUserOrderList : [],
+      isUserQueriedData : false
+
     }
 
     this.handleChangeOrderListType = this.handleChangeOrderListType.bind(this)
     this.handleStartDateSelectionChange = this.handleStartDateSelectionChange.bind(this)
     this.handleEndDateSelectionChange = this.handleEndDateSelectionChange.bind(this)
+    this.handleSearchQueryButtonClick = this.handleSearchQueryButtonClick.bind(this)
+    this.handleOrderStatusChange = this.handleOrderStatusChange.bind(this)
+    this.handleShowAll = this.handleShowAll.bind(this)
+
+  }
+
+  componentWillMount(){
+
+    const webToken = CookieJS.get('webtoken')
+    const webTokenHeader = new Headers({
+      "x-access-token" : webToken
+    })
+
+    fetch(`https://mask-shop.kro.kr/v1/api/users`,{
+      method : 'GET',
+      headers : webTokenHeader,
+    }).then( response => (response.json())).then((Jres)=>{
+      console.log(`About Token Verify : ${JSON.stringify(Jres)}`)
+      if(Jres.success === false){
+        alert('잘못된 유저입니다.')
+        CookieJS.remove('webToken')
+        window.sessionStorage.removeItem('name')
+        window.sessionStorage.removeItem('accountid')
+        window.sessionStorage.removeItem('address')
+        window.sessionStorage.removeItem('confirmPasswordQuestion')
+        window.sessionStorage.removeItem('email')
+        window.sessionStorage.removeItem('mileage')
+        window.sessionStorage.removeItem('passwordQuestion')
+        window.sessionStorage.removeItem('phone')
+        window.sessionStorage.removeItem('postCode')
+        window.sessionStorage.removeItem('rank')
+        location.href = '/'
+      }
+      else{
+        alert('올바른 유저입니다.')
+        window.sessionStorage.setItem('name',Jres.data.name)
+        window.sessionStorage.setItem('accountid',Jres.data.accountid)
+        window.sessionStorage.setItem('address',Jres.data.address)
+        window.sessionStorage.setItem('confirmPasswordQuestion',Jres.data.confirmPasswordQuestion)
+        window.sessionStorage.setItem('email',Jres.data.email)
+        window.sessionStorage.setItem('mileage',Jres.data.mileage)
+        window.sessionStorage.setItem('passwordQuestion',Jres.data.passwordQuestion)
+        window.sessionStorage.setItem('phone',Jres.data.phone)
+        window.sessionStorage.setItem('postCode',Jres.data.postCode)
+        window.sessionStorage.setItem('rank',Jres.data.rank)
+      }    
+    })
 
   }
 
   componentDidMount(){
 
-    fetch(`https://mask-shop.kro.kr/v1/api/order/admin`)
+    let user = window.sessionStorage.getItem('accountid')
+
+    if(user !== null){
+        fetch(`https://mask-shop.kro.kr/v1/api/order/${user}`,{
+        method : 'GET',
+      }).then(response=>(response.json())).then((Jres)=>{
+        this.setState({
+          userOrderList : Jres
+        })
+      })
+    }
+    else{
+      alert('잘못된 접근입니다.')
+      location.href = '/'
+    }
 
   }
 
@@ -84,7 +151,66 @@ class OrderList extends React.Component{
       }
 
   }
+  handleShowAll(){
+    this.setState({
+      isUserQueriedData : false
+    })
+  }
+  handleOrderStatusChange(event){
+    this.setState({
+      selectedOrderStatus : event.target.value
+    })
+  }
 
+  handleSearchQueryButtonClick(){
+
+    if(this.state.userOrderList.length > 0){
+
+      const QueryStartDateStamp = new Date(this.state.selectedStartDate).getTime()
+      const QueryEndDateStamp = new Date(this.state.selectedEndDate).getTime()
+      const QueryDeliveryStatus = this.state.selectedOrderStatus
+
+      let filteredUserOrderList = this.state.userOrderList.reduce((acc,curr) => {
+ 
+        const PaymentDateStamp = new Date(parseInt(curr.time)).getTime()
+
+        if(QueryDeliveryStatus === "전체주문"){
+          
+          if((QueryStartDateStamp <= PaymentDateStamp) && (PaymentDateStamp) <= (QueryEndDateStamp)){
+            acc = acc.concat([curr])
+          }
+  
+        }
+        else{
+          
+          if((QueryDeliveryStatus === curr.deliver)){
+           
+            if((QueryStartDateStamp <= PaymentDateStamp) && (PaymentDateStamp) <= (QueryEndDateStamp)){
+              acc = acc.concat([curr])
+            }
+
+          }
+
+        }
+
+        return acc
+  
+      },[])
+
+      console.log(`*****${JSON.stringify(filteredUserOrderList)}*****`)
+
+      this.setState({
+        filteredUserOrderList : filteredUserOrderList,
+        isUserQueriedData : true
+      },console.log(this.state))
+
+     
+
+    }
+
+
+
+  }
 
   render(){
     return(
@@ -104,25 +230,24 @@ class OrderList extends React.Component{
           </div>
 
           <div className="OrderList-Body-Function-Wrapper">
-            <div onClick={()=>{
-              this.handleChangeOrderListType(true)
-            }} className={`OrderList-Body-Function__Item ${this.state.orderListType? ('--Selected') : ('')}`}>
+            <div className={`OrderList-Body-Function__Item ${this.state.orderListType? ('--Selected') : ('')}`}>
               <span className="OrderList-Body-Function__Item-Text">주문목록조회</span>
             </div>
-            <div onClick={()=>{
+            {/* <div onClick={()=>{
               this.handleChangeOrderListType(false)
             }} className={`OrderList-Body-Function__Item ${this.state.orderListType? ('') : ('--Selected')}`}>
               <span className="OrderList-Body-Function__Item-Text">취소/반품 내역</span>
-            </div>
+            </div> */}
           </div>
           
           <div className="OrderList-Body-Config-Wrapper">
             {
               this.state.orderListType? ( <div className="OrderList-Body-Config__Item">
 
-              <select>
-                <option value="전체">전체 주문</option>
-                <option value="배송전">배송 전 주문</option>
+              <select onChange={this.handleOrderStatusChange}>
+                <option value="전체주문">전체 주문</option>
+                <option value="배송준비">배송 전 주문</option>
+                <option value="배송시작">배송 시작 주문</option>
                 <option value="배송중">배송 중 주문</option>
                 <option value="배송완료">배송 완료 주문</option>
               </select>
@@ -153,7 +278,11 @@ class OrderList extends React.Component{
             </div>
             
             <div className="OrderList-Body-Config__Item">
-              <button id="QUERY_BUTTON">조회</button>
+              <button onClick={this.handleSearchQueryButtonClick} id="QUERY_BUTTON">조회</button>
+            </div>
+
+            <div className="OrderList-Body-Config__Item">
+              <button onClick={this.handleShowAll} id="QUERY_BUTTON2">조건없이 보기</button>
             </div>
             
           </div>
@@ -191,7 +320,7 @@ class OrderList extends React.Component{
               <span>취소/교환</span>
             </div>
           </div>
-          {RENDER_ORDER_LIST(this.state.userOrderList)}
+          {RENDER_ORDER_LIST(this.state)}
           
         </div>
         <Footer />
@@ -201,60 +330,127 @@ class OrderList extends React.Component{
 
 }
 
-const RENDER_ORDER_LIST = (OrderList) => {
+const RENDER_ORDER_LIST = (state) => {
 
-  let OrderListNow = OrderList.reduce((acc,curr) => {
+  console.log(state.OrderList)
 
-    if(curr.orderNum in acc){
-      acc[curr.orderNum].push(curr) 
+  let OrderListNow;
+
+  if(!state.isUserQueriedData){
+
+    OrderListNow = state.userOrderList.reverse().reduce((acc,curr) => {
+
+      if(curr.orderNum in acc){
+        acc[curr.orderNum] = acc[curr.orderNum].concat([curr]) 
+      }
+      else{
+  
+        acc[curr.orderNum] = [curr]
+
+      }
+
+      return acc
+    },{})
+
+  }
+  else{
+
+    OrderListNow = state.filteredUserOrderList.reverse().reduce((acc,curr) => {
+
+      if(curr.orderNum in acc){
+        acc[curr.orderNum] = acc[curr.orderNum].concat([curr]) 
+      }
+      else{
+  
+        acc[curr.orderNum] = [curr]
+
+      }
+
+      return acc
+    },{})
+
+  }
+
+  if(state.userOrderList.length > 0 || state.filteredUserOrderList.length > 0){
+    
+    console.log(OrderListNow)
+
+    let OrderListToDOM = []
+
+    for(let key in OrderListNow){
+
+      let Order = OrderListNow[key]
+
+      OrderListToDOM.push(
+        (
+          <div key={`${Order[0].orderNum}`} className="OrderList-ListBody-Wrapper">
+            <div>
+              <span>{Order[0].orderNum}</span>
+            </div>
+            <div>
+              <span className="Order-Title">{`${Order[0].productName} 외 ${Order.length}건`}</span>
+            </div>
+            <div>
+              <span>{`${parseInt(GET_SUM_ORDER_PRICE(Order))}`}</span>
+            </div>
+            <div>
+              <span>{`${Order[0].time}`}</span>
+            </div>
+            <div>
+              <span className="Delivery-Number">{`${Order[0].invoiceNum}`}</span>
+            </div>
+            <div>
+              <span className="Delivery-Status --Before-Shipping">{`${Order[0].deliver}`}</span>
+            </div>
+            <div>
+              <button onClick={(event)=>{
+                ACTIVATE_DELETE_API_THIS_ORDER(event,Order[0].orderNum)
+              }} className="Cancel-Btn">{`${GET_BUTTON_BY_DELIVERY_STATUS(Order[0].deliver)}`}</button>
+            </div>
+          </div>
+        )
+      )
+
     }
 
-    else{
+    return OrderListToDOM
 
-      let newItemArray = []
-      acc[curr.orderNum] = newItemArray.push(curr)
+  }
+ 
+}
+
+const ACTIVATE_DELETE_API_THIS_ORDER = (event,orderNum) => {
+
+  fetch(`https://mask-shop.kro.kr/v1/api/order/list/${orderNum}`,{
+    method : 'DELETE',
+  }).then(response => (response.json())).then((Jres) => {
+    if(Jres.status === 'success'){
+      
+      alert('취소/반품 신청되었습니다.')
+      event.target.closest('.OrderList-ListBody-Wrapper').remove()
+      
     }
-  },{})
+  }) 
 
-  console.log(OrderListNow)
+}
 
-  // return OrderList.map((el,index,array) => {
+const GET_BUTTON_BY_DELIVERY_STATUS = (deliveryStatus) =>{
 
+  if(deliveryStatus !== "배송준비"){
+    return "반품"
+  }
 
+  return "취소"
 
-  //   return (
+}
 
-  //     <div className="OrderList-ListBody-Wrapper">
-  //           <div>
-  //               <span>{el.orderNum}</span>
-  //             </div>
-  //             <div>
-  //               <span className="Order-Title">마스크 MK 101 외 3건</span>
-  //             </div>
-  //             <div>
-  //               <span>111,700</span>
-  //             </div>
-  //             <div>
-  //               <span>2019/06/11</span>
-  //             </div>
-  //             <div>
-  //               <span className="Delivery-Number">123412341234</span>
-  //             </div>
-  //             <div>
-  //               <span className="Delivery-Status --Before-Shipping">배송 전</span>
-  //             </div>
-  //             <div>
-  //               <button className="Cancel-Btn">취소</button>
-  //               {/* <button className="RollBack-Btn">반품</button> */}
-  //             </div>
-  //         </div>
+const GET_SUM_ORDER_PRICE = (Order) => {
 
-  //   )
+  let result = Order.reduce((acc,curr) => {
+    return acc = acc + (parseInt(curr.price) * parseInt(curr.cycle))
+  },0)
 
-
-  // })
-
-
+  return result
 }
 
 OrderList = withRouter(connect(null,null)(OrderList))

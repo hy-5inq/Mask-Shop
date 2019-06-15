@@ -56,11 +56,11 @@ class Join extends React.Component{
 	}
 
     handleFindPostCode(that){
-
-        new daum.Postcode({
-            oncomplete: function(data) {
-                
-                // console.log(data)
+        
+        daum.postcode.load(function(){
+            new daum.Postcode({
+                oncomplete: function(data) {
+                      // console.log(data)
                 let zoneCodeInput = document.querySelector(`#ZONE_CODE_INPUT`)
                 let addressInput = document.querySelector(`#ADDRESS`)
 
@@ -72,8 +72,9 @@ class Join extends React.Component{
                     IS_ADDRESS_TYPED : true,
                 })
 
-            }
-        }).open();
+                }
+            }).open();
+        });
 
     }
     handleIdChecker(event){

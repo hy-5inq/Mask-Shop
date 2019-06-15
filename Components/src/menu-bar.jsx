@@ -207,6 +207,21 @@ export default class MenuBar extends React.Component{
 		}
 	}
 
+	handleRouteToOrderList(){
+
+		const webtoken = CookieJS.get('webtoken')
+		const accountid = window.sessionStorage.getItem('accountid')
+
+		if(webtoken !== 'undefined' && accountid !== null){
+			location.href = `/orderlist?aid=${accountid}`
+		}
+		else{
+			alert('먼저 로그인을 진행해 주세요.')
+			location.href = `/login`
+		}
+
+	}
+
 	render(){
 		return(
 			<React.Fragment>
@@ -226,7 +241,7 @@ export default class MenuBar extends React.Component{
 								this.DefaultLogin.Logout()
 							}}><a>로그아웃</a></li> : <React.Fragment></React.Fragment>}
 							<li className='join'><a href='/join' i18n-content='JOIN'></a></li>
-							<li className='order-list'><a href='#' i18n-content='ORDER_LIST'></a></li>
+							<li onClick={this.handleRouteToOrderList} className='order-list'><a href='#' i18n-content='ORDER_LIST'></a></li>
 							<li className='shop-basket' onClick={() => {
 								this.onClickSnapCard(`ORDER_CART`)
 							}}><a href='#' i18n-content='SHOP_BASKET'></a></li>

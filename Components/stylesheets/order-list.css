@@ -1,0 +1,159 @@
+.OrderList-Wrapper{
+  max-width: 1260px;
+  margin : 0 auto;
+}
+.OrderList-Header-Wrapper{
+  margin-bottom: 30px;
+}
+.OrderList-Header-Text{
+  font-size : 16px;
+  font-weight : bold;
+  border-left : 3px solid rgb(74, 82, 98);
+  padding-left: 7px;
+}
+.OrderList-Body-Function-Wrapper{
+  display: grid;
+  border : none;
+  grid-template-columns: 200px 200px 1fr;
+  height : 40px;
+  border-bottom: 1px solid hsl(0, 0%, 36%);
+  margin-bottom : 20px;
+}
+.OrderList-Body-Function__Item{
+  width : 100%;
+  height : 100%;
+  border : 1px solid hsl(0, 0%, 36%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: none;
+  cursor: pointer;
+}
+.OrderList-Body-Function__Item-Text{
+  color : hsl(0, 0%, 36%);
+  font-size: 12px;
+  font-weight: normal;
+}
+.OrderList-Body-Function__Item-Text:hover{
+  text-decoration: underline;
+}
+.--Selected{
+  background-color :hsl(0, 0%, 36%);
+  color : white;
+  
+}
+.--Selected span{
+  color : white;
+  font-weight: bold;
+}
+
+.OrderList-Body-Config-Wrapper{
+  border : 1px solid #ccc;;
+  padding : 20px;
+  display: grid;
+  grid-template-columns: auto auto auto 1fr;
+  grid-column-gap: 20px;
+}
+.input-box{
+  position: relative;
+}
+.mx-20{
+  margin : 0 10px;
+}
+.react-datepicker__input-container input{
+  text-align: center;
+}
+.Calendar-Icon{
+  font-size : 14px;
+  position: absolute;
+  z-index: 2;
+  color: hsl(2, 100%, 76%);
+}
+.ci_1{
+  top : 6px;
+  left : 113px;
+}
+.ci_2{
+  top : 6px;
+  left : 274px;
+}
+#QUERY_BUTTON{
+  background-color : hsl(222, 16%, 34%);
+  color : white;
+  outline: none;
+  border : 1px solid black;
+  width : 50px;
+  cursor: pointer;
+  border-radius: 2px;
+}
+.OrderList-Body-Description-Wrapper{
+  margin-top : 5px;
+  margin-bottom: 30px;
+}
+.OrderList-Body-Description-Text{
+  font-size: 13px;
+  color :  hsl(222, 16%, 34%);
+}
+.OrderList-ListHeader-Wrapper{
+  background-color: hsl(0, 0%, 95%);
+  padding : 10px 0px;
+  border : none;
+  display: grid;
+  border-top : 1px solid #ccc;
+  border-bottom : 2px solid #ccc;
+  grid-template-columns: 100px 1fr 135px 135px 135px 80px 80px;
+}
+.OrderList-ListHeader-Wrapper div{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.OrderList-ListHeader-Wrapper div span{
+  font-size: 14px;
+  font-weight: bold;
+}
+.OrderList-ListBody-Wrapper{
+  padding : 10px 0px;
+  border : none;
+  display: grid;
+  border-bottom : 1px solid #ccc;
+  grid-template-columns: 100px 1fr 135px 135px 135px 80px 80px;
+}
+.OrderList-ListBody-Wrapper div{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.OrderList-ListBody-Wrapper div span{
+  font-size: 14px;
+}
+.Delivery-Number{
+  color : hsl(201, 98%, 42%);
+  font-weight: bold;
+  text-decoration: underline;
+}
+.Order-Title:hover{
+  text-decoration: underline;
+  cursor: pointer;
+}
+.Delivery-Status{
+  
+}
+.--Before-Shipping{
+  color : hsl(200, 18%, 26%);
+}
+.--After-Shipping{
+  color : hsl(206, 62%, 47%);
+}
+.--Shipping{
+  color : hsl(348, 100%, 55%);
+}
+.Cancel-Btn{
+  outline: none;
+  width : 50%;
+}
+.RollBack-Btn{
+  outline: none;
+}

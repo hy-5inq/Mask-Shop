@@ -2,6 +2,7 @@
 	display: grid;
 	grid-template-columns: auto 300px auto;
 	grid-template-rows: 100px auto;	
+	margin-bottom: 146px;
 }
 
 .login-content {

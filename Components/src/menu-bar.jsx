@@ -319,6 +319,8 @@ export default class MenuBar extends React.Component{
 								<li onClick={() => location.href=`/product?category=company&subcategory=4`} i18n-content='MENU_BY_COMPANY_5'></li>
 								<li onClick={() => location.href=`/product?category=company&subcategory=5`} i18n-content='MENU_BY_COMPANY_6'></li>
 								<li onClick={() => location.href=`/product?category=company&subcategory=6`} i18n-content='MENU_BY_COMPANY_7'></li>
+								<li onClick={() => location.href=`/product?category=company&subcategory=7`} i18n-content='MENU_BY_COMPANY_8'></li>
+								<li onClick={() => location.href=`/product?category=company&subcategory=8`} i18n-content='MENU_BY_COMPANY_9'></li>
 							</ul>
 						</span>
 					</div>

@@ -53,10 +53,12 @@ export default {
 	MENU_BY_USAGE_6: `산업용`,
 
 	MENU_BY_COMPANY_1: `3M`,
-	MENU_BY_COMPANY_2: `SG생활안전`,
-	MENU_BY_COMPANY_3: `유한킴벌리`,
-	MENU_BY_COMPANY_4: `모나리자`,
-	MENU_BY_COMPANY_5: `크린탑`,
-	MENU_BY_COMPANY_6: `애니가드`,
-	MENU_BY_COMPANY_7: `3Q`,
+	MENU_BY_COMPANY_2: `크린탑`,
+	MENU_BY_COMPANY_3: `장정산업`,
+	MENU_BY_COMPANY_4: `DOBU`,
+	MENU_BY_COMPANY_5: `마스크상사`,
+	MENU_BY_COMPANY_6: `상공양행`,
+	MENU_BY_COMPANY_7: `림피어`,
+	MENU_BY_COMPANY_8: `세창에스엠`,
+	MENU_BY_COMPANY_9: `㈜HD메디스`,
 }

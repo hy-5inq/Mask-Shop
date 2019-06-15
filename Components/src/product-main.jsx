@@ -8,8 +8,8 @@ export default class ProductMain extends React.Component {
 		super(props)
 
 		this.state = {
-			item : []
-		}
+			item : [],
+		}		
 	}
 
 	componentDidMount() {
@@ -28,10 +28,6 @@ export default class ProductMain extends React.Component {
 		this.Item.getItem()
 	}
 
-	onClickProduct() {
-		location.href = `/product-detail`
-	}
-
 	get Item() {
 		const url = new URL(location.href)
 		const main = this
@@ -43,7 +39,7 @@ export default class ProductMain extends React.Component {
 					case `dust`:
 						array = [`50 - 80㎍/m³`, `80 - 100㎍/m³`, `100 - 150㎍/m³`, `150㎍/m³ 이상`]
 						return array.map((el, index) => {
-							if (url.searchParams.get(`subcategory`) == index) {
+							if (url.searchParams.get(`subcategory`) == index) {						
 								return <a href={`/product?category=dust&subcategory=${index}`} className='sub-menu-item active'>{el}</a>
 							}
 							return <a href={`/product?category=dust&subcategory=${index}`} className='sub-menu-item'>{el}</a>
@@ -65,7 +61,7 @@ export default class ProductMain extends React.Component {
 							return <a href={`/product?category=usage&subcategory=${index}`} className='sub-menu-item'>{el}</a>
 						})
 					case `company`:
-						array = [`3M`, `SG생활안전`, `유한킴벌리`, `모나리자`, `크린탑`, `애니가드`, `3Q`]
+						array = [`3M`, `크린탑`, `장정산업`, `DOBU`, `마스크상사`, `상공양행`, `림피어`, `세창에스엠`, `㈜HD메디스`]
 						return array.map((el, index) => {
 							if (url.searchParams.get(`subcategory`) == index) {
 								return <a href={`/product?category=company&subcategory=${index}`} className='sub-menu-item active'>{el}</a>
@@ -73,8 +69,8 @@ export default class ProductMain extends React.Component {
 							return <a href={`/product?category=company&subcategory=${index}`} className='sub-menu-item'>{el}</a>
 						})
 					default: 
-						console.log(`NO CATEGORY`)
-				}
+						console.info(`NO CATEGORY`)
+				}				
 			},
 
 			getItem() {
@@ -82,21 +78,37 @@ export default class ProductMain extends React.Component {
 				if (url.searchParams.get(`category`) === `dust`) array = [`50-80`, `80-100`, `100-150`, `150`]
 				if (url.searchParams.get(`category`) === `size`) array = [`소형`, `중형`, `대형`]
 				if (url.searchParams.get(`category`) === `using`) array = [`방한용`, `황사용`, `보건용`, `방역용`, `수술용`, `산업용`]
-				if (url.searchParams.get(`category`) === `company`) array = [`3M`, `SG생활안전`, `유한킴벌리`, `모나리자`, `크린탑`, `애니가드`, `3Q`]
+				if (url.searchParams.get(`category`) === `company`) array = [`3M`, `크린탑`, `장정산업`, `DOBU`, `마스크상사`, `상공양행`, `림피어`, `세창에스엠`, `㈜HD메디스`]
 				fetch(`/v1/api/item/${url.searchParams.get(`category`)}/${array[url.searchParams.get(`subcategory`)]}`)
 					.then(res => res.json())
 					.then(json => {
 						main.setState({
 							item : json.map(each => {
-								return <span className='item'>
+								return <span className='item' onClickCapture={() => {location.href=`/product-detail?name=${each.itemname}`}}>
 											<img className='photo' src={each[`contentimg`][0]} alt='현재 사진 X'></img>
 											<p className='item-name'>{each.itemname}</p>
 											<p className='item-tag'>{each.feature}</p>
-											<p className='item-price'>{each.customprice}</p>
+											<p className='item-price'>{each.customprice}원</p>
 										</span>
 							}) 	
 						})
 					})				
+			}
+		}
+	}
+
+	get convertCategoryName() {
+		const url = new URL(location.href).searchParams.get(`category`)
+		return () => {
+			switch (url) {
+				case `dust`:
+					return `미세먼지 농도별`
+				case `size`:
+					return `크기별`
+				case `usage`:
+					return `사용별`
+				case `company`:
+					return `회사별`
 			}
 		}
 	}
@@ -107,12 +119,12 @@ export default class ProductMain extends React.Component {
 				<div className='sub-menu'>
 					<div className='sub-menu-path'>
 						<div className='inner'>
-							Home > 선택된 메뉴명
+							Home  >  {this.convertCategoryName()}
 						</div>
 					</div>
 					<div className='sub-menu-title'>
 						<div className='inner'>
-							<p>선택된 메뉴명</p>
+							<p>메뉴({this.convertCategoryName()})</p>
 						</div>
 					</div>
 					<div className='sub-menu-list'>
@@ -124,7 +136,7 @@ export default class ProductMain extends React.Component {
 				<div className='item-view'>
 					<div className='bar'>
 						<div className='inner'>
-							<span className='total-number-item' i18n-content='TOTAL_NUMBER_ITEM'></span>
+							<span className='total-number-item'>Total <strong>{this.state.item.length}</strong> items</span>
 							<ul className='sort-item'>
 								<li className='sort-popularity' i18n-content='SORT_POPULARITY'></li>
 								<li className='sort-name' i18n-content='SORT_NAME'></li>

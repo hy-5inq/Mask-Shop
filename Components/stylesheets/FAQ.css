@@ -19,6 +19,9 @@
     border-bottom: 4px solid orangered;
     margin-bottom : 30px;
 }
+.--Teal-Divider{
+    border-bottom: 4px solid teal;
+}
 .FAQ-Content-Wrapper{
     padding-bottom : 30px;
 }

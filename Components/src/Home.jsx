@@ -28,6 +28,9 @@ class Home extends React.Component {
 		location.href = '/faq'
 	}
 
+	handleRouteToNotice(){
+		location.href = '/notice'
+	}
 	render(){
 
 		const { homeState } = this.props
@@ -95,7 +98,7 @@ class Home extends React.Component {
 							<img className="ImageBox__Img" src={speaker} alt="speaker"/>
 						</div>
 						<div className="Menus_Item-ContentBox">
-							<div className="ContentBox__Item-Header">
+							<div onClick={this.handleRouteToNotice} className="ContentBox__Item-Header">
 								<h4>공지사항 게시판</h4>
 							</div>
 							<div className="ContentBox__Item-Divider"></div>

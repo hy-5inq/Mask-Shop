@@ -60,16 +60,27 @@ class ProductDetail extends React.Component{
 		})
 	}
 
-	async showPayment() {
-
-		if (window.Kakao && !Kakao.Auth.getAccessToken()) {
-			location.href = `/login`
+	showPayment() {
+		if (this.isKakaoLogin() || this.isDeafultLogin()) {
+			document.querySelector(`.modal-buy`).style.display = `block`			
 			return 
 		}
-
-		document.querySelector(`.modal-buy`).style.display = `block`		
+		location.href = `/login`		
 	}
 
+	isKakaoLogin() {
+		if (window.Kakao && Kakao.Auth.getAccessToken()) {
+			return true
+		}
+		return false
+	}
+
+	isDeafultLogin() {
+		if (document.cookie.split(';').filter((item) => item.trim().startsWith('webtoken=')).length !== 0) {
+			return true
+		}
+		return false
+	}
 
 	render() {
 

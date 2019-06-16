@@ -81,7 +81,6 @@ export default class ProductMain extends React.Component {
 				if (url.searchParams.get(`category`) === `company`) array = [`3M`, `크린탑`, `장정산업`, `DOBU`, `마스크상사`, `상공양행`, `림피어`, `세창에스엠`, `㈜HD메디스`]
 				fetch(`/v1/api/item/${url.searchParams.get(`category`)}/${array[url.searchParams.get(`subcategory`)]}`)
 					.then(res => {
-						console.log(res)
 						return res.json()
 					})
 					.then(json => {

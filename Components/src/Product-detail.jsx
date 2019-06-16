@@ -87,12 +87,17 @@ class ProductDetail extends React.Component{
 
 	handleAddToCart(){
 
+		
 		const itemNow = this.state.itemName
 		const itemCount = this.state.itemNumber
 
-		let userCart = []
-		if(window.sessionStorage.getItem('userCart') === null){
-			
+		console.log(`아이템 이름 : ${itemNow} || 아이템 카운트 : ${itemCount}`)
+
+		let userCart = JSON.parse(window.sessionStorage.getItem('userCart'))
+
+		if(userCart === null){
+
+			userCart = []
 			userCart.push({
 				itemName : itemNow,
 				itemCount : itemCount
@@ -101,10 +106,9 @@ class ProductDetail extends React.Component{
 		}
 		else{
 			
-			userCart = JSON.parse(window.sessionStorage.getItem('userCart'))
-			console.log(`현재 장바구니 : ${JSON.stringify(userCart)}`)
-
 			let result = userCart.findIndex(item => item.name === itemNow)
+
+			console.log(`발견된 인덱스 ${result}`)
 
 			if(result === -1){
 
@@ -118,18 +122,19 @@ class ProductDetail extends React.Component{
 
 			userCart = userCart.filter((item,index)=>{if(index !== result) return item})
 
-			console.log(`현재 장바구니 넣기 전 : ${JSON.stringify(userCart)}`)
+			console.log(`장바구니 넣기 전 : ${JSON.stringify(userCart)}`)
 			userCart.push({
 				itemName : itemNow,
 				itemCount : itemCount
 			})
-			console.log(`현재 장바구니 넣은 후 : ${JSON.stringify(userCart)}`)
+			console.log(`장바구니 넣은 후 : ${JSON.stringify(userCart)}`)
 
 			}
 
 		}
 
-		console.log(`장바구니에 추가되었습니다. ${userCart}`)
+		console.log(`장바구니에 추가되었습니다. ${JSON.stringify(userCart)}`)
+		
 		window.sessionStorage.setItem('userCart',JSON.stringify(userCart))
 
 	}

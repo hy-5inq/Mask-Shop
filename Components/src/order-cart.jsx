@@ -105,8 +105,8 @@ class OrderCart extends React.Component {
 	GO_PAYMENT_THIS_ORDER(){
 
 		let userCart = JSON.parse(window.sessionStorage.getItem('userCart'))
-
-		if(userCart !== null){
+		let user = window.sessionStorage.getItem('accountid')
+		if(userCart !== null && user){
 
 			for (let index = 0; index < userCart.length; index++) {
 			
@@ -121,6 +121,7 @@ class OrderCart extends React.Component {
 						productCount : userCart[index]["itemCount"],
 						time : new Date().toJSON().substr(0,10).replace(/-/g,'/'),
 						invoiceNum : 175677789990,
+						accountid : user,
 						deliver : "배송준비"
 
 					})

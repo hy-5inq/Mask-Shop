@@ -413,9 +413,9 @@ class Join extends React.Component{
 
         if(SubmitAvailable){
 
-            alert('서버로 폼 전송')
+            alert('회원가입 하겠습니다')
 
-            fetch('hhttps://mask-shop.kro.kr/v1/api/account',{
+            fetch('https://mask-shop.kro.kr/v1/api/account',{
                 method : 'POST',
                 headers: {
                     'Accept': 'application/json',

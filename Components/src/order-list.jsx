@@ -40,7 +40,6 @@ class OrderList extends React.Component{
     this.handleSearchQueryButtonClick = this.handleSearchQueryButtonClick.bind(this)
     this.handleOrderStatusChange = this.handleOrderStatusChange.bind(this)
     this.handleShowAll = this.handleShowAll.bind(this)
-
   }
 
   componentWillMount(){
@@ -56,7 +55,7 @@ class OrderList extends React.Component{
     }).then( response => (response.json())).then((Jres)=>{
       console.log(`About Token Verify : ${JSON.stringify(Jres)}`)
       if(Jres.success === false){
-        alert('잘못된 유저입니다.')
+        // alert('잘못된 유저입니다.')
         CookieJS.remove('webToken')
         window.sessionStorage.removeItem('name')
         window.sessionStorage.removeItem('accountid')
@@ -71,7 +70,7 @@ class OrderList extends React.Component{
         location.href = '/'
       }
       else{
-        alert('올바른 유저입니다.')
+        // alert('올바른 유저입니다.')
         window.sessionStorage.setItem('name',Jres.data.name)
         window.sessionStorage.setItem('accountid',Jres.data.accountid)
         window.sessionStorage.setItem('address',Jres.data.address)
@@ -257,9 +256,9 @@ class OrderList extends React.Component{
            
 
             <div className="OrderList-Body-Config__Item input-box">
-
+{/* 
             <FA className="Calendar-Icon ci_1" name="calendar" />
-            <FA className="Calendar-Icon ci_2" name="calendar" />
+            <FA className="Calendar-Icon ci_2" name="calendar" /> */}
               
               <DatePicker 
                 dateFormat="yyyy/MM/dd"
@@ -321,7 +320,6 @@ class OrderList extends React.Component{
             </div>
           </div>
           {RENDER_ORDER_LIST(this.state)}
-          
         </div>
         <Footer />
       </React.Fragment>
@@ -388,7 +386,7 @@ const RENDER_ORDER_LIST = (state) => {
               <span>{Order[0].orderNum}</span>
             </div>
             <div>
-              <span className="Order-Title">{`${Order[0].productName} 외 ${Order.length}건`}</span>
+              <span onClick={()=>{SHOW_ORDER_DETAIL(state.userOrderList,Order[0].orderNum)}} className="Order-Title">{`${Order[0].productName} ${TEXT_DECISION(Order.length)}`}</span>
             </div>
             <div>
               <span>{`${parseInt(GET_SUM_ORDER_PRICE(Order))}`}</span>
@@ -419,6 +417,187 @@ const RENDER_ORDER_LIST = (state) => {
  
 }
 
+const TEXT_DECISION = (length) => {
+  if(length > 1){
+    return `외 ${length}건`
+  }
+  return ''
+}
+
+async function SHOW_ORDER_DETAIL (userOrderList,orderNum) {
+
+  let $Modal_Wrapper = document.createElement('div')
+  $Modal_Wrapper.classList.add('Modal-Wrapper')
+  $Modal_Wrapper.addEventListener('click',()=>{
+    $Modal_Wrapper.classList.add('--Hide')
+    $Modal_Wrapper.remove()
+  })
+
+  let $Modal_Container = document.createElement('div')
+  $Modal_Container.classList.add('Modal-Container')
+  $Modal_Container.addEventListener('click',(event)=>{
+    event.stopPropagation()
+  })
+
+
+  let $Modal_Header = document.createElement('div')
+  $Modal_Header.classList.add('OrderList-Header-Wrapper')
+
+  let $Modal_Text = document.createElement('span')
+  $Modal_Text.textContent = "주문 상세 목록"
+  $Modal_Text.classList.add('OrderList-Header-Text')
+
+  let $Modal_Inner_Body = document.createElement('div')
+  $Modal_Inner_Body.classList.add('Modal_Inner_Body')
+
+  let $Modal_ListHeader = document.createElement('div')
+  $Modal_ListHeader.classList.add('Modal-ListHeader-Wrapper')
+
+  let Element__Text =  ["상품이름","상품이미지","수량","사이즈","정기배송","주문금액"]
+
+  for (let index = 0; index < 6; index++) {
+    
+    let $Modal_ListHeader_Element = document.createElement('div')
+    let $Modal_ListHeader_Element__Text = document.createElement('span')
+    $Modal_ListHeader_Element__Text.textContent = Element__Text.shift()
+    $Modal_ListHeader_Element.append($Modal_ListHeader_Element__Text)
+
+    $Modal_ListHeader.append($Modal_ListHeader_Element)
+
+  }
+
+  const itemNamesFileteredByOrderNum = userOrderList.reduce((acc,curr) => {
+    if(curr.orderNum === orderNum){
+      acc = acc.concat(curr.productName)
+    }
+    return acc
+  },[])
+
+  const orderListFilteredByOrderNum = userOrderList.reduce((acc,curr) => {
+    if(curr.orderNum === orderNum){
+      acc = acc.concat(curr)
+    }
+    return acc
+  },[])
+
+  let result = await GET_ALL_IMG_PATH_BY_ITEM_NAME (itemNamesFileteredByOrderNum)
+  console.log(result)
+  console.log(`어웨잇을 안해주는 문제`)
+
+  $Modal_Header.append($Modal_Text)
+  $Modal_Container.append($Modal_Header)
+  $Modal_Inner_Body.append($Modal_ListHeader)
+
+  let Total_Price = 0
+
+  for (let index = 0; index < orderListFilteredByOrderNum.length; index++){
+    console.log(orderListFilteredByOrderNum)
+    let $Modal_ListBody_Wrapper  = document.createElement('div')  
+    $Modal_ListBody_Wrapper.classList.add('Modal-ListBody-Wrapper')
+    $Modal_ListBody_Wrapper.classList.add('--Bg-WhiteBlue')
+    if(orderListFilteredByOrderNum[index]["orderNum"] === orderNum){
+
+      let itemNow = result.shift()
+
+      let $Modal_ListBody_Element_1 = document.createElement('div')
+      let $Modal_ListBody_Element_2 = document.createElement('div')
+      let $Modal_ListBody_Element_3 = document.createElement('div')
+      let $Modal_ListBody_Element_4 = document.createElement('div')
+      let $Modal_ListBody_Element_5 = document.createElement('div')
+      let $Modal_ListBody_Element_6 = document.createElement('div')
+      let $Modal_ListBody_Element__Text_1 = document.createElement('span').textContent = orderListFilteredByOrderNum[index]["productName"]
+      let $Modal_ListBody_Element__Img = document.createElement('img')
+      $Modal_ListBody_Element__Img.setAttribute('src',`https://mask-shop.kro.kr${itemNow.thumbnail}`)
+      // let $Modal_ListBody_Element__Text_2 = document.createElement('span').textContent = orderListFilteredByOrderNum[index]["productName"]
+      let $Modal_ListBody_Element__Text_3 = document.createElement('span').textContent = orderListFilteredByOrderNum[index]["productCount"]
+      let $Modal_ListBody_Element__Text_4 = document.createElement('span').textContent = itemNow.size
+      let $Modal_ListBody_Element__Text_5 = document.createElement('span').textContent = `${orderListFilteredByOrderNum[index]['cycle']} 개월`
+      let $Modal_ListBody_Element__Text_6 = document.createElement('span').textContent = (parseInt(orderListFilteredByOrderNum[index]['productCount']) * parseInt(orderListFilteredByOrderNum[index]['price']))
+
+      Total_Price = Total_Price + (parseInt(orderListFilteredByOrderNum[index]['productCount']) * parseInt(orderListFilteredByOrderNum[index]['price']))
+
+      $Modal_ListBody_Element_1.append($Modal_ListBody_Element__Text_1)
+      $Modal_ListBody_Element_2.append($Modal_ListBody_Element__Img)
+      $Modal_ListBody_Element_3.append($Modal_ListBody_Element__Text_3)
+      $Modal_ListBody_Element_4.append($Modal_ListBody_Element__Text_4)
+      $Modal_ListBody_Element_5.append($Modal_ListBody_Element__Text_5)
+      $Modal_ListBody_Element_6.append($Modal_ListBody_Element__Text_6)
+
+      $Modal_ListBody_Wrapper.append($Modal_ListBody_Element_1)
+      $Modal_ListBody_Wrapper.append($Modal_ListBody_Element_2)
+      $Modal_ListBody_Wrapper.append($Modal_ListBody_Element_3)
+      $Modal_ListBody_Wrapper.append($Modal_ListBody_Element_4)
+      $Modal_ListBody_Wrapper.append($Modal_ListBody_Element_5)
+      $Modal_ListBody_Wrapper.append($Modal_ListBody_Element_6)
+
+      $Modal_Inner_Body.append($Modal_ListBody_Wrapper)
+    }
+    
+  }
+  let $Modal_Controller_Wrapper = document.createElement('div')
+  $Modal_Controller_Wrapper.classList.add('Modal_Controller_Wrapper')
+
+  let $Modal_Controller_Item_1=  document.createElement('div')
+  let $Modal_Controller_Item_2 =  document.createElement('div')
+  let $Modal_Controller_Item_3 =  document.createElement('div')
+
+  $Modal_Controller_Item_1.classList.add('Modal_Controller__Item')
+  $Modal_Controller_Item_2.classList.add('Modal_Controller__Item')
+  $Modal_Controller_Item_3.classList.add('Modal_Controller__Item')
+
+  let $Modal_Controller_Button = document.createElement('button')
+  $Modal_Controller_Button.textContent = "확인"
+  $Modal_Controller_Button.addEventListener('click',()=>{
+    $Modal_Wrapper.remove()
+  })
+  $Modal_Controller_Button.classList.add('Modal_Controller__Item__Button')
+  $Modal_Controller_Item_1.append($Modal_Controller_Button)
+
+  let $Modal_Controller_Sum = document.createElement('span')
+  $Modal_Controller_Sum.textContent = `₩ : ${Total_Price}`
+  $Modal_Controller_Sum.classList.add('Modal_Controller_Sum')
+  $Modal_Controller_Item_3.append($Modal_Controller_Sum)
+  $Modal_Controller_Wrapper.append($Modal_Controller_Item_1)
+  $Modal_Controller_Wrapper.append($Modal_Controller_Item_2)
+  $Modal_Controller_Wrapper.append($Modal_Controller_Item_3)
+
+  $Modal_Container.append($Modal_Inner_Body)
+  $Modal_Container.append($Modal_Controller_Wrapper)
+  $Modal_Wrapper.append($Modal_Container)
+  
+  document.getElementById('root').append($Modal_Wrapper)
+
+}
+
+const GET_ALL_IMG_PATH_BY_ITEM_NAME = (itemNamesFileteredByOrderNum) => {
+
+  return new Promise((resolve , reject) => {
+
+    let Basket = []
+    
+    for(let index = 0 ; index < itemNamesFileteredByOrderNum.length ; index++){
+
+      fetch(`https://mask-shop.kro.kr/v1/api/item/${itemNamesFileteredByOrderNum[index]}`)
+      .then(response => (response.json())).then((Jres) => {
+
+        Basket.push({
+          itemName : Jres.itemname,
+          size : Jres.size,
+          thumbnail : Jres.thumbnail
+        })
+
+        if(Basket.length === itemNamesFileteredByOrderNum.length){
+          console.log(Basket)
+          resolve(Basket)
+        }
+      })
+
+    }
+
+  })
+
+}
+
 const ACTIVATE_DELETE_API_THIS_ORDER = (event,orderNum) => {
 
   fetch(`https://mask-shop.kro.kr/v1/api/order/list/${orderNum}`,{
@@ -427,7 +606,8 @@ const ACTIVATE_DELETE_API_THIS_ORDER = (event,orderNum) => {
     if(Jres.status === 'success'){
       
       alert('취소/반품 신청되었습니다.')
-      event.target.closest('.OrderList-ListBody-Wrapper').remove()
+      // event.target.closest('.OrderList-ListBody-Wrapper').remove()
+      window.location.reload()
       
     }
   }) 

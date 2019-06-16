@@ -171,3 +171,120 @@
 .RollBack-Btn{
   outline: none;
 }
+.Modal-Wrapper{
+  width : 100%;
+  height : 100%;
+  background-color: rgba(66, 66, 66, 0.5);
+  position: absolute;
+  z-index : 100;
+  top : 0;
+  bottom : 0;
+  left : 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 90px;
+}
+.--Hide{
+  display: none;
+}
+.--Show{
+
+}
+.Modal-Container{
+
+  height : auto;
+  max-width: 1260px;
+  margin : 0 auto;
+  width : 100%;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 3px 3px 3px rgb(33, 33, 33);
+  padding : 20px;
+
+}
+.Modal-ListHeader-Wrapper{
+  
+  background-color: hsl(0, 0%, 95%);
+  padding : 10px 0px;
+  border : none;
+  display: grid;
+  border-top : 1px solid #ccc;
+  border-bottom : 2px solid #ccc;
+  grid-template-columns: 1fr 250px 140px 100px 100px 200px;
+
+}
+.Modal-ListHeader-Wrapper div{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.Modal-ListHeader-Wrapper div span{
+  font-size: 14px;
+  font-weight: bold;
+}
+.Modal-ListBody-Wrapper{
+  padding : 10px 0px;
+  border : none;
+  display: grid;
+  border-bottom : 1px solid #ccc;
+  grid-template-columns: 1fr 250px 140px 100px 100px 200px;
+  font-weight: bold;
+}
+.--Bg-WhiteBlue{
+  background-color: rgb(227, 242, 253);
+}
+.Modal-ListBody-Wrapper div{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.Modal-ListBody-Wrapper div span{
+  font-size: 14px;
+}
+.Modal-ListBody-Wrapper div img{
+  border-radius: 50%;
+  width : 70px;
+  height : 70px;
+  border : 1px solid #ccc;
+  box-shadow: 2px 2px 2px #ccc;
+}
+.Modal_Inner_Body{
+  min-height: 400px;
+  height : auto;
+}
+.Modal_Controller_Wrapper{
+  border-top : 1px solid #ccc;
+  height : 60px;
+  padding-top  : 20px;
+  display: grid;
+  grid-template-columns: 140px 1fr 200px;
+}
+.Modal_Controller__Item{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.Modal_Controller__Item__Button{
+  width : 100%;
+  height : 100%;
+  outline: none;
+  border-radius: 8px;
+  border: 1px solid hsl(231, 99%, 62%);
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 14px;
+}
+.Modal_Controller__Item__Button:hover{
+
+  box-shadow: 2px 2px 2px hsl(0, 0%, 26%);
+  transition: all 300ms ease;
+  color : white;
+  background-color: hsl(231, 99%, 62%);
+
+}
+.Modal_Controller_Sum{
+  font-weight: bold;
+}

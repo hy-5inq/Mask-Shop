@@ -40,6 +40,8 @@ class OrderCart extends React.Component {
 	RENDER_USER_CART_STATE(userCart){
 
 		return userCart.map(el => {
+
+			return (
 			<div className="OrderCart__Element">
 				<div className="OrderCart__Element__Item">
 					<input type="checkbox"/>
@@ -57,6 +59,7 @@ class OrderCart extends React.Component {
 					<span className="OrderCart__Element__Item__Text">{el.itemSize}</span>
 				</div>
 			</div>
+			)
 		})
 	}
 

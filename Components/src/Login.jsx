@@ -51,6 +51,7 @@ class Login extends React.Component{
 	loginWithKakao() {		
 		Kakao.Auth.login({
 			success: authObj => {
+				console.log(`Auth : ${JSON.stringify(authObj)}`)
 				location.href = `/`
 		  },
 			fail: err => {

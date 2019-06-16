@@ -1,15 +1,25 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>ReactJS TEMPLATE</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<head>	
+	<meta charset="utf-8">
+	<meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <title i18n-content="APP_NAME"></title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+	<link rel="preload" href="/fonts/NotoSansKR-Medium-Hestia.woff" as="font" crossorigin>
+	<link rel="preload" href="/fonts/NotoSansKR-Bold-Hestia.woff" as="font" crossorigin>
+	<link rel="preload" href="/fonts/NotoSansKR-Light-Hestia.woff" as="font" crossorigin>
 </head>
 <body>
-    
-    <div id="root"></div>
-    <script src="./bundle.js"></script>
+	<div id="root"></div>
 
+	<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>	
+	<script>
+		Kakao.init('bbd64e14c5f89fb5d2e9c07ab86b55f6')
+	</script>	
+	<script src="/bundle.js"></script>
+	<script defer type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+	<script defer type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>	
+	<script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
 </body>
 </html>

@@ -5,13 +5,17 @@
 
 import { createStore , combineReducers , applyMiddleware } from 'redux'
 
-import Reducer from './Reducer'
+import homeReducer from './HomeReducer.js'
+import productDetailReducer from './ProductDetailReducer.js'
+import loginReducer from './LoginReducer.js'
 
 import logger from 'redux-logger'
 import thunk from 'redux-thunk'
 
 const originReducer = combineReducers({
-	myReducer : Reducer,
+	homeState : homeReducer,
+	productDetailState : productDetailReducer,
+	loginState : loginReducer
 })
 
 const _store = createStore(originReducer , applyMiddleware(logger , thunk))

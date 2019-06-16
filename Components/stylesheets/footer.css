@@ -1,0 +1,147 @@
+footer {
+	width: 100vw;
+    background: #FFFFFF;
+	overflow: hidden;
+	position: relative;
+	bottom: 0;	
+}
+
+footer .inner {
+	display: flex;
+    flex-flow: wrap;
+    position: relative;
+    max-width: 1260px;
+	margin: 0 auto;
+	margin-bottom: 20px;
+}
+
+.line {
+	position: absolute;
+	width: calc(100% - 40px);
+	margin: 0 20px;
+	border-top: 1px solid #e6e6e6;
+}
+
+.content {
+	display: grid;
+	grid-template-rows: min-content repeat(4, 30px);
+	grid-auto-rows: min-content;
+	font-size: 12px;
+    width: 550px;
+	padding-left: 20px;
+	align-items: center;
+}
+
+.content-1 {	
+	display: grid;
+	grid-template-columns: repeat(8, auto);
+}
+
+.content-2 {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(auto, max-content));
+    grid-gap: 10px;
+}
+
+.content-3 {
+	display: grid;
+	grid-template-columns: repeat(3, minmax(auto, max-content));
+    grid-gap: 10px;
+}
+
+.content-3 span {
+	padding-right: 10px;
+}
+
+.content-3 a {
+	border-radius: 4px;
+	border: solid #eee 1px;	
+	background-color: white;
+    width: fit-content;
+	padding: 0 10px;
+	text-decoration: none;
+	color: #333333;
+}
+
+.content-3 a:hover {
+	opacity: 0.75;
+}
+
+.content-4 {
+	display: grid;
+	grid-template-columns: repeat(4, minmax(auto, max-content));
+    grid-gap: 10px;
+}
+
+.company-info {
+	height: 35px;
+    box-sizing: border-box;
+    margin-bottom: 12px;
+    margin-top: 20px;
+    padding-left: 5px;
+    font-size: 14px;
+}
+
+.company-info::after {
+	content: '';
+    border-bottom: 1px solid black;
+    position: absolute;
+    left: 25px;
+    top: 50px;
+    height: 1px;
+    width: 30px;
+}
+
+.phone {
+	display: grid;
+    grid-template-rows: repeat(4, min-content);
+    width: auto;
+    height: 155px;
+}
+
+.phone-title {
+	box-sizing: border-box;
+    margin-top: 20px;
+    padding-left: 20px;
+    font-size: 16px;
+}
+
+.phone-number {
+	padding-left: 20px;
+    font-size: 24px;
+    color: black;
+}
+
+.phone-detail {
+	padding-left: 20px;
+    font-size: 14px;
+}
+
+.mask-img {
+    display: flex;
+    padding-right: 20px;
+	align-self: center;
+	justify-self: center;
+	margin: 0 auto;
+}
+
+.copylight {
+	background: linear-gradient(135deg, #484848 25%, #333333 0, #333333 50%, #484848 0, #484848 75%, #333333 0);
+    background-size: 4px 4px;
+    background-color: hsla(0, 0%, 10%, 1);
+    color: white;
+    padding-left: 20px;
+    line-height: 45px;
+	font-size: 12px;
+	text-align: center;
+}
+
+.content strong, .phone strong {
+	color: #aaa;
+	font-weight: normal;
+}
+
+.content span {
+	padding-right: 10px;
+}
+

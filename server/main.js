@@ -1,35 +1,38 @@
-// import express from 'express';
-// import bodyParser from 'body-parser';
-// import mysql from 'mysql';
-// import path from 'path';
-let express = require('express');
-let bodyParser = require('body-parser');
-let path = require("path");
-let mysql = require("mysql");
+const express = require(`express`)
+const path = require(`path`)
+const https = require(`https`)
+const fs = require(`fs`)
+const compression = require(`compression`)
+const proxyServer = require(`./lib/cors-anywhere`)
 
-let dbconfig = require(__dirname+'/../server/config/db-config.json');
-// let connection = mysql.createConnection(dbconfig);  mysql 연동
+const app = express()
+const port = 3000
 
-const app = express();
-const port = 3000;
+app.use(compression())
+app.use('/', express.static(__dirname + "/../public"))
+app.use(express.urlencoded({ extended: true }))
+app.use(express.json())
 
-app.use('/', express.static(__dirname + "/../public"));
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+app.get(/^\/(.+?)/, (req, res) => {
+    res.sendFile(path.join(__dirname+'/../public/index.html'))
+})
 
-// mysql 연동
-// app.get('/man', (req, res) =>{
-// 	connection.query("SELECT * FROM man", (err, rows) => {
-// 		if(err) throw err;
+https.createServer({
+	key: fs.readFileSync(`/etc/letsencrypt/live/mask-shop.kro.kr/privkey.pem`),
+	cert: fs.readFileSync(`/etc/letsencrypt/live/mask-shop.kro.kr/cert.pem`),
+}, app).listen(port, () => {
+	console.log('Express listening on port', port)
+})
 
-// 		res.send(rows);
-// 	});
-// });
-
-app.get('/', (req, res) =>{
-    res.sendFile(path.join(__dirname+'../public/index.html'));
-});
-
-const server = app.listen(port, () => {
-	console.log('Express listening on port', port);
+proxyServer.createServer({
+    originWhitelist: [],
+	requireHeader: [],
+	removeHeaders: [`cookie`, `cookie2`],
+	httpsOptions: {
+		key: fs.readFileSync(`/etc/letsencrypt/live/mask-shop.kro.kr/privkey.pem`),
+		cert: fs.readFileSync(`/etc/letsencrypt/live/mask-shop.kro.kr/cert.pem`),
+	},
+	helpFile: `/../public/index.html`,
+}).listen(8089, `0.0.0.0`, () => {
+    console.log(`Running...`);
 });

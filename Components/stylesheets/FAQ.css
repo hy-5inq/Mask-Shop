@@ -1,0 +1,80 @@
+.FAQ-Header-Wrapper , .FAQ-Content-Wrapper{
+    max-width: 1260px;
+    margin : 0 auto;
+}
+.FAQ-Header-Text{
+    text-align: center;
+    margin :  30px 0;
+    font-size: 25px;
+}
+.FAQ-Header-Text-Sub{
+    text-align: center;
+    font-size: 18px;
+    margin-bottom: 30px;
+}
+.Small-Divider{
+    margin : 0 auto;
+    display: block;
+    width : 100px;
+    border-bottom: 4px solid orangered;
+    margin-bottom : 30px;
+}
+.--Teal-Divider{
+    border-bottom: 4px solid teal;
+}
+.FAQ-Content-Wrapper{
+    padding-bottom : 30px;
+}
+.FAQ-Content-Head{
+    background-color: rgb(251, 251, 251);
+    height : 50px;
+    display: grid;
+    grid-template-columns: 80px 1fr 160px;
+}
+.FAQ-Content-Item{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color : rgb(122, 122, 122);
+    font-weight: bold;
+    border-top : 1px solid rgb(122, 122, 122);
+}
+.FAQ-Content-Body{
+    border-top : 1px solid rgb(242, 242, 242);
+}
+.FAQ-Content-Body-Row{
+    display: grid;
+    height : 50px;
+    grid-template-columns: 80px 1fr 160px;
+}
+.FAQ-Content-Body-Item{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.FAQ-Content-Body-Item:nth-child(2){
+    justify-content: flex-start;
+    padding-left: 20px;
+    cursor: pointer;
+}
+
+.FAQ-Content-Body-Item:nth-child(2):hover{
+    text-decoration: underline;
+}
+.FAQ-Content-Body-Content{
+    /* height: 0px; */
+    /* transition: height 500ms; */
+    padding-left : 100px;
+    padding-right : 160px;
+}
+.--Fold-Off2{
+    /* height : auto; */
+    transform: scaleY(1);    
+    transform-origin: top;
+    transition: transform 0.26s ease;
+}
+.--Fold2{
+    /* height : 0px; */
+    transform: scaleY(0);
+    display: none;
+}

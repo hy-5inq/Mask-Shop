@@ -1,0 +1,85 @@
+.recent-list {
+	display: none;
+	position: absolute;
+    top: 50px;
+    right: 0px;
+    width: 250px;
+    padding: 0px;
+    background: white;
+	border-radius: 10px;
+	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(128, 128, 128, 0.1) inset;
+	overflow: scroll;
+	height: 360px;
+	z-index: 100000;
+}
+
+.recent-list:after {
+	content: '';
+	position: absolute;
+	border-style: solid;
+	border-width: 0 15px 15px;
+	border-color: #FFFFFF transparent;
+	display: block;
+	width: 0;
+	z-index: 1;
+	top: -15px;
+	right: 10px;
+	z-index: 100000;
+}
+
+.recent-content {
+	display: grid;
+    grid-template-columns: 90px auto;
+	height: 120px;
+	position: relative;
+}
+
+.recent-content a {
+	text-decoration: none;
+	cursor: pointer;
+}
+
+.recent-content-img {
+	margin: 10px;
+    border-radius: 3px;
+    border: 1px solid lightgray;
+}
+
+.recent-content-detail {
+	line-height: 160%;
+    align-self: center;
+    text-align: left;
+}
+
+.recent-content-title {
+	font-weight: bold;
+    font-size: 13px;
+}
+
+.recent-content-explain {
+    color: darkgray;
+}
+
+.recent-content-price {
+    font-weight: bold;
+    line-height: 260%;
+}
+
+.recent-content-btn {
+	top: 50%;
+    transform: translateY(-50%);
+    position: absolute;
+    right: 10px;
+    border: 0;
+    background-color: #DA4143;
+    color: white;
+    width: 40px;
+    height: 25px;
+	border-radius: 2px;
+	transition: all 0.1s ease-in-out;
+}
+
+.recent-content-btn:hover {
+	background-color: lightgray;
+	cursor: pointer;
+}

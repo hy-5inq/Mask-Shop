@@ -1,2 +1,5 @@
 node_modules/
 .idea/
+bundle.js
+public/*.js
+*.log

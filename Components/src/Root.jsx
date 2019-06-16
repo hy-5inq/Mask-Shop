@@ -9,17 +9,25 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import { Router , Route , Switch } from 'react-router-dom'
+import '../lib/i18n-contents.js'
 
 import _store from '../redux/_store.js'
 import _history from '../history/_history.js'
 
 import Home from './Home.jsx'
-import Contact from './Contact.jsx'
+import Product from './Product.jsx'
+import Login from './Login.jsx'
+import ProductDetail from './Product-detail.jsx'
+import Join from './Join.jsx'
+import FAQ from './FAQ.jsx'
+import Notice from './Notice.jsx'
+import OrderList from './order-list.jsx'
+
+import '../stylesheets/Root.css'
 
 class Root extends React.Component{
 
 	render(){
-
 		return(
 
 			<Provider store={_store}>
@@ -28,10 +36,14 @@ class Root extends React.Component{
 
 					<div>
 						<Switch>
-
 							<Route exact path="/" component={Home} ></Route>
-							<Route path="/Contact" component={Contact} ></Route>
-                        
+							<Route path="/Product" component={Product} ></Route>
+							<Route path="/Login" component={Login} ></Route>
+							<Route path="/Product-detail" component={ProductDetail} ></Route>
+							<Route path="/Join" component={Join}></Route>
+							<Route path="/faq" component={FAQ}></Route>
+							<Route path="/notice" component={Notice}></Route>
+							<Route path="/orderlist" component={OrderList}></Route>
 						</Switch>
 					</div>
 

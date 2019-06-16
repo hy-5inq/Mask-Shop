@@ -113,10 +113,10 @@ class OrderCart extends React.Component {
 				fetch('https://mask-shop.kro.kr/v1/api/order',{
 					method : 'POST',
 					body : JSON.stringify({
-						
+
 						orderNum : "0",
 						cycle : '3',
-						price : (userCart[index]["itemPrice"]/userCart[index][itemCount]),
+						price : (userCart[index]["itemPrice"]/userCart[index]["itemCount"]),
 						productName : userCart[index]["itemName"],
 						productCount : userCart[index]["itemCount"],
 						time : new Date().toJSON().substr(0,10).replace(/-/g,'/'),

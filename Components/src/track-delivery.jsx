@@ -96,8 +96,9 @@ class TrackDelivery extends React.Component {
 						</div>
 					</div>
 
-					{RENDER_USER_ORDER_STATE(this.state.userOrder)}
-
+					<div className="">
+						{RENDER_USER_ORDER_STATE(this.state.userOrder)}
+					</div>
         
 
 				</div>

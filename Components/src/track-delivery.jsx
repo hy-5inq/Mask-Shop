@@ -15,6 +15,66 @@ class TrackDelivery extends React.Component {
 		this.state = {
 			userOrder : []
 		}
+		this.ACTIVATE_DELETE_API_THIS_ORDER = this.ACTIVATE_DELETE_API_THIS_ORDER.bind(this)
+		this.RENDER_USER_ORDER_STATE = this.RENDER_USER_ORDER_STATE.bind(this)
+	}
+
+	ACTIVATE_DELETE_API_THIS_ORDER = (orderNum) => {
+
+		fetch(`https://mask-shop.kro.kr/v1/api/order/list/${orderNum}`,{
+		  method : 'DELETE',
+		}).then(response => (response.json())).then((Jres) => {
+		  if(Jres.status === 'success'){
+			
+			alert('취소/반품 신청되었습니다.')
+			let refreshedOrder = userOrder.reduce((acc,curr) => {
+				if(curr.orderNum !== orderNum){
+					acc = acc.concat(curr)
+				}
+				return acc
+			},[])
+			this.setState({
+				userOrder : refreshedOrder 
+			})
+			// event.target.closest('.OrderList-ListBody-Wrapper').remove()
+			// window.location.reload()
+			
+		  }
+		}) 
+	  
+	  }
+
+	  RENDER_USER_ORDER_STATE = (userOrder) => {
+
+		return userOrder.map(el => {
+			return (
+				<div className="TrackDelivery__Element">
+	
+					<div className="OrderCart__Element__Item">
+						<span className="OrderCart__Element__Item__Text">{`${el.orderNum}`}</span>
+					</div>
+					<div className="OrderCart__Element__Item">
+						<span className="OrderCart__Element__Item__Text">{`${el.productName}`}</span>
+					</div>
+					<div className="OrderCart__Element__Item">
+						<span className="OrderCart__Element__Item__Text">{`${parseInt(el.productCount) * parseInt(el.price)}`}</span>
+					</div>
+					<div className="OrderCart__Element__Item">
+						<span className="OrderCart__Element__Item__Text">{`${el.deliver}`}</span>
+					</div>
+					<div className="OrderCart__Element__Item">
+						<span className="OrderCart__Element__Item__Text">{`${el.cycle}`}</span>
+					</div>
+					<div className="OrderCart__Element__Item">
+						<button onClick={()=>{
+							this.ACTIVATE_DELETE_API_THIS_ORDER(el.orderNum)
+						}} className="TrackDelivery__Element__Item__Btn">{`${TEXT_DECISION(el.deliver)}`}</button>
+					</div>
+	
+				</div>
+			)
+		})
+	
 	}
 
 	componentDidMount(){
@@ -38,9 +98,7 @@ class TrackDelivery extends React.Component {
 				})
 			}
 			
-
-
-		},5000)
+		},3000)
 
 	}
 
@@ -112,42 +170,13 @@ class TrackDelivery extends React.Component {
 
 }
 
-const RENDER_USER_ORDER_STATE = (userOrder) => {
-
-	return userOrder.map(el => {
-		return (
-			<div className="TrackDelivery__Element">
-
-				<div className="OrderCart__Element__Item">
-					<span className="OrderCart__Element__Item__Text">{`${el.orderNum}`}</span>
-				</div>
-				<div className="OrderCart__Element__Item">
-					<span className="OrderCart__Element__Item__Text">{`${el.productName}`}</span>
-				</div>
-				<div className="OrderCart__Element__Item">
-					<span className="OrderCart__Element__Item__Text">{`${parseInt(el.productCount) * parseInt(el.price)}`}</span>
-				</div>
-				<div className="OrderCart__Element__Item">
-					<span className="OrderCart__Element__Item__Text">{`${el.deliver}`}</span>
-				</div>
-				<div className="OrderCart__Element__Item">
-					<span className="OrderCart__Element__Item__Text">{`${el.cycle}`}</span>
-				</div>
-				<div className="OrderCart__Element__Item">
-					<button className="TrackDelivery__Element__Item__Btn">{`${TEXT_DECISION(el.deliver)}`}</button>
-				</div>
-
-			</div>
-		)
-	})
-
-}
-
 const TEXT_DECISION = (deliver) => {
 	if(deliver !== "배송준비"){
 		return "반품"
 	}
 	return "취소"
 }
+
+
 
 export default TrackDelivery

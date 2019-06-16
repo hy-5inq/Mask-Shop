@@ -29,6 +29,9 @@ class ProductDetail extends React.Component{
 			company: ``,
 			itemNumber: 1,
 		}
+
+		this.handleAddToCart = this.handleAddToCart.bind(this)
+
 	}
 
 	componentWillMount() {
@@ -80,6 +83,51 @@ class ProductDetail extends React.Component{
 			return true
 		}
 		return false
+	}
+
+	handleAddToCart(){
+
+		const itemNow = this.state.itemName
+		const itemCount = this.state.itemNumber
+
+		let userCart = []
+		if(window.sessionStorage.getItem('userCart') === null){
+			
+			userCart.push({
+				itemName : itemNow,
+				itemCount : itemCount
+			})
+		}
+		else{
+			
+			userCart = JSON.parse(window.sessionStorage.getItem('userCart'))
+
+			let result = userCart.findIndex(item => item.name === itemNow)
+
+			if(result === -1){
+
+				userCart.push[{
+					itemName : itemNow,
+					itemCount : itemCount
+				}]
+
+			}
+			else{
+
+			userCart = userCart.filter((item,index)=>{if(index !== result) return item})
+
+			userCart.push({
+				itemName : itemNow,
+				itemCount : itemCount
+			})
+
+			}
+
+		}
+
+		alert('장바구니에 추가되었습니다.')
+		window.sessionStorage.setItem('userCart',JSON.stringify(userCart))
+
 	}
 
 	render() {
@@ -178,7 +226,7 @@ class ProductDetail extends React.Component{
 										</span>
 									</div>
 									<div className={`Order-Option`}>
-										<input className={`Option select-value`} type="number" defaultValue={this.state.itemNumber} min={`1`} name={`quantity`} onChange={this.handleChange.bind(this)} />
+										<input id="QTY" className={`Option select-value`} type="number" defaultValue={this.state.itemNumber} min={`1`} name={`quantity`} onChange={this.handleChange.bind(this)} />
 									</div>
 								</div>
 								{/* <div className={`Option-Container__Item`}>
@@ -291,7 +339,7 @@ class ProductDetail extends React.Component{
 									</span>
 								</div>
 
-								<div className={`Order-Buttons__Item --Transition-Color --Transition-Border`}>
+								<div onClick={this.handleAddToCart} className={`Order-Buttons__Item --Transition-Color --Transition-Border`}>
 									<span className={`Order-Buttons__Item-Text`}>
 										{`장바구니`}
 									</span>

@@ -110,8 +110,9 @@ class ProductDetail extends React.Component{
 
 			console.log(`발견된 인덱스 ${result}`)
 
-			if(result === -1){
+			if(result == -1){
 				console.log(`장바구니 넣기 전 : ${JSON.stringify(userCart)}`)
+				userCart = JSON.parse(userCart)
 				userCart.push[{
 					itemName : itemNow,
 					itemCount : itemCount

@@ -17,13 +17,13 @@ class OrderCart extends React.Component {
 
 	componentDidMount(){
 		setInterval(()=>{
-			
+
 			let userCart = window.sessionStorage.getItem('userCart')
 
 			if(userCart !== null){
 				this.setState({
 					userCart : JSON.parse(userCart)
-				})
+				},()=>{console.log(this.state)})
 			}
 			
 		},1000)

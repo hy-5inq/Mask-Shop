@@ -106,7 +106,7 @@ class ProductDetail extends React.Component{
 		}
 		else{
 			
-			let result = userCart.findIndex(item => item.name === itemNow)
+			let result = userCart.findIndex(item => item.itemName === itemNow)
 
 			console.log(`발견된 인덱스 ${result}`)
 
@@ -134,7 +134,7 @@ class ProductDetail extends React.Component{
 		}
 
 		console.log(`장바구니에 추가되었습니다. ${JSON.stringify(userCart)}`)
-		
+
 		window.sessionStorage.setItem('userCart',JSON.stringify(userCart))
 
 	}

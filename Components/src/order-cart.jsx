@@ -47,10 +47,10 @@ class OrderCart extends React.Component {
 					<input type="checkbox"/>
 				</div>
 				<div className="OrderCart__Element__Item">
-					<span className="OrderCart__Element__Item__Text">${el.itemName}</span>
+					<span className="OrderCart__Element__Item__Text">{el.itemName}</span>
 				</div>
 				<div className="OrderCart__Element__Item">
-					<input value={el.itemCount} className="OrderCart__Element__Item__Input-Number" type="Number"/>
+				<span className="OrderCart__Element__Item__Text">{el.itemCount}</span>
 				</div>
 				<div className="OrderCart__Element__Item">
 					<span className="OrderCart__Element__Item__Text">{el.itemPrice}</span>
@@ -61,6 +61,31 @@ class OrderCart extends React.Component {
 			</div>
 			)
 		})
+	}
+
+	DELETE_THIS_ORDER(){
+
+		let checkboxes = document.querySelectorAll('.OrderCart__Element__Item input')
+		checkboxes.forEach((el)=>{
+			console.log(el.value)
+		})
+
+		// let userCart = JSON.parse(window.sessionStorage.getItem('userCart'))
+
+		// if(userCart !== null){
+
+		// 	userCart = userCart.filter(item => {
+		// 		if(!(item.itemName in targetName)){
+		// 			return item
+		// 		}
+				
+		// 	})
+
+		// 	window.sessionStorage.removeItem('userCart')
+		// 	window.sessionStorage.setItem('userCart',JSON.stringify(userCart))
+
+		// }
+
 	}
 
 	render(){
@@ -112,7 +137,7 @@ class OrderCart extends React.Component {
 				<div className="OrderCart-Controller">
 
 					<div className="Controller__Item">
-						<div className="Controller__Item__Btn" id="REMOVE_ITEM">
+						<div onClick={this.DELETE_THIS_ORDER} className="Controller__Item__Btn" id="REMOVE_ITEM">
 							{/* <FaTrashAlt className="Controller__Item__Btn__Icon" /> */}
 							<span className="Controller__Item__Btn__Text">선택상품 삭제</span>
 						</div>

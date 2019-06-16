@@ -97,10 +97,12 @@ class ProductDetail extends React.Component{
 				itemName : itemNow,
 				itemCount : itemCount
 			})
+
 		}
 		else{
 			
 			userCart = JSON.parse(window.sessionStorage.getItem('userCart'))
+			console.log(`현재 장바구니 : ${userCart}`)
 
 			let result = userCart.findIndex(item => item.name === itemNow)
 
@@ -116,16 +118,18 @@ class ProductDetail extends React.Component{
 
 			userCart = userCart.filter((item,index)=>{if(index !== result) return item})
 
+			console.log(`현재 장바구니 넣기 전 : ${userCart}`)
 			userCart.push({
 				itemName : itemNow,
 				itemCount : itemCount
 			})
+			console.log(`현재 장바구니 넣은 후 : ${userCart}`)
 
 			}
 
 		}
 
-		alert('장바구니에 추가되었습니다.')
+		console.log(`장바구니에 추가되었습니다. ${userCart}`)
 		window.sessionStorage.setItem('userCart',JSON.stringify(userCart))
 
 	}

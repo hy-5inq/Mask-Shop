@@ -27,7 +27,7 @@ class TrackDelivery extends React.Component {
 		  if(Jres.status === 'success'){
 			
 			alert('취소/반품 신청되었습니다.')
-			let refreshedOrder = userOrder.reduce((acc,curr) => {
+			let refreshedOrder = this.state.userOrder.reduce((acc,curr) => {
 				if(curr.orderNum !== orderNum){
 					acc = acc.concat(curr)
 				}

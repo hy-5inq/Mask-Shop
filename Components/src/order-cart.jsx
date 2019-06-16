@@ -212,7 +212,7 @@ class OrderCart extends React.Component {
 					<div className="Controller__Item Credit-Box">
 						<span className="Credit-Box__Text">총액</span>
 						<span className="Credit-Box__Divider">:</span>
-						<span className="Credit-Box__Text">{`76,000`}</span>
+						<span className="Credit-Box__Text">{`${SUM_PRICE(this.state.userCart)}`}</span>
 					</div>
 
 				</div>
@@ -226,4 +226,11 @@ class OrderCart extends React.Component {
 
 }
 
+const SUM_PRICE = (userCart) => {
+	if(userCart.length > 0){
+		return userCart.reduce((acc,curr) => {
+			return (acc = acc + curr.itemPrice)
+		},0)
+	}
+}
 export default OrderCart

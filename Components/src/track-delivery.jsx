@@ -1,12 +1,48 @@
 import React from 'react'
 
 import FA from 'react-fontawesome'
+import CookieJS from 'js-cookie'
 
 import '../stylesheets/snap-card.css'
 import '../stylesheets/my-page.css'
 import '../stylesheets/track-delivery.css'
 
+
 class TrackDelivery extends React.Component {
+
+	constructor(props){
+		super(props)
+		this.state = {
+			userOrder : []
+		}
+	}
+
+	componentDidMount(){
+
+		setInterval(()=>{
+
+			let user =  window.sessionStorage.getItem('accountid')
+			let Token = CookieJS.get('webtoken')
+			if(user !== null){
+				fetch(`https://mask-shop.kro.kr/v1/api/order/${user}`,{
+					method : 'GET',
+					headers : {
+						'x-access-token' : Token
+					}
+				}).then(res=>(res.json())).then((res) => {
+					if(res.length > 0){
+						this.setState({
+							userOrder : res
+						})
+					}
+				})
+			}
+			
+
+
+		},5000)
+
+	}
 
 	handleFold(){
 
@@ -60,49 +96,9 @@ class TrackDelivery extends React.Component {
 						</div>
 					</div>
 
-					<div className="TrackDelivery__Element">
-                        <div className="OrderCart__Element__Item">
-							<span className="OrderCart__Element__Item__Text">2</span>
-						</div>
-						<div className="OrderCart__Element__Item">
-							<span className="OrderCart__Element__Item__Text">마스크 MK-101 외 3건</span>
-						</div>
-						<div className="OrderCart__Element__Item">
-							<span className="OrderCart__Element__Item__Text">100,000</span>
-						</div>
-						<div className="OrderCart__Element__Item">
-							<span className="OrderCart__Element__Item__Text">배송 전</span>
-						</div>
-						<div className="OrderCart__Element__Item">
-							<span className="OrderCart__Element__Item__Text">O</span>
-						</div>
-                        <div className="OrderCart__Element__Item">
-                        <button className="TrackDelivery__Element__Item__Btn">취소</button>
-						</div>
+					{RENDER_USER_ORDER_STATE(this.state.userOrder)}
 
-					</div>
-
-                    <div className="TrackDelivery__Element">
-                        <div className="OrderCart__Element__Item">
-							<span className="OrderCart__Element__Item__Text">1</span>
-						</div>
-						<div className="OrderCart__Element__Item">
-							<span className="OrderCart__Element__Item__Text">마스크 MK-102 외 3건</span>
-						</div>
-						<div className="OrderCart__Element__Item">
-							<span className="OrderCart__Element__Item__Text">100,000</span>
-						</div>
-						<div className="OrderCart__Element__Item">
-							<span className="OrderCart__Element__Item__Text">배송 중</span>
-						</div>
-						<div className="OrderCart__Element__Item">
-							<span className="OrderCart__Element__Item__Text">O</span>
-						</div>
-                        <div className="OrderCart__Element__Item">
-                            <button className="TrackDelivery__Element__Item__Btn">반품</button>
-						</div>
-
-					</div>
+        
 
 				</div>
 
@@ -113,6 +109,44 @@ class TrackDelivery extends React.Component {
 	}
 
 
+}
+
+const RENDER_USER_ORDER_STATE = (userOrder) => {
+
+	return userOrder.map(el => {
+		return (
+			<div className="TrackDelivery__Element">
+
+				<div className="OrderCart__Element__Item">
+					<span className="OrderCart__Element__Item__Text">{`${el.orderNum}`}</span>
+				</div>
+				<div className="OrderCart__Element__Item">
+					<span className="OrderCart__Element__Item__Text">{`${el.productName}`}</span>
+				</div>
+				<div className="OrderCart__Element__Item">
+					<span className="OrderCart__Element__Item__Text">{`${parseInt(el.productCount) * parseInt(el.price)}`}</span>
+				</div>
+				<div className="OrderCart__Element__Item">
+					<span className="OrderCart__Element__Item__Text">{`${el.deliver}`}</span>
+				</div>
+				<div className="OrderCart__Element__Item">
+					<span className="OrderCart__Element__Item__Text">{`${el.cycle}`}</span>
+				</div>
+				<div className="OrderCart__Element__Item">
+					<button className="TrackDelivery__Element__Item__Btn">{`${TEXT_DECISION(el.deliver)}`}</button>
+				</div>
+
+			</div>
+		)
+	})
+
+}
+
+const TEXT_DECISION = (deliver) => {
+	if(deliver !== "배송준비"){
+		return "반품"
+	}
+	return "취소"
 }
 
 export default TrackDelivery

@@ -171,7 +171,7 @@ class OrderList extends React.Component{
 
       let filteredUserOrderList = this.state.userOrderList.reduce((acc,curr) => {
  
-        const PaymentDateStamp = new Date(parseInt(curr.time)).getTime()
+        const PaymentDateStamp = new Date(curr.time).getTime()
 
         if(QueryDeliveryStatus === "전체주문"){
           
@@ -615,7 +615,7 @@ const ACTIVATE_DELETE_API_THIS_ORDER = (event,orderNum) => {
 }
 
 const GET_BUTTON_BY_DELIVERY_STATUS = (deliveryStatus) =>{
-
+  
   if(deliveryStatus !== "배송준비"){
     return "반품"
   }
@@ -627,7 +627,7 @@ const GET_BUTTON_BY_DELIVERY_STATUS = (deliveryStatus) =>{
 const GET_SUM_ORDER_PRICE = (Order) => {
 
   let result = Order.reduce((acc,curr) => {
-    return acc = acc + (parseInt(curr.price) * parseInt(curr.cycle))
+    return acc = acc + (parseInt(curr.price) * parseInt(curr.productCount))
   },0)
 
   return result

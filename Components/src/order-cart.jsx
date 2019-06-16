@@ -13,6 +13,7 @@ class OrderCart extends React.Component {
 		this.state = ({
 			userCart : []
 		})
+		this.RENDER_USER_CART_STATE = this.RENDER_USER_CART_STATE.bind(this)
 	}
 
 	componentDidMount(){
@@ -34,6 +35,29 @@ class OrderCart extends React.Component {
 		const SnapCard = document.body.querySelector(`#ORDER_CART`)
 		SnapCard.classList.add(`--Fold-Off`)
 
+	}
+
+	RENDER_USER_CART_STATE(userCart){
+
+		return userCart.map(el => {
+			<div className="OrderCart__Element">
+				<div className="OrderCart__Element__Item">
+					<input type="checkbox"/>
+				</div>
+				<div className="OrderCart__Element__Item">
+					<span className="OrderCart__Element__Item__Text">${el.itemName}</span>
+				</div>
+				<div className="OrderCart__Element__Item">
+					<input value={el.itemCount} className="OrderCart__Element__Item__Input-Number" type="Number"/>
+				</div>
+				<div className="OrderCart__Element__Item">
+					<span className="OrderCart__Element__Item__Text">{el.itemPrice}</span>
+				</div>
+				<div className="OrderCart__Element__Item">
+					<span className="OrderCart__Element__Item__Text">{el.itemSize}</span>
+				</div>
+			</div>
+		})
 	}
 
 	render(){
@@ -78,23 +102,7 @@ class OrderCart extends React.Component {
 						</div>
 					</div>
 
-					<div className="OrderCart__Element">
-						<div className="OrderCart__Element__Item">
-							<input type="checkbox"/>
-						</div>
-						<div className="OrderCart__Element__Item">
-							<span className="OrderCart__Element__Item__Text">마스크 MK-101</span>
-						</div>
-						<div className="OrderCart__Element__Item">
-							<input className="OrderCart__Element__Item__Input-Number" type="Number"/>
-						</div>
-						<div className="OrderCart__Element__Item">
-							<span className="OrderCart__Element__Item__Text">100,000</span>
-						</div>
-						<div className="OrderCart__Element__Item">
-							<span className="OrderCart__Element__Item__Text">M</span>
-						</div>
-					</div>
+					{this.RENDER_USER_CART_STATE(this.state.userCart)}
 
 				</div>
 

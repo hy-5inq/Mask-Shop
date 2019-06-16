@@ -66,25 +66,32 @@ class OrderCart extends React.Component {
 	DELETE_THIS_ORDER(){
 
 		let checkboxes = document.querySelectorAll('.OrderCart__Element__Item input')
+		let targetNames = []
+
 		checkboxes.forEach((el)=>{
-			console.log(el.checked)
+			
+			if(el.checked === true){
+				targetNames.push(el.parentNode.nextSibling.firstChild.textContent)
+			}
+
 		})
 
-		// let userCart = JSON.parse(window.sessionStorage.getItem('userCart'))
+		let userCart = JSON.parse(window.sessionStorage.getItem('userCart'))
 
-		// if(userCart !== null){
+		if(userCart !== null){
 
-		// 	userCart = userCart.filter(item => {
-		// 		if(!(item.itemName in targetName)){
-		// 			return item
-		// 		}
+			userCart = userCart.filter(item => {
 				
-		// 	})
+				if(!(item.itemName in targetNames)){
+					return item
+				}
+				
+			})
 
-		// 	window.sessionStorage.removeItem('userCart')
-		// 	window.sessionStorage.setItem('userCart',JSON.stringify(userCart))
+			window.sessionStorage.removeItem('userCart')
+			window.sessionStorage.setItem('userCart',JSON.stringify(userCart))
 
-		// }
+		}
 
 	}
 

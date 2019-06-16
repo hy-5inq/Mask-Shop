@@ -67,7 +67,7 @@ class OrderCart extends React.Component {
 
 		let checkboxes = document.querySelectorAll('.OrderCart__Element__Item input')
 		checkboxes.forEach((el)=>{
-			console.log(el.value)
+			console.log(el.checked)
 		})
 
 		// let userCart = JSON.parse(window.sessionStorage.getItem('userCart'))

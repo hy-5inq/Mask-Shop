@@ -78,19 +78,20 @@ class OrderCart extends React.Component {
 
 		})
 
-		console.log(targetNames)
-
+		console.log(`**** ${targetNames}`)
+		
 		let userCart = JSON.parse(window.sessionStorage.getItem('userCart'))
+		console.log(`**** ${userCart}`)
 
 		if(userCart !== null){
 
-			let myUserCart = userCart.filter(item => {
+			let myUserCart = userCart.reduce((acc,curr) => {
 
-				if(!(item.itemName in targetNames)){
-					return item
+				if(targetNames.indexOf(curr.itemName) == -1){
+					acc.push(curr)
 				}
-				
-			})
+				return acc
+			},[])
 
 			console.log(`삭제 후 ${JSON.stringify(myUserCart)}`)
 

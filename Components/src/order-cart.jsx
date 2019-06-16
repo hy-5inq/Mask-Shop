@@ -128,6 +128,12 @@ class OrderCart extends React.Component {
 						deliver : "배송준비"
 
 					})
+				}).then(res=>(res.json())).then((res)=>{
+					if(res.success === true && index == userCart.length -1){
+						alert('주문이 성공적으로 접수되었습니다.')
+						window.location.href = `/orderlist`
+						window.sessionStorage.removeItem('userCart')
+					}
 				})
 				
 			}

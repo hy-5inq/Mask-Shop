@@ -112,7 +112,7 @@ class OrderCart extends React.Component {
 			
 				fetch('https://mask-shop.kro.kr/v1/api/order',{
 					method : 'POST',
-					body : JSON.stringify({
+					body : {
 
 						orderNum : "0",
 						cycle : 3,
@@ -124,7 +124,7 @@ class OrderCart extends React.Component {
 						accountid : user,
 						deliver : "배송준비"
 
-					})
+					}
 				})
 				
 			}

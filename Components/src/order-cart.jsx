@@ -102,6 +102,41 @@ class OrderCart extends React.Component {
 
 	}
 
+	GO_PAYMENT_THIS_ORDER(){
+
+		let userCart = JSON.parse(window.sessionStorage.getItem('userCart'))
+
+		if(userCart !== null){
+
+			for (let index = 0; index < userCart.length; index++) {
+			
+				fetch('https://mask-shop.kro.kr/v1/api/order',{
+					method : 'POST',
+					body : JSON.stringify({
+						
+						orderNum : "0",
+						cycle : '3',
+						price : (userCart[index]["itemPrice"]/userCart[index][itemCount]),
+						productName : userCart[index]["itemName"],
+						productCount : userCart[index]["itemCount"],
+						time : new Date().toJSON().substr(0,10).replace(/-/g,'/'),
+						invoiceNum : 175677789990,
+						deliver : "배송준비"
+
+					})
+				})
+				
+			}
+
+		}
+		else{
+			alert("주문할 아이템이 없습니다.")
+		}
+
+	}
+
+
+
 	render(){
 
 		return (
@@ -155,7 +190,7 @@ class OrderCart extends React.Component {
 							{/* <FaTrashAlt className="Controller__Item__Btn__Icon" /> */}
 							<span className="Controller__Item__Btn__Text">선택상품 삭제</span>
 						</div>
-						<div className="Controller__Item__Btn" id="GO_ORDER">
+						<div onClick={this.GO_PAYMENT_THIS_ORDER} className="Controller__Item__Btn" id="GO_ORDER">
 							{/* <FaCreditCard className="Controller__Item__Btn__Icon" /> */}
 							<span className="Controller__Item__Btn__Text">주문하기</span>
 						</div>

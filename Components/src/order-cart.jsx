@@ -10,7 +10,23 @@ class OrderCart extends React.Component {
 
 	constructor(props){
 		super(props)
-		console.log(`*** OrderCart : ${JSON.stringify(this.props)}`)
+		this.state = ({
+			userCart : []
+		})
+	}
+
+	componentDidMount(){
+		setInterval(()=>{
+			
+			let userCart = window.sessionStorage.getItem('userCart')
+
+			if(userCart !== null){
+				this.setState({
+					userCart : JSON.parse(userCart)
+				})
+			}
+			
+		},1000)
 	}
 
 	handleFold(){

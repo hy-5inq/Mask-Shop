@@ -28,7 +28,7 @@ class ProductDetail extends React.Component{
 			using: ``,
 			company: ``,
 			itemNumber: 1,
-			userCart : []
+			
 		}
 
 		this.handleAddToCart = this.handleAddToCart.bind(this)
@@ -87,7 +87,7 @@ class ProductDetail extends React.Component{
 	}
 
 	handleAddToCart(){
-
+		
 		const itemNow = this.state.itemName
 		const itemCount = this.state.itemNumber
 		const itemPrice = this.state.itemPrice
@@ -109,9 +109,7 @@ class ProductDetail extends React.Component{
 
 			window.sessionStorage.removeItem('userCart')
 			window.sessionStorage.setItem('userCart',JSON.stringify(userCart))
-			this.setState({
-				userCart : userCart
-			})
+			
 		}
 		else{
 			
@@ -135,9 +133,7 @@ class ProductDetail extends React.Component{
 				window.sessionStorage.removeItem('userCart')
 				window.sessionStorage.setItem('userCart',JSON.stringify(myUserCart))
 				console.log(`장바구니 넣은 후 : ${JSON.stringify(userCart)}`)
-				this.setState({
-					userCart : myUserCart
-				})
+				
 			}
 			else{
 
@@ -157,9 +153,7 @@ class ProductDetail extends React.Component{
 				window.sessionStorage.removeItem('userCart')
 				window.sessionStorage.setItem('userCart',JSON.stringify(userCart))
 
-				this.setState({
-					userCart : userCart
-				})
+				
 			}
 
 			
@@ -176,7 +170,7 @@ class ProductDetail extends React.Component{
 			<React.Fragment>
 				<div className={`Wrapper`}>
 					<MenuBar/>
-					<OrderCart userCart={this.state.userCart}></OrderCart>
+					<OrderCart></OrderCart>
 					<MyPage></MyPage>
 					<TrackDelivery></TrackDelivery>
 					<div className={`Flex-Nav-Monitor`}>

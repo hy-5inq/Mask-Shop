@@ -28,6 +28,7 @@ class ProductDetail extends React.Component{
 			using: ``,
 			company: ``,
 			itemNumber: 1,
+			userCart : []
 		}
 
 		this.handleAddToCart = this.handleAddToCart.bind(this)
@@ -87,12 +88,11 @@ class ProductDetail extends React.Component{
 
 	handleAddToCart(){
 
-		
 		const itemNow = this.state.itemName
 		const itemCount = this.state.itemNumber
 		const itemPrice = this.state.itemPrice
 		const itemSize = this.state.size
-		
+
 		console.log(`아이템 이름 : ${itemNow} || 아이템 카운트 : ${itemCount}`)
 
 		let userCart = JSON.parse(window.sessionStorage.getItem('userCart'))
@@ -102,9 +102,16 @@ class ProductDetail extends React.Component{
 			userCart = []
 			userCart.push({
 				itemName : itemNow,
-				itemCount : itemCount
+				itemCount : itemCount,
+				itemPrice : parseInt(itemCount) * parseInt(itemPrice),
+				itemSize : itemSize
 			})
 
+			window.sessionStorage.removeItem('userCart')
+			window.sessionStorage.setItem('userCart',JSON.stringify(userCart))
+			this.setState({
+				userCart : userCart
+			})
 		}
 		else{
 			
@@ -119,14 +126,18 @@ class ProductDetail extends React.Component{
 				let myUserCart = userCart
 				myUserCart.push({
 					itemName : itemNow,
-					itemCount : itemCount
+					itemCount : itemCount,
+					itemPrice : parseInt(itemCount) * parseInt(itemPrice),
+					itemSize : itemSize
 				})
 				console.log(`장바구니에 추가되었습니다. ${JSON.stringify(userCart)}`)
 
 				window.sessionStorage.removeItem('userCart')
 				window.sessionStorage.setItem('userCart',JSON.stringify(myUserCart))
 				console.log(`장바구니 넣은 후 : ${JSON.stringify(userCart)}`)
-
+				this.setState({
+					userCart : myUserCart
+				})
 			}
 			else{
 
@@ -135,7 +146,9 @@ class ProductDetail extends React.Component{
 				console.log(`장바구니 넣기 전 : ${JSON.stringify(userCart)}`)
 				userCart.push({
 					itemName : itemNow,
-					itemCount : itemCount
+					itemCount : itemCount,
+					itemPrice : parseInt(itemCount) * parseInt(itemPrice),
+					itemSize : itemSize
 				})
 				console.log(`장바구니 넣은 후 : ${JSON.stringify(userCart)}`)
 
@@ -144,6 +157,9 @@ class ProductDetail extends React.Component{
 				window.sessionStorage.removeItem('userCart')
 				window.sessionStorage.setItem('userCart',JSON.stringify(userCart))
 
+				this.setState({
+					userCart : userCart
+				})
 			}
 
 			
@@ -160,7 +176,7 @@ class ProductDetail extends React.Component{
 			<React.Fragment>
 				<div className={`Wrapper`}>
 					<MenuBar/>
-					<OrderCart></OrderCart>
+					<OrderCart userCart={this.state.userCart}></OrderCart>
 					<MyPage></MyPage>
 					<TrackDelivery></TrackDelivery>
 					<div className={`Flex-Nav-Monitor`}>

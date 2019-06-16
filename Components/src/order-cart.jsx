@@ -10,7 +10,7 @@ class OrderCart extends React.Component {
 
 	constructor(props){
 		super(props)
-		console.log(`*** OrderCart : ${this.props}`)
+		console.log(`*** OrderCart : ${JSON.stringify(this.props)}`)
 	}
 
 	handleFold(){

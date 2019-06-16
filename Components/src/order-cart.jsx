@@ -112,11 +112,14 @@ class OrderCart extends React.Component {
 			
 				fetch('https://mask-shop.kro.kr/v1/api/order',{
 					method : 'POST',
-					body : {
+					headers : {
+						"Content-Type" : "application/json"
+					},
+					body : JSON.stringify({
 
 						orderNum : "0",
-						cycle : 3,
-						price : (userCart[index]["itemPrice"]/userCart[index]["itemCount"]),
+						cycle : "3",
+						price : `${userCart[index]["itemPrice"]/userCart[index]["itemCount"]}`,
 						productName : userCart[index]["itemName"],
 						productCount : userCart[index]["itemCount"],
 						time : new Date().toJSON().substr(0,10).replace(/-/g,'/'),
@@ -124,7 +127,7 @@ class OrderCart extends React.Component {
 						accountid : user,
 						deliver : "배송준비"
 
-					}
+					})
 				})
 				
 			}

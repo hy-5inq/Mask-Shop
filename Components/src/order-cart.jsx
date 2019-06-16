@@ -13,7 +13,9 @@ class OrderCart extends React.Component {
 		this.state = ({
 			userCart : []
 		})
+
 		this.RENDER_USER_CART_STATE = this.RENDER_USER_CART_STATE.bind(this)
+		this.DELETE_THIS_ORDER =  this.DELETE_THIS_ORDER.bind(this)
 	}
 
 	componentDidMount(){
@@ -76,20 +78,24 @@ class OrderCart extends React.Component {
 
 		})
 
+		console.log(targetNames)
+
 		let userCart = JSON.parse(window.sessionStorage.getItem('userCart'))
 
 		if(userCart !== null){
 
-			userCart = userCart.filter(item => {
-				
+			let myUserCart = userCart.filter(item => {
+
 				if(!(item.itemName in targetNames)){
 					return item
 				}
 				
 			})
 
+			console.log(`삭제 후 ${JSON.stringify(myUserCart)}`)
+
 			window.sessionStorage.removeItem('userCart')
-			window.sessionStorage.setItem('userCart',JSON.stringify(userCart))
+			window.sessionStorage.setItem('userCart',JSON.stringify(myUserCart))
 
 		}
 

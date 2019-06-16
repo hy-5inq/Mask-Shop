@@ -111,12 +111,17 @@ class ProductDetail extends React.Component{
 			console.log(`발견된 인덱스 ${result}`)
 
 			if(result == -1){
-				console.log(`장바구니 넣기 전 : ${JSON.stringify(userCart)}`)
+				console.log(`장바구니 넣기 전 -1 : ${JSON.stringify(userCart)}`)
 				
-				userCart.push[{
+				let myUserCart = userCart
+				myUserCart.push({
 					itemName : itemNow,
 					itemCount : itemCount
-				}]
+				})
+				console.log(`장바구니에 추가되었습니다. ${JSON.stringify(userCart)}`)
+
+				window.sessionStorage.removeItem('userCart')
+				window.sessionStorage.setItem('userCart',JSON.stringify(myUserCart))
 				console.log(`장바구니 넣은 후 : ${JSON.stringify(userCart)}`)
 			}
 			else{
@@ -132,11 +137,14 @@ class ProductDetail extends React.Component{
 
 			}
 
+			console.log(`장바구니에 추가되었습니다. ${JSON.stringify(userCart)}`)
+
+			window.sessionStorage.remove('userCart')
+			window.sessionStorage.setItem('userCart',JSON.stringify(userCart))
+
 		}
 
-		console.log(`장바구니에 추가되었습니다. ${JSON.stringify(userCart)}`)
-
-		window.sessionStorage.setItem('userCart',JSON.stringify(userCart))
+		
 
 	}
 

@@ -115,7 +115,7 @@ class OrderCart extends React.Component {
 					body : JSON.stringify({
 
 						orderNum : "0",
-						cycle : '3',
+						cycle : 3,
 						price : (userCart[index]["itemPrice"]/userCart[index]["itemCount"]),
 						productName : userCart[index]["itemName"],
 						productCount : userCart[index]["itemCount"],

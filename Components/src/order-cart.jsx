@@ -8,6 +8,11 @@ import '../stylesheets/order-cart.css'
 
 class OrderCart extends React.Component {
 
+	constructor(props){
+		super(props)
+		console.log(`*** OrderCart : ${this.props}`)
+	}
+
 	handleFold(){
 
 		const SnapCard = document.body.querySelector(`#ORDER_CART`)
@@ -55,9 +60,6 @@ class OrderCart extends React.Component {
 						<div className="OrderCart__Header__Item">
 							<span className="OrderCart__Header__Item__Text">사이즈</span>
 						</div>
-						<div className="OrderCart__Header__Item">
-							<span className="OrderCart__Header__Item__Text">정기배송</span>
-						</div>
 					</div>
 
 					<div className="OrderCart__Element">
@@ -75,9 +77,6 @@ class OrderCart extends React.Component {
 						</div>
 						<div className="OrderCart__Element__Item">
 							<span className="OrderCart__Element__Item__Text">M</span>
-						</div>
-						<div className="OrderCart__Element__Item">
-							<span className="OrderCart__Element__Item__Text">O</span>
 						</div>
 					</div>
 

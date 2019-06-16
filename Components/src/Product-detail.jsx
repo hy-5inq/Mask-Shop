@@ -90,7 +90,9 @@ class ProductDetail extends React.Component{
 		
 		const itemNow = this.state.itemName
 		const itemCount = this.state.itemNumber
-
+		const itemPrice = this.state.itemPrice
+		const itemSize = this.state.size
+		
 		console.log(`아이템 이름 : ${itemNow} || 아이템 카운트 : ${itemCount}`)
 
 		let userCart = JSON.parse(window.sessionStorage.getItem('userCart'))
@@ -124,7 +126,7 @@ class ProductDetail extends React.Component{
 				window.sessionStorage.removeItem('userCart')
 				window.sessionStorage.setItem('userCart',JSON.stringify(myUserCart))
 				console.log(`장바구니 넣은 후 : ${JSON.stringify(userCart)}`)
-				
+
 			}
 			else{
 

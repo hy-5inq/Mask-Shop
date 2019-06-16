@@ -1,0 +1,123 @@
+.modal-buy {
+	display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	background-color: rgba(0, 0, 0, 0.75);
+	z-index: 500000;
+}
+
+.modal-but input {
+	border: 1px solid #ccc;
+}
+
+.modal-buy-content {
+	width: 550px;
+	display: grid;
+	grid-template-columns: 100px auto;
+	grid-template-rows: 50px 25px 100px 25px 30px 25px auto;
+
+	background-color: white;
+    margin: 0 auto;
+    top: 50%;
+    position: relative;
+    transform: translateY(-50%);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(128, 128, 128, 0.1) inset;
+	border-radius: 3px;
+    padding: 15px;
+}
+
+.modal-buy-content h1 {
+	grid-area: 1 / 1 / span 1 / span 2;
+	font-size: 20px;
+}
+
+.modal-buy-name-label {
+	grid-area: 2 / 1 / span 1 / span 1;
+}
+
+.modal-buy-name-input {
+	grid-area: 2 / 2 / span 1 / span 1;
+	width: 180px;
+}
+
+.modal-buy-address-label {
+	margin-top: 10px;
+	grid-area: 3 / 1 / span 1 / span 1;
+}
+
+.modal-buy-address-input {
+	margin-top: 10px;
+	grid-area: 3 / 2 / span 1 / span 1;
+	display: grid;
+	grid-template-columns: 60px 70px;
+	grid-template-rows: 25px 25px 25px;
+	grid-column-gap: 10px;
+	grid-row-gap: 5px;
+}
+
+.modal-buy-addrees-btn {	
+	grid-area: 1 / 1 / span 1 / span 1;
+	background-color: #ECECEC;
+    border: 1px solid #ccc;
+}
+
+.modal-buy-address-code {
+	grid-area: 1 / 2 / span 1 / span 1;
+}
+
+.modal-buy-address-text {
+	grid-area: 2 / 1 / span 1 / span 2;
+	width: 400px;
+}
+
+.modal-buy-address-text-detail {
+	grid-area: 3 / 1 / span 1 / span 2;
+	width: 400px;
+}
+
+.modal-buy-phone-label {
+	grid-area: 4 / 1 / span 1 / span 1;
+}
+
+.modal-buy-phone-input {
+	grid-area: 4 / 2 / span 1 / span 1;
+}
+
+.modal-buy-phone-1 {
+	width: 40px;
+}
+
+.modal-buy-phone-2, .modal-buy-phone-3 {
+	width: 60px;
+}
+
+.modal-buy-email-label {
+	margin-top: 10px;
+	grid-area: 5 / 1 /span 1 / span 1;
+}
+
+.modal-buy-email-input {
+	margin-top: 10px;
+	grid-area: 5 / 2 / span 1 / span 1;
+	width: 250px;
+	height: 25px;
+}
+
+.modal-buy-button {
+	background-color: #027FE9;
+	border: 0;
+	color: white;
+    border-radius: 1px;
+    grid-area: 6 / 2 /span 1 / span 1;
+    width: 100px;
+	justify-self: right;
+	transition: all 0.2s ease-in-out;
+}
+
+.modal-buy-button:hover {
+	cursor: pointer;
+	background-color: lightgray;
+}

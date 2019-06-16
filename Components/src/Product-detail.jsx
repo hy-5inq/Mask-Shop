@@ -9,6 +9,7 @@ import TrackDelivery from './track-delivery.jsx'
 import Footer from './footer.jsx'
 import '../stylesheets/Product-Detail.css'
 import FA from 'react-fontawesome'
+import ModalBuy from './modal-buy.jsx'
 
 class ProductDetail extends React.Component{
 	constructor(props) {
@@ -26,6 +27,7 @@ class ProductDetail extends React.Component{
 			size: ``,
 			using: ``,
 			company: ``,
+			itemNumber: 1,
 		}
 	}
 
@@ -33,9 +35,15 @@ class ProductDetail extends React.Component{
 		this.loadItem()	
 	}
 
-	async loadItem() {
+	handleChange(event) {
+		this.setState({
+			itemNumber: event.target.value,
+		})
+	}
+
+	async loadItem() {		
 		const res = await fetch(`https://mask-shop.kro.kr/v1/api/item/${new URL(location.href).searchParams.get(`name`)}`)
-		const item = await res.json()
+		const item = await res.json()		
 
 		this.setState({
 			img: item.contentimg,
@@ -53,36 +61,15 @@ class ProductDetail extends React.Component{
 	}
 
 	async showPayment() {
-		const res = await fetch(`https://mask-shop.kro.kr/v1/api/item/${new URL(location.href).searchParams.get(`name`)}`)
-		const item = await res.json()
 
-		const IMP = window.IMP
-		IMP.init(`imp92116496`)
-		IMP.request_pay({
-			pg : `payco`,
-			pay_method : `card`,
-			merchant_uid : `merchant_` + new Date().getTime(),
-			name : `상품명: ${item.itemname}`,
-			amount : item.productprice,
-			buyer_email : `taeuk_kang@naver.com`,
-			buyer_name : `구매자이름`,
-			buyer_tel : `010-1234-5678`,
-			buyer_addr : `주소`,
-			buyer_postcode : `123-456`,
-			m_redirect_url : `https://mask-shop.kro.kr/`,
-		}, rsp => {
-			if ( rsp.success ) {
-				let msg = `결제가 완료되었습니다.`
-				msg += `고유ID : ` + rsp.imp_uid
-				msg += `상점 거래ID : ` + rsp.merchant_uid
-				msg += `결제 금액 : ` + rsp.paid_amount
-				msg += `카드 승인번호 : ` + rsp.apply_num
-			} else {
-				let msg = `결제에 실패하였습니다.`
-				msg += `에러내용 : ` + rsp.error_msg
-			}	
-		})
+		if (window.Kakao && !Kakao.Auth.getAccessToken()) {
+			location.href = `/login`
+			return 
+		}
+
+		document.querySelector(`.modal-buy`).style.display = `block`		
 	}
+
 
 	render() {
 
@@ -180,10 +167,10 @@ class ProductDetail extends React.Component{
 										</span>
 									</div>
 									<div className={`Order-Option`}>
-										<input className={`Option`} type="number" defaultValue={1} min={`1`} name={`quantity`} />
+										<input className={`Option select-value`} type="number" defaultValue={this.state.itemNumber} min={`1`} name={`quantity`} onChange={this.handleChange.bind(this)} />
 									</div>
 								</div>
-								<div className={`Option-Container__Item`}>
+								{/* <div className={`Option-Container__Item`}>
 									<div className={`Order-Option`}>
 										<span className={`Option-Key`}>
 											{`> 사이즈`}
@@ -200,8 +187,8 @@ class ProductDetail extends React.Component{
 											<option value="XXXL">XXXL</option>
 										</select>
 									</div>
-								</div>
-								<div className={`Option-Container__Item`}>
+								</div> */}
+								{/* <div className={`Option-Container__Item`}>
 									<div className={`Order-Option`}>
 										<span className={`Option-Key`}>
 											{`> 정기배송`}
@@ -217,7 +204,7 @@ class ProductDetail extends React.Component{
 											<option value="XXL">4개월</option>
 										</select>
 									</div>
-								</div>
+								</div> */}
 							</div>
 
 							<hr className={`Normal-Band --Light-Dark`}/>
@@ -234,17 +221,17 @@ class ProductDetail extends React.Component{
 								<div className={`Grid-Info-Container`}>
 									<div className={`Info-Container__Item`}>
 										<span className={`Info-Container__Item-Text`}>
-											{`상품명`}
+											상품명
 										</span>
 									</div>
 									<div className={`Info-Container__Item --Justify-Center`}>
 										<span className={`Info-Container__Item-Text`}>
-											{`상품수`}
+											총 수량
 										</span>
 									</div>
 									<div className={`Info-Container__Item --Justify-Center`}>
 										<span className={`Info-Container__Item-Text`}>
-											{`가격`}
+											총 가격
 										</span>
 									</div>
 								</div>
@@ -256,17 +243,17 @@ class ProductDetail extends React.Component{
 								<div className={`Grid-Info-Container`}>
 									<div className={`Info-Container__Item`}>
 										<span className={`Info-Container__Item-Text`}>
-											{`선택한 아이템 이름`}
+											{this.state.itemName}
 										</span>
 									</div>
 									<div className={`Info-Container__Item --Justify-Center`}>
 										<span className={`Info-Container__Item-Text`}>
-											{`옵션 수량을 반영`}
+											{this.state.itemNumber}
 										</span>
 									</div>
 									<div className={`Info-Container__Item --Flex-End --Padding-Light-15`}>
 										<span className={`Info-Container__Item-Text`}>
-											{`상품수 X 가격`}
+											{this.state.itemNumber * this.state.itemPrice}원
 										</span>
 									</div>
 								</div>
@@ -279,7 +266,7 @@ class ProductDetail extends React.Component{
 									{`합계 : `}
 								</span>
 								<span className={`Total-Price-Container__Number`}>
-									{`상품수 X 가격`}
+									{this.state.itemNumber * this.state.itemPrice}원
 								</span>
 							</div>
 
@@ -287,7 +274,7 @@ class ProductDetail extends React.Component{
 
 							<div className={`Grid-Order-Buttons-Container`}>
 
-								<div className={`Order-Buttons__Item --Transition-Color`} onClickCapture={this.showPayment}>
+								<div className={`Order-Buttons__Item --Transition-Color`} onClickCapture={this.showPayment.bind(this)}>
 									<span className={`Order-Buttons__Item-Text `}>
 										{`바로구매`}
 									</span>
@@ -500,6 +487,7 @@ class ProductDetail extends React.Component{
 					</div>
 				</div>
 				<Footer />
+				<ModalBuy itemName={this.state.itemName} itemPrice={this.state.itemPrice} itemNumber={this.state.itemNumber}/>
 			</React.Fragment>
 		)
 	}

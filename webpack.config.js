@@ -11,14 +11,13 @@ module.exports = {
 		"i18n-contents": path.join(__dirname,`/Components/lib/i18n-contents.js`),
 	},
 	output : {
-
 		filename : `[name].js`,
 		path : path.join(__dirname,`/public`),
     
 	},
 	devServer: {
 		hot : true,
-		contentBase: [
+		contentBase: [			
 			path.join(__dirname, `public`),
 			path.join(__dirname, `Components`)],
 		watchContentBase: true,

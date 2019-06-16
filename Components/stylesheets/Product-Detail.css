@@ -12,7 +12,8 @@
 }
 .Flex-Nav-Monitor__Text{
     font-size: 12px;
-    color : #757575;
+	color : #757575;
+	visibility: hidden;
 }
 .Grid-Item-Summary-Container{
     margin : 30px 0;

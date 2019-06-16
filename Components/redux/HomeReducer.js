@@ -39,29 +39,24 @@ const homeReducerInitialState = {
 
 	recommendedItems : [
 		{
-			src : ``,
-			product : `마스크 MK-101`,
-			description : `숨막히지 않는 방진율 98% 프리미엄 아이템`
+			src : `/home/rhodochrosited/tmp/server/imgs/3.jpg`,
+			product : `3M 이지핏 황사마스크`,
+			description : `#올해 가장 핫한 마스크 #50-80 #대형 #산업용 #3M`
 		},
 		{
-			src : ``,
-			product : `마스크 MK-101`,
-			description : `숨막히지 않는 방진율 98% 프리미엄 아이템`
+			src : `/home/rhodochrosited/tmp/server/imgs/5.jpg`,
+			product : `3Q 입체형 마스크`,
+			description : `#올해 가장 핫한 마스크 #50-80 #중형 #황사용 #3M`
 		},
 		{
-			src : ``,
-			product : `마스크 MK-101`,
-			description : `숨막히지 않는 방진율 98% 프리미엄 아이템`
+			src : `/home/rhodochrosited/tmp/server/imgs/32.jpg`,
+			product : `크린탑 124`,
+			description : `#너도 나도 사는 마스크! #50-80 #대형 #황사용 #크린탑`
 		},
 		{
-			src : ``,
-			product : `마스크 MK-101`,
-			description : `숨막히지 않는 방진율 98% 프리미엄 아이템`
-		},
-		{
-			src : ``,
-			product : `마스크 MK-101`,
-			description : `숨막히지 않는 방진율 98% 프리미엄 아이템`
+			src : `/home/rhodochrosited/tmp/server/imgs/43.jpg`,
+			product : `200보건용 마스크`,
+			description : `#너도 나도 사는 마스크! #50-80 #중형 #산업용 #DOBU`
 		},
 	]
 

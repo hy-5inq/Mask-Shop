@@ -437,7 +437,7 @@ class Join extends React.Component{
                     })
                 })
                 .then(response=>(response.json())).then((Jres)=>{
-                    if(Jres.status === 'SUCCESS'){
+                    if(Jres){
                         location.href = '/'
                     }
             })

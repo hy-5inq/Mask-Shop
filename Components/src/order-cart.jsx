@@ -26,7 +26,7 @@ class OrderCart extends React.Component {
 			if(userCart !== null){
 				this.setState({
 					userCart : JSON.parse(userCart)
-				},()=>{console.log(this.state)})
+				})
 			}
 			
 		},1000)

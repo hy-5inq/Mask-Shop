@@ -199,8 +199,9 @@ export default class MenuBar extends React.Component{
 
 		const webtoken = CookieJS.get('webtoken')
 		const accountid = window.sessionStorage.getItem('accountid')
+		
 
-		if(webtoken !== 'undefined' && accountid !== null){
+		if(webtoken !== 'undefined' || accountid !== null){
 			location.href = `/orderlist?aid=${accountid}`
 		}
 		else{

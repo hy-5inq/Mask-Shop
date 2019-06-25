@@ -1,6 +1,6 @@
 .OrderCart-Container{
     min-height : 410px;
-    height : auto;
+    height : 410px;
     overflow-y: auto;
 }
 
@@ -8,7 +8,7 @@
 
     /* 선택상자 , 제품명 , 수량 , 가격 , 사이즈 , 정기배송 */
     display: grid;
-    grid-template-columns: 40px 1fr 80px 140px 80px 80px;
+    grid-template-columns: 40px 1fr 80px 140px 80px;
     height : 40px;
     border-top : 1px solid black;
     border-bottom : 1px solid black;
@@ -31,7 +31,7 @@
 
     /* 선택상자 , 제품명 , 수량 , 가격 , 사이즈 , 정기배송 */
     display: grid;
-    grid-template-columns: 40px 1fr 80px 140px 80px 80px;
+    grid-template-columns: 40px 1fr 80px 140px 80px;
     height : 40px;
     border-bottom : 1px solid black;
 
@@ -141,7 +141,7 @@
 @media screen and (max-width: 645px) {
 
     .OrderCart__Element , .OrderCart__Header{
-        grid-template-columns: 40px 1fr 80px 100px 60px 60px;
+        grid-template-columns: 40px 1fr 80px 100px 60px;
     }
 
     .OrderCart-Container{

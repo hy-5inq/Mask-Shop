@@ -8,12 +8,144 @@ import '../stylesheets/order-cart.css'
 
 class OrderCart extends React.Component {
 
+	constructor(props){
+		super(props)
+		this.state = ({
+			userCart : []
+		})
+
+		this.RENDER_USER_CART_STATE = this.RENDER_USER_CART_STATE.bind(this)
+		this.DELETE_THIS_ORDER =  this.DELETE_THIS_ORDER.bind(this)
+	}
+
+	componentDidMount(){
+		setInterval(()=>{
+
+			let userCart = window.sessionStorage.getItem('userCart')
+
+			if(userCart !== null){
+				this.setState({
+					userCart : JSON.parse(userCart)
+				})
+			}
+			
+		},1000)
+	}
+
 	handleFold(){
 
 		const SnapCard = document.body.querySelector(`#ORDER_CART`)
 		SnapCard.classList.add(`--Fold-Off`)
 
 	}
+
+	RENDER_USER_CART_STATE(userCart){
+
+		return userCart.map(el => {
+
+			return (
+			<div className="OrderCart__Element">
+				<div className="OrderCart__Element__Item">
+					<input type="checkbox"/>
+				</div>
+				<div className="OrderCart__Element__Item">
+					<span className="OrderCart__Element__Item__Text">{el.itemName}</span>
+				</div>
+				<div className="OrderCart__Element__Item">
+				<span className="OrderCart__Element__Item__Text">{el.itemCount}</span>
+				</div>
+				<div className="OrderCart__Element__Item">
+					<span className="OrderCart__Element__Item__Text">{el.itemPrice}</span>
+				</div>
+				<div className="OrderCart__Element__Item">
+					<span className="OrderCart__Element__Item__Text">{el.itemSize}</span>
+				</div>
+			</div>
+			)
+		})
+	}
+
+	DELETE_THIS_ORDER(){
+
+		let checkboxes = document.querySelectorAll('.OrderCart__Element__Item input')
+		let targetNames = []
+
+		checkboxes.forEach((el)=>{
+			
+			if(el.checked === true){
+				targetNames.push(el.parentNode.nextSibling.firstChild.textContent)
+			}
+
+		})
+
+		console.log(`**** ${targetNames}`)
+		
+		let userCart = JSON.parse(window.sessionStorage.getItem('userCart'))
+		console.log(`**** ${userCart}`)
+
+		if(userCart !== null){
+
+			let myUserCart = userCart.reduce((acc,curr) => {
+
+				if(targetNames.indexOf(curr.itemName) == -1){
+					acc.push(curr)
+				}
+				return acc
+			},[])
+
+			console.log(`삭제 후 ${JSON.stringify(myUserCart)}`)
+
+			window.sessionStorage.removeItem('userCart')
+			window.sessionStorage.setItem('userCart',JSON.stringify(myUserCart))
+
+		}
+
+	}
+
+	GO_PAYMENT_THIS_ORDER(){
+
+		let userCart = JSON.parse(window.sessionStorage.getItem('userCart'))
+		let user = window.sessionStorage.getItem('accountid')
+		if(userCart !== null && user){
+
+			for (let index = 0; index < userCart.length; index++) {
+			
+				fetch('https://mask-shop.kro.kr/v1/api/order',{
+					method : 'POST',
+					headers : {
+						"Content-Type" : "application/json"
+					},
+					body : JSON.stringify({
+
+						orderNum : "0",
+						cycle : "3",
+						price : `${userCart[index]["itemPrice"]/userCart[index]["itemCount"]}`,
+						productName : userCart[index]["itemName"],
+						productCount : userCart[index]["itemCount"],
+						time : new Date().toJSON().substr(0,10).replace(/-/g,'/'),
+						invoiceNum : 175677789990,
+						accountid : user,
+						deliver : "배송준비"
+
+					})
+				}).then(res=>(res.json())).then((res)=>{
+					if(res.success === true && index == userCart.length -1){
+						alert('주문이 성공적으로 접수되었습니다.')
+						window.location.href = `/orderlist`
+						window.sessionStorage.removeItem('userCart')
+					}
+				})
+				
+			}
+
+		}
+		else{
+			alert("주문할 아이템이 없습니다.")
+		}
+
+	}
+
+
 
 	render(){
 
@@ -55,42 +187,20 @@ class OrderCart extends React.Component {
 						<div className="OrderCart__Header__Item">
 							<span className="OrderCart__Header__Item__Text">사이즈</span>
 						</div>
-						<div className="OrderCart__Header__Item">
-							<span className="OrderCart__Header__Item__Text">정기배송</span>
-						</div>
 					</div>
 
-					<div className="OrderCart__Element">
-						<div className="OrderCart__Element__Item">
-							<input type="checkbox"/>
-						</div>
-						<div className="OrderCart__Element__Item">
-							<span className="OrderCart__Element__Item__Text">마스크 MK-101</span>
-						</div>
-						<div className="OrderCart__Element__Item">
-							<input className="OrderCart__Element__Item__Input-Number" type="Number"/>
-						</div>
-						<div className="OrderCart__Element__Item">
-							<span className="OrderCart__Element__Item__Text">100,000</span>
-						</div>
-						<div className="OrderCart__Element__Item">
-							<span className="OrderCart__Element__Item__Text">M</span>
-						</div>
-						<div className="OrderCart__Element__Item">
-							<span className="OrderCart__Element__Item__Text">O</span>
-						</div>
-					</div>
+					{this.RENDER_USER_CART_STATE(this.state.userCart)}
 
 				</div>
 
 				<div className="OrderCart-Controller">
 
 					<div className="Controller__Item">
-						<div className="Controller__Item__Btn" id="REMOVE_ITEM">
+						<div onClick={this.DELETE_THIS_ORDER} className="Controller__Item__Btn" id="REMOVE_ITEM">
 							{/* <FaTrashAlt className="Controller__Item__Btn__Icon" /> */}
 							<span className="Controller__Item__Btn__Text">선택상품 삭제</span>
 						</div>
-						<div className="Controller__Item__Btn" id="GO_ORDER">
+						<div onClick={this.GO_PAYMENT_THIS_ORDER} className="Controller__Item__Btn" id="GO_ORDER">
 							{/* <FaCreditCard className="Controller__Item__Btn__Icon" /> */}
 							<span className="Controller__Item__Btn__Text">주문하기</span>
 						</div>
@@ -102,7 +212,7 @@ class OrderCart extends React.Component {
 					<div className="Controller__Item Credit-Box">
 						<span className="Credit-Box__Text">총액</span>
 						<span className="Credit-Box__Divider">:</span>
-						<span className="Credit-Box__Text">{`76,000`}</span>
+						<span className="Credit-Box__Text">{`${SUM_PRICE(this.state.userCart)}`}</span>
 					</div>
 
 				</div>
@@ -116,4 +226,11 @@ class OrderCart extends React.Component {
 
 }
 
+const SUM_PRICE = (userCart) => {
+	if(userCart.length > 0){
+		return userCart.reduce((acc,curr) => {
+			return (acc = acc + curr.itemPrice)
+		},0)
+	}
+}
 export default OrderCart

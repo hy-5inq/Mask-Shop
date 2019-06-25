@@ -1,0 +1,1050 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Mask-shop API",
+    "description": "Mask-shop API",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "host": "mask-shop.kro.kr/v1",
+  "basePath": "/api",
+  "tags": [
+    {
+      "name": "account",
+      "description": "API for account in the system"
+    },
+    {
+      "name": "review",
+      "description": "API for review in the item"
+    },
+    {
+      "name": "auth",
+      "description": "API for auth"
+    },
+    {
+      "name": "category",
+      "description": "API for category"
+    },
+    {
+      "name": "subcategory",
+      "description": "API for subcategory"
+    },
+    {
+      "name": "cartlist",
+      "description": "API for cartlist"
+    },
+    {
+      "name": "item",
+      "description": "API for item"
+    }
+  ],
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/account": {
+      "post": {
+        "tags": [
+          "account"
+        ],
+        "description": "Create new user in system",
+        "parameters": [
+          {
+            "name": "user",
+            "in": "body",
+            "description": "User that we want to create",
+            "schema": {
+              "$ref": "#/definitions/account"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "New user is created",
+            "schema": {
+              "$ref": "#/definitions/account"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "account"
+        ],
+        "summary": "Get all users in system",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/account"
+            }
+          }
+        }
+      }
+    },
+    "/account/:id": {
+      "parameters": [
+        {
+          "name": "userId",
+          "in": "path",
+          "required": true,
+          "description": "ID of user that we want to find",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "tags": [
+          "account"
+        ],
+        "summary": "Get user with given ID",
+        "responses": {
+          "200": {
+            "description": "User is found",
+            "schema": {
+              "$ref": "#/definitions/account"
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete user with given ID",
+        "tags": [
+          "account"
+        ],
+        "responses": {
+          "200": {
+            "description": "User is deleted",
+            "schema": {
+              "$ref": "#/definitions/account"
+            }
+          }
+        }
+      }
+    },
+    "/item": {
+        "post": {
+          "tags": [
+            "item"
+          ],
+          "description": "Create new item in system",
+          "parameters": [
+            {
+              "name": "item",
+              "in": "body",
+              "description": "User that we want to create",
+              "schema": {
+                "$ref": "#/definitions/item"
+              }
+            }
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "New user is created",
+              "schema": {
+                "$ref": "#/definitions/item"
+              }
+            }
+          }
+        },
+        "get": {
+          "tags": [
+            "item"
+          ],
+          "summary": "Get all item in system",
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/definitions/item"
+              }
+            }
+          }
+        }
+      },
+      "/item/:id": {
+        "parameters": [
+          {
+            "name": "itemname",
+            "in": "path",
+            "required": true,
+            "description": "ID of user that we want to find",
+            "type": "string"
+          }
+        ],
+        "get": {
+          "tags": [
+            "item"
+          ],
+          "summary": "Get user with given ID",
+          "responses": {
+            "200": {
+              "description": "User is found",
+              "schema": {
+                "$ref": "#/definitions/item"
+              }
+            }
+          }
+        },
+        "delete": {
+          "summary": "Delete item with given ID",
+          "tags": [
+            "item"
+          ],
+          "responses": {
+            "200": {
+              "description": "item is deleted",
+              "schema": {
+                "$ref": "#/definitions/item"
+              }
+            }
+          }
+        }
+      },
+    "/item/urls/:array": {
+      "parameters": [
+        {
+          "name": "itemurls",
+          "in": "path",
+          "required": true,
+          "description": "ID of user that we want to find",
+          "type": "string, .."
+        }
+      ],
+      "get": {
+        "tags": [
+          "item"
+        ],
+        "summary": "Get user with given ID",
+        "responses": {
+          "200": {
+            "description": "User is found",
+            "schema": {
+              "$ref": "#/definitions/item"
+            }
+          }
+        }
+      }
+    },
+
+    "/item/dust/:id": {
+        "parameters": [
+          {
+            "name": "dustname",
+            "in": "path",
+            "required": true,
+            "description": "ID of user that we want to find",
+            "type": "string"
+          }
+        ],
+        "get": {
+          "tags": [
+            "item"
+          ],
+          "summary": "Get user with given ID",
+          "responses": {
+            "200": {
+              "description": "User is found",
+              "schema": {
+                "$ref": "#/definitions/item"
+              }
+            }
+          }
+        }
+      },
+      "/item/size/:id": {
+        "parameters": [
+          {
+            "name": "sizename",
+            "in": "path",
+            "required": true,
+            "description": "ID of user that we want to find",
+            "type": "string"
+          }
+        ],
+        "get": {
+          "tags": [
+            "item"
+          ],
+          "summary": "Get user with given ID",
+          "responses": {
+            "200": {
+              "description": "User is found",
+              "schema": {
+                "$ref": "#/definitions/item"
+              }
+            }
+          }
+        }
+      },
+      "/item/using/:id": {
+        "parameters": [
+          {
+            "name": "usingname",
+            "in": "path",
+            "required": true,
+            "description": "ID of user that we want to find",
+            "type": "string"
+          }
+        ],
+        "get": {
+          "tags": [
+            "item"
+          ],
+          "summary": "Get user with given ID",
+          "responses": {
+            "200": {
+              "description": "User is found",
+              "schema": {
+                "$ref": "#/definitions/item"
+              }
+            }
+          }
+        }
+      },"/item/company/:id": {
+        "parameters": [
+          {
+            "name": "companyname",
+            "in": "path",
+            "required": true,
+            "description": "ID of user that we want to find",
+            "type": "string"
+          }
+        ],
+        "get": {
+          "tags": [
+            "item"
+          ],
+          "summary": "Get user with given ID",
+          "responses": {
+            "200": {
+              "description": "User is found",
+              "schema": {
+                "$ref": "#/definitions/item"
+              }
+            }
+          }
+        }
+      },
+    "/review": {
+      "post": {
+        "tags": [
+          "review"
+        ],
+        "description": "Create new account in system",
+        "parameters": [
+          {
+            "name": "user name",
+            "in": "body",
+            "description": "User that we want to create",
+            "schema": {
+              "$ref": "#/definitions/review"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "New user is created",
+            "schema": {
+              "$ref": "#/definitions/review"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "review"
+        ],
+        "summary": "Get all users in system",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/review"
+            }
+          }
+        }
+      }
+    },
+    "/category": {
+      "post": {
+        "tags": [
+          "category"
+        ],
+        "description": "Create new category in system",
+        "parameters": [
+          {
+            "name": "category name",
+            "in": "body",
+            "description": "User that we want to create",
+            "schema": {
+              "$ref": "#/definitions/category"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "New user is created",
+            "schema": {
+              "$ref": "#/definitions/category"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "category"
+        ],
+        "summary": "Get all users in system",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/category"
+            }
+          }
+        }
+      }
+    },
+    "/category/:id": {
+      "get": {
+        "tags": [
+          "category"
+        ],
+        "summary": "Get all users in system",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/category"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "category"
+        ],
+        "summary": "Get all users in system",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/category"
+            }
+          }
+        }
+      }
+    },
+    "/subcategory": {
+      "post": {
+        "tags": [
+          "subcategory"
+        ],
+        "description": "Create new subcategory in system",
+        "parameters": [
+          {
+            "name": "subcategory name",
+            "in": "body",
+            "description": "subcategory that we want to create",
+            "schema": {
+              "$ref": "#/definitions/subcategory"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "New subcategory is created",
+            "schema": {
+              "$ref": "#/definitions/subcategory"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "subcategory"
+        ],
+        "summary": "Get all subcategory in system",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/subcategory"
+            }
+          }
+        }
+      }
+    },
+    "/subcategory/:id": {
+      "get": {
+        "tags": [
+          "subcategory"
+        ],
+        "summary": "Get all subcategory in system",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/subcategory"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "subcategory"
+        ],
+        "summary": "delete all subcategory in system",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/subcategory"
+            }
+          }
+        }
+      }
+    },"/order": {
+        "post": {
+          "tags": [
+            "order"
+          ],
+          "description": "Create new order in system",
+          "parameters": [
+            {
+              "name": "order",
+              "in": "body",
+              "description": "User that we want to create",
+              "schema": {
+                "$ref": "#/definitions/order"
+              }
+            }
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "New order is created",
+              "schema": {
+                "$ref": "#/definitions/order"
+              }
+            }
+          }
+        }},
+      "/order/list/:id": {
+        "parameters": [
+          {
+            "name": "�ֹ���ȣ ",
+            "in": "path",
+            "required": true,
+            "description": "ID of order that we want to find",
+            "type": "string"
+          }
+        ],
+        "get": {
+          "tags": [
+            "order"
+          ],
+          "summary": "Get order with given ID",
+          "responses": {
+            "200": {
+              "description": "order is found",
+              "schema": {
+                "$ref": "#/definitions/order"
+              }
+            }
+          }
+        },
+        "delete": {
+          "summary": "Delete order with given ID",
+          "tags": [
+            "order"
+          ],
+          "responses": {
+            "200": {
+              "description": "order is deleted",
+              "schema": {
+                "$ref": "#/definitions/order"
+              }
+            }
+          }
+        }
+      },
+        "/order/:id": {
+        "parameters": [
+          {
+            "name": "ȸ�����̵� ",
+            "in": "path",
+            "required": true,
+            "description": "ID of order that we want to find",
+            "type": "string"
+          }
+        ],
+        "get": {
+          "tags": [
+            "order"
+          ],
+          "summary": "Get order with given ID",
+          "responses": {
+            "200": {
+              "description": "order is found",
+              "schema": {
+                "$ref": "#/definitions/order"
+              }
+            }
+          }
+        },
+        "delete": {
+          "summary": "Delete order with given ID",
+          "tags": [
+            "order"
+          ],
+          "responses": {
+            "200": {
+              "description": "order is deleted",
+              "schema": {
+                "$ref": "#/definitions/order"
+              }
+            }
+          }
+        }
+      },
+       "/auth/login": {
+        "post": {
+          "tags": [
+            "auth"
+          ],
+          "description": "Create new token in system",
+          "parameters": [
+            {
+              "name": "order",
+              "in": "body",
+              "description": "token that we want to create",
+              "schema": {
+                "$ref": "#/definitions/login"
+              }
+            }
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "New token is created",
+              "schema": {
+                "$ref": "#/definitions/token"
+              }
+            }
+          }
+        }
+      },
+      "/auth/me": {
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "ID of order that we want to find",
+            "type": "string"
+          }
+        ],
+        "get": {
+          "tags": [
+            "auth"
+          ],
+          "summary": "Get user with given token",
+          "responses": {
+            "200": {
+              "description": "user is found",
+              "schema": {
+                "$ref": "#/definitions/user"
+              }
+            }
+          }
+        }
+      },
+      "/auth/refresh": {
+        "parameters": [
+          {
+            "name": "token",
+            "in": "path",
+            "required": true,
+            "description": "make refresh token",
+            "type": "string"
+          }
+        ],
+        "get": {
+          "tags": [
+            "auth"
+          ],
+          "summary": "make refresh token",
+          "responses": {
+            "200": {
+              "description": "refresh token",
+              "schema": {
+                "$ref": "#/definitions/token"
+              }
+            }
+          }
+        }
+      },
+    "/cartlist": {
+      "post": {
+        "tags": [
+          "cartlist"
+        ],
+        "description": "Create new subcategory in system",
+        "parameters": [
+          {
+            "name": "subcategory name",
+            "in": "body",
+            "description": "subcategory that we want to create",
+            "schema": {
+              "$ref": "#/definitions/cartlist"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "New subcategory is created",
+            "schema": {
+              "$ref": "#/definitions/cartlist"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "cartlist"
+        ],
+        "summary": "Get all subcategory in system",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/cartlist"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "category": {
+      "required": [
+        "category"
+      ],
+      "properties": {
+        "category": {
+          "type": "string",
+          "uniqueItems": true
+        },
+        "subcategory": {
+          "type": "[string]"
+        }
+      }
+    },
+    "cartlist": {
+      "required": [
+        "accountid",
+        "itemnames",
+        "itemnums"
+      ],
+      "properties": {
+        "accountid": {
+          "type": "string",
+          "uniqueItems": true
+        },
+        "itemnames": {
+          "type": "[string]"
+        },
+        "itemnums": {
+          "type": "[string]"
+        }
+      }
+    },
+    "subcategory": {
+      "required": [
+        "category"
+      ],
+      "properties": {
+        "category": {
+          "type": "string",
+          "uniqueItems": true
+        },
+        "subcategory": {
+          "type": "[string]"
+        }
+      }
+    },
+    "account": {
+      "required": [
+        "accountid",
+        "password",
+        "name",
+        "email",
+        "passwordQuestion",
+        "confirmPasswordQuestion",
+        "postCode",
+        "address",
+        "rank",
+        "mileage",
+        "phone"
+      ],
+      "properties": {
+        "accountid": {
+          "type": "string",
+          "uniqueItems": true
+        },
+        "password": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "passwordQuestion": {
+          "type": "string"
+        },
+        "confirmPasswordQuestion": {
+          "type": "string"
+        },
+        "postCode": {
+          "type": "string"
+        },
+        "address": {
+          "type": "string"
+        },
+        "rank": {
+          "type": "string"
+        },
+        "mileage": {
+          "type": "string"
+        },
+        "phone": {
+          "type": "string"
+        }
+      }
+    },
+    "token": {
+        "required": [
+          "success",
+          "message",
+          "errors",
+          "data"
+        ],
+        "properties": {
+            "success": {
+                "type": "string",
+                "uniqueItems": true
+            },
+            "message": {
+                "type": "string"
+            },
+            "errors": {
+                "type": "string"
+            },
+            "data": {
+                "type": "string"
+            }
+        }
+      },
+      "login": {
+        "required": [
+          "accountid",
+          "password"
+        ],
+        "properties": {
+            "accountid": {
+                "type": "string",
+                "uniqueItems": true
+            },
+            "password": {
+                "type": "string"
+            }
+        }
+      },
+      
+    "item": {
+        "required": [
+          "itemname",
+          "productprice",
+          "customprice",
+          "point",
+          "deliveryfee",
+          "remaincount",
+          "thumbnail",
+          "titleimg1",
+          "titleimg2",
+          "titleimg3",
+          "dust",
+          "size",
+          "using",
+          "company"
+        ],
+        "properties": {
+            "itemname": {
+                "type": "string",
+                "uniqueItems": true
+            },
+            "productprice": {
+                "type": "int"
+            },
+            "customprice": {
+                "type": "int"
+            },
+            "point": {
+                "type": "int"
+            },
+            "deliveryfee": {
+                "type": "int"
+            },
+            "remaincount": {
+                "type": "int"
+            },
+            "feature": {
+                "type": "string"
+            },
+            "thumbnail": {
+                "type": "string"
+            },
+            "titleimg1": {
+                "type": "string"
+            },
+            "titleimg2": {
+                "type": "string"
+            },
+            "titleimg3": {
+                "type": "string"
+            },
+            "contentimg": {
+                "type": "string"
+            },
+            "dust": {
+                "type": "string"
+            },
+            "size": {
+                "type": "string"
+            },
+            "using": {
+                "type": "string"
+            },
+            "company": {
+                "type": "string"
+            }
+        }
+      },
+       "order": {
+        "required": [
+          "orderNum",
+          "cycle",
+          "price",
+          "productName",
+          "productCount",
+          "accountid",
+          "time",
+          "invoiceNum",
+          "deliver"
+        ],
+        "properties": {
+            "orderNum": {
+                "type": "string",
+                "uniqueItems": true
+            },
+            "cycle": {
+                "type": "int"
+            },
+            "price": {
+                "type": "int"
+            },
+            "productName": {
+                "type": "string"
+            },
+            "productCount": {
+                "type": "int"
+            },
+            "accountid": {
+                "type": "string"
+            },
+            "time": {
+                "type": "string"
+            },
+            "invoiceNum": {
+                "type": "int"
+            },
+            "deliver": {
+                "type": "string"
+            }
+        }
+      },
+    "review": {
+      "required": [
+        "itemname",
+        "subject",
+        "context",
+        "star",
+        "writer"
+      ],
+      "properties": {
+        "itemname": {
+          "type": "string"
+        },
+        "subject": {
+          "type": "string"
+        },
+        "context": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        },
+        "hits": {
+          "type": "int"
+        },
+        "star": {
+          "type": "string"
+        },
+        "writer": {
+          "type": "int"
+        },
+        "date": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
+  
+
+
+    

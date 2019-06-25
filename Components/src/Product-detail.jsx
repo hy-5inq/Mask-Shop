@@ -28,7 +28,11 @@ class ProductDetail extends React.Component{
 			using: ``,
 			company: ``,
 			itemNumber: 1,
+			
 		}
+
+		this.handleAddToCart = this.handleAddToCart.bind(this)
+
 	}
 
 	componentWillMount() {
@@ -80,6 +84,84 @@ class ProductDetail extends React.Component{
 			return true
 		}
 		return false
+	}
+
+	handleAddToCart(){
+		
+		const itemNow = this.state.itemName
+		const itemCount = this.state.itemNumber
+		const itemPrice = this.state.itemPrice
+		const itemSize = this.state.size
+
+		console.log(`아이템 이름 : ${itemNow} || 아이템 카운트 : ${itemCount}`)
+
+		let userCart = JSON.parse(window.sessionStorage.getItem('userCart'))
+
+		if(userCart === null){
+
+			userCart = []
+			userCart.push({
+				itemName : itemNow,
+				itemCount : itemCount,
+				itemPrice : parseInt(itemCount) * parseInt(itemPrice),
+				itemSize : itemSize
+			})
+
+			window.sessionStorage.removeItem('userCart')
+			window.sessionStorage.setItem('userCart',JSON.stringify(userCart))
+			
+		}
+		else{
+			
+			let result = userCart.findIndex(item => item.itemName === itemNow)
+
+			console.log(`발견된 인덱스 ${result}`)
+
+			if(result == -1){
+
+				console.log(`장바구니 넣기 전 -1 : ${JSON.stringify(userCart)}`)
+				
+				let myUserCart = userCart
+				myUserCart.push({
+					itemName : itemNow,
+					itemCount : itemCount,
+					itemPrice : parseInt(itemCount) * parseInt(itemPrice),
+					itemSize : itemSize
+				})
+				console.log(`장바구니에 추가되었습니다. ${JSON.stringify(userCart)}`)
+
+				window.sessionStorage.removeItem('userCart')
+				window.sessionStorage.setItem('userCart',JSON.stringify(myUserCart))
+				console.log(`장바구니 넣은 후 : ${JSON.stringify(userCart)}`)
+				
+			}
+			else{
+
+				userCart = userCart.filter((item,index)=>{if(index !== result) return item})
+
+				console.log(`장바구니 넣기 전 : ${JSON.stringify(userCart)}`)
+				userCart.push({
+					itemName : itemNow,
+					itemCount : itemCount,
+					itemPrice : parseInt(itemCount) * parseInt(itemPrice),
+					itemSize : itemSize
+				})
+				console.log(`장바구니 넣은 후 : ${JSON.stringify(userCart)}`)
+
+				console.log(`장바구니에 추가되었습니다. ${JSON.stringify(userCart)}`)
+
+				window.sessionStorage.removeItem('userCart')
+				window.sessionStorage.setItem('userCart',JSON.stringify(userCart))
+
+				
+			}
+
+			
+
+		}
+
+		
+
 	}
 
 	render() {
@@ -178,7 +260,7 @@ class ProductDetail extends React.Component{
 										</span>
 									</div>
 									<div className={`Order-Option`}>
-										<input className={`Option select-value`} type="number" defaultValue={this.state.itemNumber} min={`1`} name={`quantity`} onChange={this.handleChange.bind(this)} />
+										<input id="QTY" className={`Option select-value`} type="number" defaultValue={this.state.itemNumber} min={`1`} name={`quantity`} onChange={this.handleChange.bind(this)} />
 									</div>
 								</div>
 								{/* <div className={`Option-Container__Item`}>
@@ -291,7 +373,7 @@ class ProductDetail extends React.Component{
 									</span>
 								</div>
 
-								<div className={`Order-Buttons__Item --Transition-Color --Transition-Border`}>
+								<div onClick={this.handleAddToCart} className={`Order-Buttons__Item --Transition-Color --Transition-Border`}>
 									<span className={`Order-Buttons__Item-Text`}>
 										{`장바구니`}
 									</span>

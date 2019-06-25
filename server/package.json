@@ -9,11 +9,22 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.18.3",
     "compression": "^1.7.4",
+    "cookie-parser": "^1.4.4",
+    "ejs": "^2.6.1",
     "express": "^4.16.4",
+    "forever": "^1.0.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.5.15",
+    "morgan": "^1.9.1",
     "mysql": "^2.16.0",
     "path": "^0.12.7",
     "proxy-from-env": "^1.0.0"
+  },
+  "devDependencies": {
+    "swagger-jsdoc": "^3.2.9",
+    "swagger-ui-express": "^4.0.6"
   }
 }
